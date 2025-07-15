@@ -1,0 +1,71 @@
+@use "../../base/variables" as *;
+
+header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1300px;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: $bg;
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  height: 64px;
+  transform: translatex(-50%);
+  color: $white;
+
+  a{
+    color: $text;
+  }
+}
+
+
+
+.dropdown {
+  position: relative;
+}
+
+.theme,
+.language {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.theme:hover,
+.language:hover {
+  background: #f0f0f0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 120px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  padding: 0.3rem 0;
+}
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dropdown-menu li:hover {
+  background: #f5f5f5;
+}
