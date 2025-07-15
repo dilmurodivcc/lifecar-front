@@ -1,28 +1,68 @@
 @use "../../base/variables" as *;
 
 header {
-  padding: 15px;
+  padding: 6px;
+  padding-left: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 95vw;
   margin: 10px auto;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: $bg;
   position: fixed;
-  top: 25px;
+  top: 10px;
   left: 50%;
   height: 64px;
   transform: translatex(-50%);
   color: $white;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgba(0, 0, 0, 0.08); // subtle border for both states
 
-  a{
+  a {
     color: $text;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .logoName {
+      font-size: 22px;
+      font-weight: bold;
+      font-family: var(--font-exo2);
+      text-transform: uppercase;
+      color: #fff;
+    }
+    img {
+      width: 50px;
+      filter: drop-shadow(0 0px 2px rgba(255, 255, 255, 0.25));
+    }
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 16px;
+    font-family: var(--font-geist);
+    a {
+      transition: color 0.2s;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 }
 
-
+header.shrink {
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
 
 .dropdown {
   position: relative;
@@ -35,37 +75,91 @@ header {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  font-size: 1.1rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  transition: background 0.2s;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: var(--font-geist);
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  height: 50px;
+
+  svg:last-child {
+    transition: transform 0.2s;
+  }
 }
-.theme:hover,
-.language:hover {
-  background: #f0f0f0;
+
+.language {
+  background-color: $black;
+  color: $white;
+  border: 1px solid #333;
+
+  svg {
+    color: $white;
+  }
+
+  &:hover {
+    border-color: #555;
+  }
+}
+
+.theme {
+  background-color: $white;
+  color: $black;
+
+  svg {
+    color: $black;
+  }
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.dropdown[data-open="true"] {
+  .theme svg:last-child,
+  .language svg:last-child {
+    transform: rotate(180deg);
+  }
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 110%;
-  left: 0;
-  min-width: 120px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 150px;
+  background: lighten($black, 5%);
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
-  padding: 0.3rem 0;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
 }
+
+.dropdown[data-open="true"] .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
 .dropdown-menu li {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   transition: background 0.2s;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-.dropdown-menu li:hover {
-  background: #f5f5f5;
+  gap: 0.75rem;
+  border-radius: 6px;
+  color: $text;
+
+  &:hover {
+    background: #333;
+    color: $white;
+  }
 }

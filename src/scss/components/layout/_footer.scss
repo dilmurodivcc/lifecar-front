@@ -1,1 +1,158 @@
 @use "../../base/variables" as *;
+
+.footer {
+  width: 100%;
+  color: #a1a1aa;
+  font-family: var(--font-geist, $font-family);
+  font-size: 15px;
+  padding: 48px 0 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 3fr 1.2fr;
+  gap: 32px;
+  max-width: 1380px;
+  margin: 0 auto;
+  align-items: flex-start;
+  padding: 0 24px;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.footer-email {
+  color: #a1eaff;
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.footer-social {
+  display: flex;
+  gap: 16px;
+  font-size: 22px;
+}
+.footer-social a {
+  color: #a1a1aa;
+  transition: color 0.2s;
+}
+.footer-social a:hover {
+  color: #fff;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.footer-col-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.footer-col a {
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.footer-col a:hover {
+  color: #fff;
+}
+
+.footer-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+.footer-lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #18181b;
+  border: 1px solid #232326;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #fff;
+  font-size: 15px;
+}
+.footer-lang-switch select {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+.footer-theme-switch {
+  display: flex;
+  gap: 8px;
+  background: #18181b;
+  border: 1px solid #232326;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.footer-theme-switch button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.footer-theme-switch button:hover {
+  color: #a1eaff;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1380px;
+  margin: 32px auto 0 auto;
+  padding: 0 24px 24px 24px;
+  font-size: 15px;
+  color: #71717a;
+}
+.footer-badge {
+  display: flex;
+  align-items: center;
+}
+.footer-soc-badge {
+  background: #18181b;
+  border-radius: 8px;
+  padding: 4px 12px;
+  color: #a1a1aa;
+  font-size: 14px;
+  border: 1px solid #232326;
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footer-links-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .footer-controls {
+    align-items: flex-start;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
