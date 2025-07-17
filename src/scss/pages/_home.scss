@@ -42,9 +42,8 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5); /* yengil qoramtir qatlam */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
     z-index: 1;
-    box-shadow: 0 0 100px rgba(251, 0, 0, 0.836);
   }
   h1 {
     font-size: 8rem;
