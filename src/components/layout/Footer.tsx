@@ -69,7 +69,7 @@ const Footer = () => (
           <FaGlobe />
           <select aria-label="Language">
             <option>English</option>
-            <option>O'zbek</option>
+            <option>O&apos;zbek</option>
             <option>Русский</option>
           </select>
         </div>
