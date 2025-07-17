@@ -55,7 +55,6 @@ const Header = () => {
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
-  // Add shrink classname when window scrolled
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
@@ -86,6 +85,25 @@ const Header = () => {
         <Link href="/">Contact</Link>
       </nav>
       <div className="actions">
+           <div className="dropdown" ref={langRef} data-open={langOpen}>
+          <button className="language" onClick={() => setLangOpen((v) => !v)}>
+            {languages.find((l) => l.value === language)?.label}
+            <HiChevronDown />
+          </button>
+          <ul className="dropdown-menu">
+            {languages.map((l) => (
+              <li
+                key={l.value}
+                onClick={() => {
+                  setLanguage(l.value);
+                  setLangOpen(false);
+                }}
+              >
+                {l.label}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="dropdown" ref={themeRef} data-open={themeOpen}>
           <button className="theme" onClick={() => setThemeOpen((v) => !v)}>
             {themes.find((t) => t.value === theme)?.icon}
@@ -105,25 +123,7 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <div className="dropdown" ref={langRef} data-open={langOpen}>
-          <button className="language" onClick={() => setLangOpen((v) => !v)}>
-            {languages.find((l) => l.value === language)?.label}
-            <HiChevronDown />
-          </button>
-          <ul className="dropdown-menu">
-            {languages.map((l) => (
-              <li
-                key={l.value}
-                onClick={() => {
-                  setLanguage(l.value);
-                  setLangOpen(false);
-                }}
-              >
-                {l.label}
-              </li>
-            ))}
-          </ul>
-        </div>
+     
       </div>
     </header>
   );

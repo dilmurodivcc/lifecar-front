@@ -10,18 +10,19 @@ header {
   max-width: 95vw;
   margin: 10px auto;
   border-radius: 15px;
-  background-color: $bg;
+  background-color: var(--bg);
   position: fixed;
   top: 10px;
   left: 50%;
   height: 64px;
   transform: translatex(-50%);
-  color: $white;
+  color: var(--white);
   transition: all 0.2s ease-in-out;
-  border: 1px solid rgba(0, 0, 0, 0.08); // subtle border for both states
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 1000;
 
   a {
-    color: $text;
+    color: var(--text);
   }
   .logo {
     display: flex;
@@ -30,9 +31,10 @@ header {
     .logoName {
       font-size: 22px;
       font-weight: bold;
+
       font-family: var(--font-exo2);
       text-transform: uppercase;
-      color: #fff;
+      color: var(--black);
     }
     img {
       width: 50px;
@@ -48,7 +50,7 @@ header {
     a {
       transition: color 0.2s;
       &:hover {
-        color: $white;
+        color: var(--white);
       }
     }
   }
@@ -60,8 +62,9 @@ header {
 }
 
 header.shrink {
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px var(--box-shadow);
   border-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--white);
 }
 
 .dropdown {
@@ -84,36 +87,35 @@ header.shrink {
   font-weight: 500;
   transition: all 0.2s ease-in-out;
   height: 50px;
-
-  svg:last-child {
+  svg {
+    width: 20px;
+    height: 20px;
     transition: transform 0.2s;
   }
 }
 
 .language {
-  background-color: $black;
-  color: $white;
+  background-color: var(--black);
+  color: var(--white);
   border: 1px solid #333;
 
   svg {
-    color: $white;
-  }
-
-  &:hover {
-    border-color: #555;
+    color: var(--white);
+    transition: transform 0.2s ease-in-out;
+    width: 20px;
+    height: 20px;
   }
 }
 
 .theme {
-  background-color: $white;
-  color: $black;
-
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--border-color);
   svg {
-    color: $black;
-  }
-
-  &:hover {
-    background-color: #f0f0f0;
+    color: var(--black);
+    transition: transform 0.2s ease-in-out;
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -130,16 +132,21 @@ header.shrink {
   left: 50%;
   transform: translateX(-50%);
   min-width: 150px;
-  background: lighten($black, 5%);
-  border: 1px solid #333;
+  background: var(--white);
+  border: 1px solid;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
+  border: 1px solid var(--border-color);
   padding: 0.5rem;
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, 10px);
   transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text);
+  }
 }
 
 .dropdown[data-open="true"] .dropdown-menu {
@@ -156,10 +163,12 @@ header.shrink {
   align-items: center;
   gap: 0.75rem;
   border-radius: 6px;
-  color: $text;
+  color: var(--text);
 
   &:hover {
-    background: #333;
-    color: $white;
+    background: rgba(0, 0, 0, 0.03);
+    [data-theme="dark"] & {
+      background: rgba(255, 255, 255, 0.06);
+    }
   }
 }

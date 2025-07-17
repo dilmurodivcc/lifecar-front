@@ -1,7 +1,7 @@
 @use "./variables" as *;
 .container {
   max-width: 1550px;
-  padding: 30px;
+  padding: 0 30px;
   margin: 0 auto;
   width: 100%;
 }
@@ -9,6 +9,7 @@
 body {
   font-family:   var(--font-geist), sans-serif;
   font-weight: 500;
-  background-color: $bg;
-  color: $white;
+  background-color: var(--bg);
+  color: var(--text);
+
 }
