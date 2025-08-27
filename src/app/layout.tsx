@@ -20,6 +20,16 @@ const geist = Geist({
 
 export const metadata = {
   title: "Lifecar | Auto Tuning",
+  description:
+    "Lifecar | Auto Tuning | Auto Parts | Auto Accessories | Auto Maintenance",
+  keywords:
+    "Lifecar, Auto Tuning, Auto Parts, Auto Accessories, Auto Maintenance",
+  openGraph: {
+    title: "Lifecar | Auto Tuning",
+    description:
+      "Lifecar | Auto Tuning | Auto Parts | Auto Accessories | Auto Maintenance",
+    images: ["/icons/lifecar.webp"],
+  },
   icons: {
     icon: "/icons/lifecar.ico",
   },
@@ -31,7 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${exo2.variable} ${nunito.variable} ${geist.variable}`}>
+    <html
+      lang="en"
+      className={`${exo2.variable} ${nunito.variable} ${geist.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

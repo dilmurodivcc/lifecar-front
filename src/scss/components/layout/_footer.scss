@@ -2,7 +2,7 @@
 
 .footer {
   width: 100%;
-  color: #a1a1aa;
+  color: var(--text);
   font-family: var(--font-geist, $font-family);
   font-size: 15px;
   padding: 48px 0 0 0;
@@ -23,30 +23,21 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-}
-.footer-email {
-  color: #a1eaff;
-  font-size: 17px;
-  font-weight: 500;
-  text-decoration: none;
-  margin-bottom: 8px;
-}
+} 
+
 .footer-social {
   display: flex;
   gap: 16px;
   font-size: 22px;
 }
 .footer-social a {
-  color: #a1a1aa;
+  color: var(--text);
   transition: color 0.2s;
-}
-.footer-social a:hover {
-  color: #fff;
 }
 
 .footer-links-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   width: 100%;
 }
@@ -56,64 +47,22 @@
   gap: 15px;
 }
 .footer-col-title {
-  color: #fff;
+  color: var(--black);
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 6px;
 }
 .footer-col a {
-  color: #a1a1aa;
+  color: var(--text);
   text-decoration: none;
   font-size: 16px;
   transition: color 0.2s;
 }
 .footer-col a:hover {
-  color: #fff;
+  color: var(--black);
 }
 
-.footer-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 18px;
-}
-.footer-lang-switch {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #18181b;
-  border: 1px solid #232326;
-  border-radius: 8px;
-  padding: 6px 12px;
-  color: #fff;
-  font-size: 15px;
-}
-.footer-lang-switch select {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 15px;
-  outline: none;
-}
-.footer-theme-switch {
-  display: flex;
-  gap: 8px;
-  background: #18181b;
-  border: 1px solid #232326;
-  border-radius: 8px;
-  padding: 6px 12px;
-}
-.footer-theme-switch button {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.footer-theme-switch button:hover {
-  color: #a1eaff;
-}
+
 
 .footer-bottom {
   display: flex;
@@ -123,7 +72,7 @@
   margin: 32px auto 0 auto;
   padding: 0 24px 24px 24px;
   font-size: 15px;
-  color: #71717a;
+  color: var(--text);
 }
 .footer-badge {
   display: flex;
@@ -168,5 +117,6 @@
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+    margin-top: 20px;
   }
 }

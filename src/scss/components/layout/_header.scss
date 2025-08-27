@@ -16,7 +16,7 @@ header {
   left: 50%;
   height: 64px;
   transform: translatex(-50%);
-  color: var(--white);
+  color: var(--text-white);
   transition: all 0.2s ease-in-out;
   border: 1px solid rgba(0, 0, 0, 0.08);
   z-index: 1000;
@@ -50,7 +50,7 @@ header {
     a {
       transition: color 0.2s;
       &:hover {
-        color: var(--white);
+        color: var(--black);
       }
     }
   }
@@ -64,7 +64,6 @@ header {
 header.shrink {
   box-shadow: 0 4px 16px var(--box-shadow);
   border-color: rgba(255, 255, 255, 0.12);
-  background-color: var(--white);
 }
 
 .dropdown {
@@ -107,20 +106,32 @@ header.shrink {
   }
 }
 
-.theme {
+.theme-toggle {
   background-color: var(--white);
   color: var(--black);
   border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: var(--font-geist);
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  height: 50px;
+  width: 50px;
+
   svg {
     color: var(--black);
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     width: 20px;
     height: 20px;
   }
 }
 
 .dropdown[data-open="true"] {
-  .theme svg:last-child,
   .language svg:last-child {
     transform: rotate(180deg);
   }
@@ -131,13 +142,13 @@ header.shrink {
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  min-width: 150px;
+  min-width: 140px;
   background: var(--white);
   border: 1px solid;
   border-radius: 8px;
   z-index: 10;
   border: 1px solid var(--border-color);
-  padding: 0.5rem;
+  padding: 0.4rem;
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, 10px);
@@ -145,6 +156,11 @@ header.shrink {
   svg {
     width: 20px;
     height: 20px;
+  }
+  .lang-img{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
   }
 }
 
@@ -155,7 +171,7 @@ header.shrink {
 }
 
 .dropdown-menu li {
-  padding: 0.75rem 1rem;
+  padding: 8px 10px;
   cursor: pointer;
   transition: background 0.2s;
   display: flex;

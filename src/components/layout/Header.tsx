@@ -11,9 +11,9 @@ const themes = [
   { label: "System", value: "system", icon: GrSystem },
 ];
 const languages = [
-  { label: "English", value: "en" },
-  { label: "O'zbek", value: "uz" },
-  { label: "Русский", value: "ru" },
+  { label: "English", value: "en", img: "/icons/en.jpg" },
+  { label: "O'zbek", value: "uz", img: "/icons/uz.avif" },
+  { label: "Русский", value: "ru", img: "/icons/ru.png" },
 ];
 
 const Header = () => {
@@ -23,35 +23,27 @@ const Header = () => {
         ? "dark"
         : "light";
     }
-    return "light";
+    return "dark";
   };
 
-  const [theme, setTheme] = useState("light");
-  const [themeOpen, setThemeOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
   const [language, setLanguage] = useState("en");
   const [langOpen, setLangOpen] = useState(false);
-  const themeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const systemThemeMedia =
     typeof window !== "undefined"
       ? window.matchMedia("(prefers-color-scheme: dark)")
       : null;
 
-  // Set theme to DOM
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (theme === "system") {
-        const sysTheme = getSystemTheme();
-        document.documentElement.setAttribute("data-theme", sysTheme);
-      } else {
-        document.documentElement.setAttribute("data-theme", theme);
-      }
+      document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
     }
   }, [theme]);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme);
   }, []);
 
@@ -66,7 +58,6 @@ const Header = () => {
     };
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     mq.addEventListener("change", handler);
-    // Set initial
     document.documentElement.setAttribute(
       "data-theme",
       mq.matches ? "dark" : "light"
@@ -86,8 +77,6 @@ const Header = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     function handleClick(e: MouseEvent) {
-      if (themeRef.current && !themeRef.current.contains(e.target as Node))
-        setThemeOpen(false);
       if (langRef.current && !langRef.current.contains(e.target as Node))
         setLangOpen(false);
     }
@@ -108,6 +97,11 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
     <header className={shrink ? "shrink" : ""}>
       <div className="logo">
@@ -138,33 +132,15 @@ const Header = () => {
                   setLangOpen(false);
                 }}
               >
-                {l.label}
+                <img src={l.img} alt="" className="lang-img" />
+                <span>{l.label}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="dropdown" ref={themeRef} data-open={themeOpen}>
-          <button className="theme" onClick={() => setThemeOpen((v) => !v)}>
-            {(() => {
-              const Icon = themes.find((t) => t.value === theme)?.icon;
-              return Icon ? <Icon /> : null;
-            })()}
-            <HiChevronDown />
-          </button>
-          <ul className="dropdown-menu">
-            {themes.map((t) => (
-              <li
-                key={t.value}
-                onClick={() => {
-                  setTheme(t.value);
-                  setThemeOpen(false);
-                }}
-              >
-                <t.icon /> {t.label}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? <HiMoon /> : <HiSun />}
+        </button>
       </div>
     </header>
   );

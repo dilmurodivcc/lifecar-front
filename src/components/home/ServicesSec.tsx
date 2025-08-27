@@ -108,7 +108,9 @@ const ServicesSec = () => {
               <div className="carousel-column" key={colIndex}>
                 {[...column, ...column].map((service, cardIndex) => (
                   <div className="card" key={cardIndex}>
-                    <img src={service.img} alt={service.title} />
+                    <div className="img-wrapper">
+                      <img src={service.img} alt={service.title} />
+                    </div>
                     <div className="card-content">
                       <h4 className="title">{service.title}</h4>
                       <div className="card-bottom">
