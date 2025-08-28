@@ -36,18 +36,7 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <video
-            src="/videos/heroVideo.mp4"
-            width="100%"
-            height="100%"
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-hidden="true"
-            title="Hero background video"
-            role="presentation"
-          />
+          
           <div className="hero-inset-shadow"></div>
           <div className="scroll-down-indicator">
             <RiArrowDownDoubleLine />

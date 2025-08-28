@@ -74,10 +74,10 @@ const Header = () => {
       </div>
       <nav>
         <Link href="/">Home</Link>
-        <Link href="/">Services</Link>
-        <Link href="/">Shop</Link>
-        <Link href="/">About Us</Link>
-        <Link href="/">Contact</Link>
+        <Link href="/services">Services</Link>
+        <Link href="/shop">Shop</Link>
+        <Link href="/about">About Us</Link>
+        <Link href="/contact">Contact</Link>
       </nav>
       <div className="actions">
         <div className="dropdown" ref={langRef} data-open={langOpen}>
