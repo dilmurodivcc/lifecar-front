@@ -16,13 +16,14 @@ const Hero = () => {
               boshqalar – barchasi bir joyda.
             </p>
             <div className="btns">
-              <Link href="/services" className="toServices">
+              <Link href="/services"  >
                 <button className="toServices">
                   {" "}
                   <MdMiscellaneousServices /> Xizmatlarimiz
                 </button>
               </Link>
               <Link href="/contact">
+              
                 <button className="toContact">
                   <FaPhoneAlt /> Biz bilan boglanish
                 </button>

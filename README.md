@@ -17,7 +17,7 @@ Modern, responsive auto tuning website built with Next.js 15, TypeScript, and SC
 - **Language**: TypeScript
 - **Styling**: SCSS with CSS Variables
 - **Icons**: React Icons
-- **Maps**: Google Maps JavaScript API (cookie-free)
+- **Maps**: Yandex Maps JavaScript API (cookie-free)
 - **Package Manager**: Yarn
 
 ## 📦 Installation
@@ -33,10 +33,10 @@ cd lifecar-frontend
 yarn install
 ```
 
-3. Set up environment variables:
+3. Set up environment variables (optional):
 ```bash
-# Create .env.local file
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+# Create .env.local file if you want to use your own Yandex Maps API key
+NEXT_PUBLIC_YANDEX_MAPS_API_KEY=your_yandex_maps_api_key_here
 ```
 
 4. Run the development server:
@@ -44,22 +44,20 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 yarn dev
 ```
 
-## 🗺️ Google Maps Setup
-
-### Getting API Key
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing one
-3. Enable **Maps JavaScript API**
-4. Go to **Credentials** and create an API key
-5. Add the API key to your `.env.local` file
+## 🗺️ Yandex Maps Setup
 
 ### Features
 
 - **Cookie-Free**: No tracking cookies, better privacy
 - **Theme-Aware**: Automatically switches between light/dark styles
-- **Custom Marker**: Uses Lifecar logo as map marker
+- **Custom Marker**: Uses red dot marker for Lifecar location
 - **Responsive**: Works perfectly on all screen sizes
+- **Uzbek Language**: Map interface in Uzbek language
+- **Error Handling**: Graceful fallback if map fails to load
+
+### API Key
+
+The project uses a pre-configured Yandex Maps API key. For production, consider getting your own API key from [Yandex Cloud](https://cloud.yandex.com/).
 
 ## 🎨 Theme System
 

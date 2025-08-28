@@ -8,18 +8,16 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { IoMdArrowRoundUp } from "react-icons/io";
-import GoogleMap from "../ui/GoogleMap";
+import YandexMap from "../ui/YandexMap";
 
 const Footer = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    // Get current theme
     const savedTheme =
       (localStorage.getItem("theme") as "light" | "dark") || "dark";
     setTheme(savedTheme);
 
-    // Listen for localStorage theme change
     const handleStorageChange = () => {
       const currentTheme =
         (localStorage.getItem("theme") as "light" | "dark") || "dark";
@@ -27,7 +25,6 @@ const Footer = () => {
     };
     window.addEventListener("storage", handleStorageChange);
 
-    // Listen for attribute changes on <html data-theme="">
     const observer = new MutationObserver(() => {
       const currentTheme =
         (document.documentElement.getAttribute("data-theme") as
@@ -91,7 +88,7 @@ const Footer = () => {
         {/* Map */}
         <div className="footer-map">
           <div className="footer-col-title">Bizning manzil</div>
-          <GoogleMap theme={theme} />
+          <YandexMap theme={theme} />
         </div>
       </div>
 
