@@ -20,7 +20,7 @@ const geist = Geist({
 
 export const metadata = {
   title: "Lifecar | Auto Tuning",
-  description:
+  description:  
     "Lifecar | Auto Tuning | Auto Parts | Auto Accessories | Auto Maintenance",
   keywords:
     "Lifecar, Auto Tuning, Auto Parts, Auto Accessories, Auto Maintenance",

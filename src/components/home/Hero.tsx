@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { RiArrowDownDoubleLine } from "react-icons/ri";
+import Link from "next/link";
 const Hero = () => {
-  const router = useRouter();
   return (
     <>
       <div className="hero-shadow">
@@ -17,26 +16,20 @@ const Hero = () => {
               boshqalar – barchasi bir joyda.
             </p>
             <div className="btns">
-              <button
-                onClick={() => {
-                  router.push("/services");
-                }}
-                className="toServices"
-              >
-                {" "}
-                <MdMiscellaneousServices /> Xizmatlarimiz
-              </button>
-              <button
-                onClick={() => {
-                  router.push("/contact");
-                }}
-                className="toContact"
-              >
-                <FaPhoneAlt /> Biz bilan boglanish
-              </button>
+              <Link href="/services" className="toServices">
+                <button className="toServices">
+                  {" "}
+                  <MdMiscellaneousServices /> Xizmatlarimiz
+                </button>
+              </Link>
+              <Link href="/contact">
+                <button className="toContact">
+                  <FaPhoneAlt /> Biz bilan boglanish
+                </button>
+              </Link>
             </div>
           </div>
-          
+
           <div className="hero-inset-shadow"></div>
           <div className="scroll-down-indicator">
             <RiArrowDownDoubleLine />

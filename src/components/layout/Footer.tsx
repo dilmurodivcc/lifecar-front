@@ -8,6 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { IoMdArrowRoundUp } from "react-icons/io";
+import GoogleMap from "../ui/GoogleMap";
 
 const Footer = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -44,13 +45,6 @@ const Footer = () => {
       observer.disconnect();
     };
   }, []);
-
-  // ✅ Google Maps embed URLs
-  const lightMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.123456789!2d69.240073!3d41.299495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b123456789%3A0xabcdef123456789!2sLifecar%20Service!5e0!3m2!1suz!2s!4v1710000000000!5m2!1suz!2s";
-
-  const darkMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.123456789!2d69.240073!3d41.299495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b123456789%3A0xabcdef123456789!2sLifecar%20Service!5e0!3m2!1suz!2s!4v1710000000000!5m2!1suz!2s";
 
   return (
     <footer className="footer">
@@ -97,16 +91,7 @@ const Footer = () => {
         {/* Map */}
         <div className="footer-map">
           <div className="footer-col-title">Bizning manzil</div>
-          <iframe
-            src={theme === "dark" ? darkMapUrl : lightMapUrl}
-            width="400"
-            height="250"
-            style={{ border: 0, borderRadius: "12px" }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Bizning manzil"
-          ></iframe>
+          <GoogleMap theme={theme} />
         </div>
       </div>
 

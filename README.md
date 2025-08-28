@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lifecar Frontend
 
-## Getting Started
+Modern, responsive auto tuning website built with Next.js 15, TypeScript, and SCSS.
 
-First, run the development server:
+## 🚀 Features
 
+- **Modern Design**: Clean, professional UI with dark/light theme support
+- **Responsive**: Mobile-first design that works on all devices
+- **Performance**: Optimized with Next.js 15 and modern build tools
+- **Cookie-Free Maps**: Google Maps JavaScript API without cookies for better privacy
+- **Internationalization**: Multi-language support (English, Uzbek, Russian)
+- **Theme Switching**: Dynamic light/dark theme with smooth transitions
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: SCSS with CSS Variables
+- **Icons**: React Icons
+- **Maps**: Google Maps JavaScript API (cookie-free)
+- **Package Manager**: Yarn
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/lifecar-frontend.git
+cd lifecar-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+# Create .env.local file
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+yarn dev
+```
 
-## Learn More
+## 🗺️ Google Maps Setup
 
-To learn more about Next.js, take a look at the following resources:
+### Getting API Key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Enable **Maps JavaScript API**
+4. Go to **Credentials** and create an API key
+5. Add the API key to your `.env.local` file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Features
 
-## Deploy on Vercel
+- **Cookie-Free**: No tracking cookies, better privacy
+- **Theme-Aware**: Automatically switches between light/dark styles
+- **Custom Marker**: Uses Lifecar logo as map marker
+- **Responsive**: Works perfectly on all screen sizes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Theme System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app supports dynamic theme switching:
+
+- **Light Theme**: Clean, bright interface
+- **Dark Theme**: Modern dark interface
+- **Auto-Save**: Theme preference is saved in localStorage
+- **Smooth Transitions**: All theme changes are animated
+
+## 🌐 Internationalization
+
+Currently supports:
+- 🇺🇸 English
+- 🇺🇿 O'zbek
+- 🇷🇺 Русский
+
+## 📱 Pages
+
+- **Home**: Hero section with services overview
+- **Services**: Detailed service offerings
+- **Shop**: Product catalog
+- **About**: Company information
+- **Contact**: Contact details and map
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
+
+### Manual Deployment
+
+```bash
+yarn build
+yarn start
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # Next.js app router
+├── components/          # React components
+│   ├── home/           # Home page components
+│   ├── layout/         # Layout components
+│   └── ui/             # Reusable UI components
+├── scss/               # Styles
+│   ├── base/           # Base styles and variables
+│   ├── components/     # Component styles
+│   └── pages/          # Page-specific styles
+└── i18n.ts             # Internationalization
+```
+
+## 🔧 Development
+
+### Available Scripts
+
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn start` - Start production server
+- `yarn lint` - Run ESLint
+
+### Code Style
+
+- TypeScript for type safety
+- SCSS for styling with BEM methodology
+- React functional components with hooks
+- Responsive design principles
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support, email support@lifecar.com or create an issue on GitHub.
+
+---
+
+**Made with ❤️ by Lifecar Team**
