@@ -9,13 +9,25 @@ interface YandexMapProps {
 
 declare global {
   interface Window {
-    ymaps: any;
+    ymaps: {
+      ready: (callback: () => void) => void;
+      Map: new (
+        element: HTMLElement,
+        options: unknown,
+        settings?: unknown
+      ) => unknown;
+      Placemark: new (
+        coordinates: number[],
+        properties: unknown,
+        options?: unknown
+      ) => unknown;
+    };
   }
 }
 
 const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<any>(null);
+  const [map, setMap] = useState<unknown>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -47,10 +59,10 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
 
     try {
       window.ymaps.ready(() => {
-        const coordinates = [41.294102, 69.173356]; // Tashkent
+        const coordinates = [41.294102, 69.173356];
 
         const mapInstance = new window.ymaps.Map(
-          mapRef.current,
+          mapRef.current!,
           {
             center: coordinates,
             zoom: 15,
@@ -61,7 +73,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
             suppressMapOpenBlock: true,
             yandexMapDisablePoiInteractivity: true,
           }
-        );
+        ) as { geoObjects: { add: (placemark: unknown) => void } };
 
         const placemark = new window.ymaps.Placemark(
           coordinates,
@@ -99,9 +111,13 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   return (
     <div
       ref={mapRef}
-      style={{ minHeight: "250px", width: "100%" }}
+      style={{
+        minHeight: "250px",
+        width: "100%",
+        borderRadius: "10px",
+        overflow: "hidden",
+      }}
     >
-      {/* Dark mode CSS overlay */}
       {theme === "dark" && (
         <div className="absolute inset-0 bg-black/40 pointer-events-none mix-blend-multiply" />
       )}
