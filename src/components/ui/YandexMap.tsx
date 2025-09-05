@@ -30,6 +30,25 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   const [map, setMap] = useState<unknown>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string>("");
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // ESC key handler for fullscreen exit
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isFullscreen) {
+        setIsFullscreen(false);
+        document.body.style.overflow = "";
+      }
+    };
+
+    if (isFullscreen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFullscreen]);
 
   useEffect(() => {
     const loadYandexMaps = () => {
@@ -67,13 +86,18 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
             center: coordinates,
             zoom: 15,
             controls: ["zoomControl", "fullscreenControl"],
-            type: "yandex#map", // faqat oddiy map
+            type: "yandex#map",
           },
           {
             suppressMapOpenBlock: true,
             yandexMapDisablePoiInteractivity: true,
           }
-        ) as { geoObjects: { add: (placemark: unknown) => void } };
+        ) as {
+          geoObjects: { add: (placemark: unknown) => void };
+          events: {
+            add: (type: string, callback: (event: any) => void) => void;
+          };
+        };
 
         const placemark = new window.ymaps.Placemark(
           coordinates,
@@ -88,6 +112,18 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
         );
 
         mapInstance.geoObjects.add(placemark);
+
+        // Fullscreen event handlers
+        mapInstance.events.add("fullscreenenter", () => {
+          setIsFullscreen(true);
+          document.body.style.overflow = "hidden";
+        });
+
+        mapInstance.events.add("fullscreenexit", () => {
+          setIsFullscreen(false);
+          document.body.style.overflow = "";
+        });
+
         setMap(mapInstance);
       });
     } catch (err) {
@@ -111,14 +147,21 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   return (
     <div
       ref={mapRef}
+      className={`yandex-map-container ${className} ${
+        isFullscreen ? "yandex-map-fullscreen" : ""
+      }`}
       style={{
-        minHeight: "250px",
-        width: "100%",
-        borderRadius: "10px",
+        minHeight: isFullscreen ? "100vh" : "250px",
+        width: isFullscreen ? "100vw" : "100%",
+        maxWidth: isFullscreen ? "100vw" : "100%",
+        minWidth: isFullscreen ? "100vw" : "300px",
+        borderRadius: isFullscreen ? "0" : "10px",
         overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
-      {theme === "dark" && (
+      {/* Dark mode CSS overlay */}
+      {theme === "dark" && !isFullscreen && (
         <div className="absolute inset-0 bg-black/40 pointer-events-none mix-blend-multiply" />
       )}
     </div>

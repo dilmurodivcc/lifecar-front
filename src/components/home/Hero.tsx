@@ -16,14 +16,13 @@ const Hero = () => {
               boshqalar – barchasi bir joyda.
             </p>
             <div className="btns">
-              <Link href="/services"  >
+              <Link href="/services" prefetch={true}>
                 <button className="toServices">
                   {" "}
                   <MdMiscellaneousServices /> Xizmatlarimiz
                 </button>
               </Link>
-              <Link href="/contact">
-              
+              <Link href="/contact" prefetch={true}>
                 <button className="toContact">
                   <FaPhoneAlt /> Biz bilan boglanish
                 </button>

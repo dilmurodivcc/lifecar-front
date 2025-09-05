@@ -73,11 +73,21 @@ const Header = () => {
         </Link>
       </div>
       <nav>
-        <Link href="/">Home</Link>
-        <Link href="/services">Services</Link>
-        <Link href="/shop">Shop</Link>
-        <Link href="/about">About Us</Link>
-        <Link href="/contact">Contact</Link>
+        <Link href="/" prefetch={true}>
+          Home
+        </Link>
+        <Link href="/services" prefetch={true}>
+          Services
+        </Link>
+        <Link href="/shop" prefetch={true}>
+          Shop
+        </Link>
+        <Link href="/about" prefetch={true}>
+          About Us
+        </Link>
+        <Link href="/contact" prefetch={true}>
+          Contact
+        </Link>
       </nav>
       <div className="actions">
         <div className="dropdown" ref={langRef} data-open={langOpen}>

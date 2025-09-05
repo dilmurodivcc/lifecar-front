@@ -7,9 +7,7 @@ import ClientLayout from "@/components/layout/ClientLayout";
 export default function Shop() {
   return (
     <ClientLayout showHeader={true} showFooter={true}>
-      <main className="shop">
-        {/* <ShopSec /> */}
-      </main>
+      <main className="shop">{/* <ShopSec /> */}</main>
     </ClientLayout>
   );
 }

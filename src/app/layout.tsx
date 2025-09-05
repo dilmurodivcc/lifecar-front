@@ -33,6 +33,16 @@ export const metadata = {
   icons: {
     icon: "/icons/lifecar.ico",
   },
+  alternates: {
+    canonical: "https://lifecar.uz",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    google: "kHld5O7aSSfDHveNMffBr_uIj38NVCC1FYxJSYCEf7w",
+  },
 };
 
 export default function RootLayout({
