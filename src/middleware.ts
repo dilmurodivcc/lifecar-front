@@ -3,9 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 const locales = ['uz', 'ru'];
 const defaultLocale = 'uz';
 
-// Get the preferred locale, similar to the above or using a library
+// Get the preferred locale from Accept-Language header
 function getLocale(request: NextRequest): string {
-  // Get locale from Accept-Language header
   const acceptLanguage = request.headers.get('accept-language');
   let locale = defaultLocale;
 
@@ -26,15 +25,22 @@ function getLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  // Check if the pathname already has a locale
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
+  // Only redirect if there's no locale and it's not a static file
+  if (!pathnameHasLocale && pathname !== '/' && !pathname.startsWith('/_next') && !pathname.startsWith('/api') && !pathname.includes('.')) {
     const locale = getLocale(request);
     const url = new URL(`/${locale}${pathname}`, request.url);
+    return NextResponse.redirect(url);
+  }
+
+  // Handle root path redirect
+  if (pathname === '/') {
+    const locale = getLocale(request);
+    const url = new URL(`/${locale}`, request.url);
     return NextResponse.redirect(url);
   }
 
@@ -53,7 +59,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next), static files, and API routes
+    // Only match paths that don't start with _next, api, or contain file extensions
     '/((?!_next|api|favicon.ico|robots.txt|sitemap.xml|icons|img|.*\\.).*)',
   ],
 };
