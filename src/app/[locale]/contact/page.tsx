@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
 import ClientLayout from "../../../components/layout/ClientLayout";
 // i18n is initialized in I18nProvider
 
@@ -12,24 +11,7 @@ interface ContactPageProps {
 }
 
 export default function ContactPage({}: ContactPageProps) {
-  const { t, ready } = useTranslation();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient || !ready) {
-    return (
-      <ClientLayout showHeader={true} showFooter={true}>
-        <main className="contact-page">
-          <div className="container">
-            <h1>Loading...</h1>
-          </div>
-        </main>
-      </ClientLayout>
-    );
-  }
+  const { t } = useTranslation();
 
   return (
     <ClientLayout showHeader={true} showFooter={true}>

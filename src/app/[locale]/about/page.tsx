@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
 import ClientLayout from "../../../components/layout/ClientLayout";
 // i18n is initialized in I18nProvider
 
@@ -13,9 +12,6 @@ interface AboutPageProps {
 
 export default function AboutPage({}: AboutPageProps) {
   const { t } = useTranslation();
-
-
-
 
   return (
     <ClientLayout showHeader={true} showFooter={true}>
