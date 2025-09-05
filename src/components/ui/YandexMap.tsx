@@ -95,7 +95,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
         ) as {
           geoObjects: { add: (placemark: unknown) => void };
           events: {
-            add: (type: string, callback: (event: any) => void) => void;
+            add: (type: string, callback: (event: unknown) => void) => void;
           };
         };
 

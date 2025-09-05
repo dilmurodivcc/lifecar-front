@@ -1,0 +1,95 @@
+{
+    "navigation": {
+        "home": "Bosh sahifa",
+        "services": "Xizmatlar",
+        "shop": "Do'kon",
+        "about": "Biz haqimizda",
+        "contact": "Aloqa"
+    },
+    "header": {
+        "languages": {
+            "uz": "O'zbek",
+            "ru": "Русский"
+        },
+        "phone": "Telefon",
+        "address": "Manzil"
+    },
+    "hero": {
+        "title": "Lifecar - Avto Tuning Xizmatlari",
+        "subtitle": "Professional avto tuning, ehtiyot qismlar va aksessuarlar O'zbekistonda",
+        "cta": "Xizmatlarimizni ko'rish",
+        "learnMore": "Batafsil ma'lumot"
+    },
+    "services": {
+        "title": "Bizning Xizmatlar",
+        "subtitle": "Avtomobilingizni professional darajada sozlash va ta'mirlash",
+        "tuning": {
+            "title": "Avto Tuning",
+            "description": "Avtomobilingizni zamonaviy va chiroyli qilish"
+        },
+        "parts": {
+            "title": "Ehtiyot Qismlar",
+            "description": "Original va sifatli avto ehtiyot qismlari"
+        },
+        "repair": {
+            "title": "Ta'mirlash",
+            "description": "Professional avto ta'mirlash xizmatlari"
+        },
+        "accessories": {
+            "title": "Aksessuarlar",
+            "description": "Avtomobilingiz uchun zamonaviy aksessuarlar"
+        }
+    },
+    "shop": {
+        "title": "Do'kon",
+        "subtitle": "Eng yaxshi avto ehtiyot qismlari va aksessuarlar",
+        "viewAll": "Barchasini ko'rish",
+        "addToCart": "Savatchaga qo'shish",
+        "price": "Narx"
+    },
+    "about": {
+        "title": "Biz Haqimizda",
+        "subtitle": "Lifecar - O'zbekistondagi eng ishonchli avto tuning xizmatlari",
+        "description": "Biz 10 yildan ortiq tajribaga ega professional avto ustalar jamoasi. Avtomobilingizni eng yuqori sifatda sozlash va ta'mirlash bizning asosiy maqsadimiz.",
+        "experience": "Yillik Tajriba",
+        "clients": "Mamnun Mijozlar",
+        "projects": "Bajarilgan Loyihalar"
+    },
+    "contact": {
+        "title": "Aloqa",
+        "subtitle": "Biz bilan bog'laning",
+        "phone": "Telefon",
+        "email": "Email",
+        "address": "Manzil",
+        "workingHours": "Ish Vaqti",
+        "sendMessage": "Xabar Yuborish",
+        "name": "Ism",
+        "message": "Xabar",
+        "send": "Yuborish"
+    },
+    "footer": {
+        "description": "Lifecar - O'zbekistondagi eng ishonchli avto tuning xizmatlari",
+        "quickLinks": "Tezkor Havolalar",
+        "services": "Xizmatlar",
+        "contact": "Aloqa",
+        "followUs": "Bizni Kuzatib Boring",
+        "allRightsReserved": "Barcha huquqlar himoyalangan"
+    },
+    "common": {
+        "loading": "Yuklanmoqda...",
+        "error": "Xatolik yuz berdi",
+        "search": "Qidirish...",
+        "readMore": "Batafsil",
+        "close": "Yopish",
+        "back": "Orqaga",
+        "next": "Keyingi",
+        "previous": "Oldingi",
+        "showMore": "Ko'proq ko'rsatish",
+        "showLess": "Kamroq ko'rsatish"
+    },
+    "seo": {
+        "title": "Lifecar | Avto Tuning Xizmatlari O'zbekistonda",
+        "description": "Lifecar - Avto tuning, auto parts, auto accessories va professional avto ustalar xizmatlari O'zbekistonda. Professional avto sozlash va ta'mirlash xizmatlari.",
+        "keywords": "Lifecar, lifecar tuning, lifecar tyuning, lifecar uz, auto tuning, avtotuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar"
+    }
+}

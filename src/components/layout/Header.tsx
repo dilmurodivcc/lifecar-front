@@ -5,14 +5,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { HiSun, HiMoon, HiChevronDown } from "react-icons/hi";
 
 const languages = [
-  { label: "English", value: "en", img: "/icons/en.jpg" },
   { label: "O'zbek", value: "uz", img: "/icons/uz.avif" },
   { label: "Русский", value: "ru", img: "/icons/ru.png" },
 ];
 
 const Header = () => {
   const [theme, setTheme] = useState("dark");
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
