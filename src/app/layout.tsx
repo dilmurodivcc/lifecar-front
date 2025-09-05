@@ -1,7 +1,6 @@
 import "./../scss/main.scss";
 import { Exo_2, Nunito, Geist } from "next/font/google";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import I18nProvider from "../components/providers/I18nProvider";
 
 const exo2 = Exo_2({
@@ -25,23 +24,14 @@ const geist = Geist({
   preload: true,
 });
 
-// Function to get current locale from headers
-async function getLocale(): Promise<string> {
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const segments = pathname.split("/");
-  const locale = segments[1];
-
-  if (["uz", "ru"].includes(locale)) {
-    return locale;
-  }
-
-  return "uz"; // Default fallback
+// Function to get current locale - simplified
+function getLocale(): string {
+  return "uz"; // Default locale for root layout
 }
 
 // Dynamic metadata generation
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+  const locale = getLocale();
 
   const metadataConfig = {
     uz: {
@@ -144,12 +134,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
+  const locale = getLocale();
 
   // JSON-LD Schema configuration for both languages
   const schemaConfig = {
