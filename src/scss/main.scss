@@ -5,7 +5,9 @@
 @use "./components/layout/header" as *;
 @use "./components/layout/footer" as *;
 @use "./components/ui/buttons" as *;
-
+@use "./components/layout/card" as *;
+@use "./pages/services/services" as *;
+@use "./pages/services/services-cards" as *;
 // Global Yandex Maps overrides
 .yandex-map-container {
   .ymaps,

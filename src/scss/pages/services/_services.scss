@@ -1,0 +1,203 @@
+.services {
+  position: relative;
+  overflow: hidden;
+
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-header {
+    padding: 40px 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      button {
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            var(--box-shadow),
+            transparent
+          );
+          transition: left 0.5s;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          background: var(--glass-bg-hover);
+          border-color: var(--border-color);
+          box-shadow: 0 8px 32px var(--box-shadow),
+            0 0 0 1px var(--border-color);
+
+          &::before {
+            left: 100%;
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      max-width: 400px;
+
+      .input-search-services {
+        flex: 1;
+        height: 48px;
+        padding: 0 20px;
+        border: none;
+        border-radius: 10px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        color: var(--text);
+        font-size: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &::placeholder {
+          color: var(--text-muted);
+        }
+
+        &:focus {
+          outline: none;
+          background: var(--glass-bg-hover);
+          border-color: var(--border-color);
+          box-shadow: 0 0 0 4px var(--box-shadow), 0 8px 32px var(--box-shadow);
+        }
+      }
+
+      .search-button {
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 10px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+          transform: translateY(-2px);
+          background: var(--glass-bg-hover);
+          box-shadow: 0 8px 32px var(--box-shadow),
+            0 0 0 1px var(--border-color);
+        }
+      }
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 768px) {
+    .services-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+
+      .left {
+        justify-content: center;
+        gap: 8px;
+
+        button {
+          width: 44px;
+          height: 44px;
+          font-size: 16px;
+        }
+      }
+
+      .right {
+        max-width: none;
+
+        .input-search-services {
+          height: 44px;
+          font-size: 14px;
+        }
+
+        .search-button {
+          width: 44px;
+          height: 44px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-header {
+      padding: 30px 0 40px;
+
+      .left {
+        button {
+          width: 40px;
+          height: 40px;
+          font-size: 14px;
+        }
+      }
+
+      .right {
+        .input-search-services {
+          height: 40px;
+          font-size: 14px;
+        }
+
+        .search-button {
+          width: 40px;
+          height: 40px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
