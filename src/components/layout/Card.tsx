@@ -3,7 +3,7 @@ const Card = (props: {
   title: string;
   desc: string;
   price: string;
-  time: string;
+  time?: string;
   layout: string;
   type: string;
 }) => {
@@ -20,7 +20,7 @@ const Card = (props: {
           <p className="desc">{desc}</p>
           <div className="card-bottom">
             <h4 className="price">{price}</h4>
-            <h4 className="time">{time}</h4>
+            {time && <h4 className="time">{time}</h4>}
           </div>
         </div>
       </div>

@@ -1,0 +1,39 @@
+{
+    "name": "Lifecar - Avto Tuning Xizmatlari",
+    "short_name": "Lifecar",
+    "description": "Professional avto tuning, ehtiyot qismlar va aksessuarlar O'zbekistonda",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1a1a1a",
+    "theme_color": "#1a1a1a",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "uz",
+    "icons": [
+        {
+            "src": "/icons/lifecar.webp",
+            "sizes": "192x192",
+            "type": "image/webp",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icons/lifecar.webp",
+            "sizes": "512x512",
+            "type": "image/webp",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "automotive",
+        "business",
+        "shopping"
+    ],
+    "screenshots": [
+        {
+            "src": "/icons/lifecar.webp",
+            "sizes": "1280x720",
+            "type": "image/webp",
+            "form_factor": "wide"
+        }
+    ]
+}

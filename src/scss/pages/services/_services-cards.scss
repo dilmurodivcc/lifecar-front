@@ -88,7 +88,7 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        gap: 16px;
+        gap: 8px;
 
         .title {
           font-size: 1.4rem;
@@ -116,9 +116,9 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 16px;
+          gap: 8px;
           margin-top: auto;
-          padding-top: 16px;
+          padding-top: 10px;
           border-top: 1px solid var(--border-color);
 
           .price {
@@ -143,10 +143,6 @@
           }
         }
       }
-
-      // Grid layout specific styles are handled by the main .card styles
-
-      // List layout specific styles
       &.list {
         display: grid !important;
         grid-template-columns: 200px 1fr;
@@ -186,7 +182,6 @@
     }
   }
 
-  // Tablet responsiveness
   @media (max-width: 1024px) {
     .services {
       &.list {
@@ -195,7 +190,6 @@
     }
   }
 
-  // Mobile responsiveness
   @media (max-width: 768px) {
     .services {
       grid-template-columns: 1fr;
@@ -275,7 +269,7 @@
         }
 
         .card-content {
-          padding: 16px;
+          padding: 8px;
 
           .title {
             font-size: 1.1rem;
@@ -315,7 +309,6 @@
     }
   }
 
-  // Pagination styles
   .pagination {
     display: flex;
     justify-content: center;
@@ -404,7 +397,6 @@
     }
   }
 
-  // Mobile pagination
   @media (max-width: 768px) {
     .pagination {
       flex-direction: column;

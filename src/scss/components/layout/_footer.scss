@@ -76,12 +76,12 @@
   align-items: center;
 }
 .footer-soc-badge {
-  background: #18181b;
+  background: var(--bg-ter);
   border-radius: 8px;
   padding: 4px 12px;
-  color: #a1a1aa;
+  color: var(--text-muted);
   font-size: 14px;
-  border: 1px solid #232326;
+  border: 1px solid var(--border-color);
 }
 
 // Map section

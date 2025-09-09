@@ -157,7 +157,7 @@ header.shrink {
     width: 20px;
     height: 20px;
   }
-  .lang-img{
+  .lang-img {
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -184,6 +184,17 @@ header.shrink {
     background: rgba(0, 0, 0, 0.03);
     [data-theme="dark"] & {
       background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &.active {
+    background: var(--glass-bg);
+    color: var(--text);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+
+    [data-theme="dark"] & {
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 }

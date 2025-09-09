@@ -2,19 +2,11 @@
 
 import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
-import {
-  FaClock,
-  FaFilter,
-  FaList,
-  FaSearch,
-  FaSort,
-  FaTags,
-  FaTh,
-  FaThLarge,
-} from "react-icons/fa";
+import { FaSearch, FaThLarge } from "react-icons/fa";
 import Card from "@/components/layout/Card";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PiListBold } from "react-icons/pi";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 interface ServicesPageProps {
   params: Promise<{
@@ -109,15 +101,76 @@ export default function ServicesPage({}: ServicesPageProps) {
   const { t } = useTranslation();
   const [layout, setLayout] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState("default");
+  const [filterBy, setFilterBy] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const cardsPerPage = 8;
 
-  // Calculate pagination
-  const totalPages = Math.ceil(services.length / cardsPerPage);
+  const sortRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
+        setIsSortOpen(false);
+      }
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const sortOptions = [
+    { value: "default", label: "Saralash" },
+    { value: "price-low", label: "Arzonroq " },
+    { value: "price-high", label: "Qimmatroq " },
+  ];
+
+  const filterOptions = [
+    { value: "all", label: "Barcha xizmatlar" },
+    { value: "service", label: "Xizmatlar" },
+    { value: "repair", label: "Ta'mirlash" },
+    { value: "maintenance", label: "Texnik xizmat" },
+  ];
+
+  const filteredServices = services.filter((service) => {
+    const matchesSearch =
+      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.desc.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filterBy === "all" || service.type === filterBy;
+    return matchesSearch && matchesFilter;
+  });
+
+  const sortedServices = [...filteredServices].sort((a, b) => {
+    switch (sortBy) {
+      case "price-low":
+        return parseInt(a.price) - parseInt(b.price);
+      case "price-high":
+        return parseInt(b.price) - parseInt(a.price);
+      case "time-low":
+        return parseInt(a.time) - parseInt(b.time);
+      case "time-high":
+        return parseInt(b.time) - parseInt(a.time);
+      default:
+        return 0;
+    }
+  });
+
+  const totalPages = Math.ceil(sortedServices.length / cardsPerPage);
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  const currentServices = services.slice(startIndex, endIndex);
+  const currentServices = sortedServices.slice(startIndex, endIndex);
 
-  // Debug info (remove in production)
   console.log("Pagination Debug:", {
     totalServices: services.length,
     cardsPerPage,
@@ -145,21 +198,93 @@ export default function ServicesPage({}: ServicesPageProps) {
               >
                 {layout === "grid" ? <FaThLarge /> : <PiListBold />}
               </button>
-              <button className="duration-selector">
-                <FaClock />
-              </button>
-              <button className="price-selector">
-                <FaSort />
-              </button>
-              <button className="type-selector">
-                <FaTags />
-              </button>
+
+              <div
+                className="filter-dropdown"
+                ref={sortRef}
+                data-open={isSortOpen}
+              >
+                <button
+                  className="dropdown-button"
+                  onClick={() => setIsSortOpen(!isSortOpen)}
+                >
+                  {sortOptions.find((option) => option.value === sortBy)?.label}
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="m6 8 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+                <div className="dropdown-menu">
+                  {sortOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`dropdown-item ${
+                        sortBy === option.value ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setSortBy(option.value);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className="filter-dropdown"
+                ref={filterRef}
+                data-open={isFilterOpen}
+              >
+                <button
+                  className="dropdown-button"
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                >
+                  {
+                    filterOptions.find((option) => option.value === filterBy)
+                      ?.label
+                  }
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="m6 8 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+                <div className="dropdown-menu">
+                  {filterOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`dropdown-item ${
+                        filterBy === option.value ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setFilterBy(option.value);
+                        setIsFilterOpen(false);
+                      }}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="right">
               <input
                 type="text"
                 className="input-search-services"
                 placeholder="Qidirish"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className="search-button">
                 <FaSearch />
@@ -167,7 +292,7 @@ export default function ServicesPage({}: ServicesPageProps) {
             </div>
           </div>
 
-          <section className={`services ${layout}`}>
+          <section className={`cards-grid ${layout}`}>
             {currentServices.map((service) => (
               <Card
                 key={service.id}

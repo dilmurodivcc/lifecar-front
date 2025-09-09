@@ -1,4 +1,6 @@
-.services {
+@use "../../base/variables" as *;
+
+.shop {
   position: relative;
   overflow: hidden;
 
@@ -10,7 +12,7 @@
     z-index: 1;
   }
 
-  .services-header {
+  .shop-header {
     padding: 40px 0 60px;
     display: flex;
     justify-content: space-between;
@@ -86,7 +88,7 @@
       flex: 1;
       max-width: 400px;
 
-      .input-search-services {
+      .input-search-shop {
         flex: 1;
         height: 48px;
         padding: 0 20px;
@@ -139,9 +141,54 @@
     }
   }
 
+  // Card styles are now in common/cards.scss
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    gap: 8px;
+
+    .pagination-numbers {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pagination-number {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: var(--glass-bg-hover);
+        border-color: var(--border-color-strong);
+        transform: translateY(-1px);
+      }
+
+      &.active {
+        background: var(--black);
+        color: var(--white);
+        border-color: var(--black);
+        font-weight: 600;
+      }
+    }
+  }
+
   // Mobile responsiveness
   @media (max-width: 768px) {
-    .services-header {
+    .shop-header {
       flex-direction: column;
       align-items: stretch;
       gap: 24px;
@@ -163,7 +210,7 @@
       .right {
         max-width: none;
 
-        .input-search-services {
+        .input-search-shop {
           height: 44px;
           font-size: 14px;
         }
@@ -178,7 +225,7 @@
   }
 
   @media (max-width: 480px) {
-    .services-header {
+    .shop-header {
       padding: 30px 0 40px;
 
       .left {
@@ -192,7 +239,7 @@
       }
 
       .right {
-        .input-search-services {
+        .input-search-shop {
           height: 40px;
           font-size: 14px;
         }

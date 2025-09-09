@@ -2,7 +2,10 @@
 
 import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
-// i18n is initialized in I18nProvider
+import { FaSearch, FaThLarge } from "react-icons/fa";
+import Card from "@/components/layout/Card";
+import { useState, useRef, useEffect } from "react";
+import { PiListBold } from "react-icons/pi";
 
 interface ShopPageProps {
   params: Promise<{
@@ -10,33 +13,329 @@ interface ShopPageProps {
   }>;
 }
 
+const products = [
+  {
+    id: 1,
+    img: "/img/7700.png",
+    title: "Avto Ehtiyot Qismlar",
+    desc: "Original va sifatli avto ehtiyot qismlari. Barcha mashina turlari uchun.",
+    price: "150$",
+    category: "parts",
+  },
+  {
+    id: 2,
+    img: "/img/malibu.png",
+    title: "Tuning Aksessuarlar",
+    desc: "Zamonaviy tuning aksessuarlari va modifikatsiya qismlari.",
+    price: "200$",
+    category: "accessories",
+  },
+  {
+    id: 3,
+    img: "/img/zimmer.png",
+    title: "Avto Kichik Qismlar",
+    desc: "Barcha turdagi avto kichik qismlari va detallar.",
+    price: "80$",
+    category: "parts",
+  },
+  {
+    id: 4,
+    img: "/img/7700.png",
+    title: "Motor Qismlari",
+    desc: "Motor uchun barcha kerakli qismlar va komponentlar.",
+    price: "300$",
+    category: "engine",
+  },
+  {
+    id: 5,
+    img: "/img/malibu.png",
+    title: "Tormoz Tizimi",
+    desc: "Tormoz disklari, kolodkalar va tormoz suyuqligi.",
+    price: "120$",
+    category: "brake",
+  },
+  {
+    id: 6,
+    img: "/img/zimmer.png",
+    title: "Suspension Qismlari",
+    desc: "Amortizatorlar, prujinalar va suspension komponentlari.",
+    price: "250$",
+    category: "suspension",
+  },
+  {
+    id: 7,
+    img: "/img/7700.png",
+    title: "Elektronika",
+    desc: "Avtomobil elektronikasi va sensorlar.",
+    price: "180$",
+    category: "electronics",
+  },
+  {
+    id: 8,
+    img: "/img/malibu.png",
+    title: "Kuzov Qismlari",
+    desc: "Kuzov detallari va kapot, eshiklar.",
+    price: "400$",
+    category: "body",
+  },
+  {
+    id: 9,
+    img: "/img/zimmer.png",
+    title: "Interior Aksessuarlar",
+    desc: "Salon uchun barcha kerakli aksessuarlar.",
+    price: "90$",
+    category: "interior",
+  },
+  {
+    id: 10,
+    img: "/img/7700.png",
+    title: "Shinalar va Jantlar",
+    desc: "Barcha o'lchamdagi shinalar va jantlar.",
+    price: "350$",
+    category: "wheels",
+  },
+  {
+    id: 11,
+    img: "/img/malibu.png",
+    title: "Yog' va Filtrlar",
+    desc: "Motor yog'i, havo filtri va boshqa filtrlar.",
+    price: "60$",
+    category: "maintenance",
+  },
+  {
+    id: 12,
+    img: "/img/zimmer.png",
+    title: "Yoritish Tizimi",
+    desc: "Faralar, chiroqlar va yoritish qismlari.",
+    price: "140$",
+    category: "lighting",
+  },
+];
+
 export default function ShopPage({}: ShopPageProps) {
   const { t } = useTranslation();
+  const [layout, setLayout] = useState("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState("default");
+  const [filterBy, setFilterBy] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const cardsPerPage = 8;
+
+  const sortRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
+        setIsSortOpen(false);
+      }
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const sortOptions = [
+    { value: "default", label: "Saralash" },
+    { value: "price-low", label: "Arzonroq" },
+    { value: "price-high", label: "Qimmatroq" },
+  ];
+
+  const filterOptions = [
+    { value: "all", label: "Barcha mahsulotlar" },
+    { value: "parts", label: "Ehtiyot qismlar" },
+    { value: "accessories", label: "Aksessuarlar" },
+    { value: "engine", label: "Motor qismlari" },
+    { value: "brake", label: "Tormoz tizimi" },
+    { value: "suspension", label: "Suspension" },
+    { value: "electronics", label: "Elektronika" },
+    { value: "body", label: "Kuzov qismlari" },
+    { value: "interior", label: "Interior" },
+    { value: "wheels", label: "Shinalar" },
+    { value: "maintenance", label: "Texnik xizmat" },
+    { value: "lighting", label: "Yoritish" },
+  ];
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.desc.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filterBy === "all" || product.category === filterBy;
+    return matchesSearch && matchesFilter;
+  });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case "price-low":
+        return parseInt(a.price) - parseInt(b.price);
+      case "price-high":
+        return parseInt(b.price) - parseInt(a.price);
+      default:
+        return 0;
+    }
+  });
+
+  const totalPages = Math.ceil(sortedProducts.length / cardsPerPage);
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+  const currentProducts = sortedProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <ClientLayout showHeader={true} showFooter={true}>
-      <main className="shop-page">
+      <main className="shop">
         <div className="container">
-          <h1>{t("shop.title")}</h1>
-          <h2>{t("shop.subtitle")}</h2>
+          <div className="shop-header">
+            <div className="left">
+              <button
+                onClick={() => setLayout(layout === "grid" ? "list" : "grid")}
+              >
+                {layout === "grid" ? <FaThLarge /> : <PiListBold />}
+              </button>
 
-          <div className="shop-grid">
-            <div className="product-card">
-              <h3>Avto Ehtiyot Qismlar</h3>
-              <p>Original va sifatli avto ehtiyot qismlari</p>
-              <button>{t("shop.addToCart")}</button>
+              <div
+                className="filter-dropdown"
+                ref={sortRef}
+                data-open={isSortOpen}
+              >
+                <button
+                  className="dropdown-button"
+                  onClick={() => setIsSortOpen(!isSortOpen)}
+                >
+                  {sortOptions.find((option) => option.value === sortBy)?.label}
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="m6 8 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+                <div className="dropdown-menu">
+                  {sortOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`dropdown-item ${
+                        sortBy === option.value ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setSortBy(option.value);
+                        setIsSortOpen(false);
+                      }}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className="filter-dropdown"
+                ref={filterRef}
+                data-open={isFilterOpen}
+              >
+                <button
+                  className="dropdown-button"
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                >
+                  {
+                    filterOptions.find((option) => option.value === filterBy)
+                      ?.label
+                  }
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="m6 8 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+                <div className="dropdown-menu">
+                  {filterOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`dropdown-item ${
+                        filterBy === option.value ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setFilterBy(option.value);
+                        setIsFilterOpen(false);
+                      }}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="product-card">
-              <h3>Tuning Aksessuarlar</h3>
-              <p>Zamonaviy tuning aksessuarlari</p>
-              <button>{t("shop.addToCart")}</button>
-            </div>
-            <div className="product-card">
-              <h3>Avto Kichik Qismlar</h3>
-              <p>Barcha turdagi avto kichik qismlari</p>
-              <button>{t("shop.addToCart")}</button>
+            <div className="right">
+              <input
+                type="text"
+                className="input-search-shop"
+                placeholder="Qidirish"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="search-button">
+                <FaSearch />
+              </button>
             </div>
           </div>
+
+          <section className={`cards-grid ${layout}`}>
+            {currentProducts.map((product) => (
+              <Card
+                key={product.id}
+                img={product.img}
+                title={product.title}
+                desc={product.desc}
+                price={product.price}
+                layout={layout}
+                type={product.category}
+              />
+            ))}
+          </section>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <div className="pagination-numbers">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      className={`pagination-number ${
+                        currentPage === page ? "active" : ""
+                      }`}
+                      onClick={() => handlePageChange(page)}
+                      aria-label={`Go to page ${page}`}
+                      aria-current={currentPage === page ? "page" : undefined}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </ClientLayout>

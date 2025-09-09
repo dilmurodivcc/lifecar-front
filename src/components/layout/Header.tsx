@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { HiSun, HiMoon, HiChevronDown } from "react-icons/hi";
+import { useRouter, usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const languages = [
   { label: "O'zbek", value: "uz", img: "/icons/uz.avif" },
@@ -14,6 +16,9 @@ const Header = () => {
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -29,10 +34,17 @@ const Header = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedLang = localStorage.getItem("language");
-      if (savedLang) setLanguage(savedLang);
+      // Get current locale from pathname
+      const segments = pathname.split("/");
+      const locale = segments[1];
+      if (["uz", "ru"].includes(locale)) {
+        setLanguage(locale);
+        if (i18n) {
+          i18n.changeLanguage(locale);
+        }
+      }
     }
-  }, []);
+  }, [pathname, i18n]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -61,6 +73,21 @@ const Header = () => {
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  const changeLanguage = (newLanguage: string) => {
+    if (!i18n) return;
+
+    setLanguage(newLanguage);
+    setLangOpen(false);
+
+    // Update i18n language
+    i18n.changeLanguage(newLanguage);
+
+    // Navigate to new locale
+    const segments = pathname.split("/");
+    const newPath = `/${newLanguage}${segments.slice(2).join("/")}`;
+    router.push(newPath);
   };
 
   return (
@@ -98,10 +125,8 @@ const Header = () => {
             {languages.map((l) => (
               <li
                 key={l.value}
-                onClick={() => {
-                  setLanguage(l.value);
-                  setLangOpen(false);
-                }}
+                onClick={() => changeLanguage(l.value)}
+                className={language === l.value ? "active" : ""}
               >
                 <img src={l.img} alt="" className="lang-img" />
                 <span>{l.label}</span>

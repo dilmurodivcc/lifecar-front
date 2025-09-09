@@ -2,6 +2,7 @@ import "./../scss/main.scss";
 import { Exo_2, Nunito, Geist } from "next/font/google";
 import type { Metadata } from "next";
 import I18nProvider from "../components/providers/I18nProvider";
+import ErrorBoundary from "../components/common/ErrorBoundary";
 
 const exo2 = Exo_2({
   subsets: ["latin", "cyrillic"],
@@ -24,12 +25,10 @@ const geist = Geist({
   preload: true,
 });
 
-// Function to get current locale - simplified
 function getLocale(): string {
-  return "uz"; // Default locale for root layout
+  return "uz";
 }
 
-// Dynamic metadata generation
 export async function generateMetadata(): Promise<Metadata> {
   const locale = getLocale();
 
@@ -102,11 +101,34 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     icons: {
       icon: [
-        { url: "/icons/lifecar.ico", sizes: "any" },
-        { url: "/icons/lifecar.webp", type: "image/webp" },
+        { url: "/icons/lifecar.ico", sizes: "16x16 32x32 48x48" },
+        { url: "/icons/lifecar.webp", type: "image/webp", sizes: "192x192" },
+        { url: "/icons/lifecar.webp", type: "image/webp", sizes: "512x512" },
       ],
       shortcut: "/icons/lifecar.ico",
-      apple: "/icons/lifecar.webp",
+      apple: [
+        { url: "/icons/lifecar.webp", sizes: "180x180", type: "image/webp" },
+      ],
+      other: [
+        {
+          rel: "icon",
+          url: "/icons/lifecar.ico",
+          sizes: "16x16",
+          type: "image/x-icon",
+        },
+        {
+          rel: "icon",
+          url: "/icons/lifecar.webp",
+          sizes: "192x192",
+          type: "image/webp",
+        },
+        {
+          rel: "icon",
+          url: "/icons/lifecar.webp",
+          sizes: "512x512",
+          type: "image/webp",
+        },
+      ],
     },
     alternates: {
       canonical: `https://lifecar.uz/${locale}`,
@@ -131,6 +153,8 @@ export async function generateMetadata(): Promise<Metadata> {
       yandex: "1234567890",
     },
     category: "automotive",
+
+    // Favicon
   };
 }
 
@@ -141,7 +165,6 @@ export default function RootLayout({
 }) {
   const locale = getLocale();
 
-  // JSON-LD Schema configuration for both languages
   const schemaConfig = {
     uz: {
       name: "Lifecar",
@@ -173,7 +196,6 @@ export default function RootLayout({
       className={`${exo2.variable} ${nunito.variable} ${geist.variable}`}
     >
       <head>
-        {/* JSON-LD Schema (SEO uchun) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -237,22 +259,74 @@ export default function RootLayout({
           }}
         />
 
-        {/* Additional meta tags for better SEO */}
+        {/* Additional meta tags for better SEO and compatibility */}
         <meta name="theme-color" content="#1a1a1a" />
         <meta name="msapplication-TileColor" content="#1a1a1a" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5"
+          content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
         />
+
+        {/* Favicon fallbacks for maximum compatibility */}
+        <link rel="icon" href="/icons/lifecar.ico" type="image/x-icon" />
+        <link
+          rel="shortcut icon"
+          href="/icons/lifecar.ico"
+          type="image/x-icon"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/icons/lifecar.webp"
+          sizes="180x180"
+        />
+        <link
+          rel="icon"
+          href="/icons/lifecar.webp"
+          type="image/webp"
+          sizes="192x192"
+        />
+        <link
+          rel="icon"
+          href="/icons/lifecar.webp"
+          type="image/webp"
+          sizes="512x512"
+        />
+
+        {/* PWA and mobile optimization */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="Lifecar" />
+
+        {/* Performance and loading optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+        {/* Security headers */}
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+
+        {/* Cache control */}
+        <meta httpEquiv="Cache-Control" content="public, max-age=31536000" />
+
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="antialiased">
-        <I18nProvider>{children}</I18nProvider>
+        <ErrorBoundary>
+          <I18nProvider>{children}</I18nProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

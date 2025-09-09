@@ -1,0 +1,138 @@
+@use "../../base/variables" as *;
+
+// Common dropdown styles for both services and shop pages
+.filter-dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  gap: 0.5rem;
+  padding: 10px 12px;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  border-radius: 10px;
+  font-family: var(--font-geist);
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  height: 50px;
+  background-color: var(--black);
+  color: var(--white);
+  border: 1px solid #333;
+  min-width: 200px;
+
+  svg {
+    color: var(--black);
+    transition: transform 0.2s ease-in-out;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.filter-dropdown[data-open="true"] {
+  .dropdown-button svg:last-child {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: var(--white);
+  border: 1px solid;
+  border-radius: 8px;
+  z-index: 10;
+  border: 1px solid var(--border-color);
+  padding: 0.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.filter-dropdown[data-open="true"] .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 6px;
+  color: var(--text);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+    [data-theme="dark"] & {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &.active {
+    background: var(--glass-bg);
+    color: var(--text);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+
+    [data-theme="dark"] & {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// Mobile responsiveness for dropdowns
+@media (max-width: 768px) {
+  .dropdown-button {
+    height: 44px;
+    font-size: 14px;
+    min-width: 150px;
+    padding: 8px 16px;
+  }
+
+  .dropdown-menu {
+    min-width: 150px;
+
+    .dropdown-item {
+      padding: 8px 10px;
+      font-size: 14px;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown-button {
+    height: 40px;
+    font-size: 12px;
+    min-width: 120px;
+    padding: 6px 12px;
+  }
+
+  .dropdown-menu {
+    min-width: 120px;
+
+    .dropdown-item {
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+  }
+}
