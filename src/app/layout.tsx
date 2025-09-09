@@ -302,7 +302,6 @@ export default function RootLayout({
         />
         <meta name="apple-mobile-web-app-title" content="Lifecar" />
 
-        {/* Performance and loading optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
