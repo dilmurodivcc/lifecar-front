@@ -3,6 +3,7 @@
 import ClientLayout from "../../../components/layout/ClientLayout";
 import { FaSearch, FaThLarge } from "react-icons/fa";
 import Card from "@/components/layout/Card";
+import Pagination from "@/components/ui/Pagination";
 import { useState, useRef, useEffect } from "react";
 import { PiListBold } from "react-icons/pi";
 
@@ -305,27 +306,11 @@ export default function ServicesPage({}: ServicesPageProps) {
           </section>
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="pagination">
-              <div className="pagination-numbers">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <button
-                      key={page}
-                      className={`pagination-number ${
-                        currentPage === page ? "active" : ""
-                      }`}
-                      onClick={() => handlePageChange(page)}
-                      aria-label={`Go to page ${page}`}
-                      aria-current={currentPage === page ? "page" : undefined}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-          )}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </main>
     </ClientLayout>

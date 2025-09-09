@@ -35,7 +35,6 @@ const Header = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Get current locale from pathname
       const segments = pathname.split("/");
       const locale = segments[1];
       if (["uz", "ru"].includes(locale)) {

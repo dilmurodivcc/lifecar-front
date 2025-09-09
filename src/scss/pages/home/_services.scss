@@ -81,22 +81,23 @@
     }
   }
 
-  .card {
+  .card-home {
     background: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: all 0.4s ease;
     background: var(--bg-ter);
     cursor: pointer;
     overflow: hidden;
-    min-height: 260px;
+    min-height: 300px;
 
     &:hover {
+      
       .img-wrapper {
         img {
           overflow: hidden !important;
@@ -112,7 +113,7 @@
 
     img {
       width: 100%;
-      height: 180px;
+      height: 180px !important;
       object-fit: cover;
       border-radius: 10px;
       transition: all 0.4s ease;

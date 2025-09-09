@@ -92,7 +92,7 @@
         padding: 0 20px;
         border: none;
         border-radius: 10px;
-        background: var(--glass-bg);
+        background: var(--bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--border-color);
@@ -117,7 +117,7 @@
         height: 48px;
         border: none;
         border-radius: 10px;
-        background: var(--glass-bg);
+        background: var(--bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--border-color);
@@ -130,9 +130,7 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
         &:hover {
-          transform: translateY(-2px);
-          background: var(--glass-bg-hover);
-          box-shadow: 0 8px 32px var(--box-shadow),
+          box-shadow: 0 8px 12px var(--box-shadow),
             0 0 0 1px var(--border-color);
         }
       }
@@ -157,7 +155,6 @@
           font-size: 16px;
         }
 
-        // Mobile dropdown styles are now in common/dropdowns.scss
       }
 
       .right {
@@ -188,7 +185,6 @@
           font-size: 14px;
         }
 
-        // Mobile dropdown styles are now in common/dropdowns.scss
       }
 
       .right {

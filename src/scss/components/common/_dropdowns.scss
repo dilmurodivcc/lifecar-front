@@ -27,7 +27,7 @@
   background-color: var(--black);
   color: var(--white);
   border: 1px solid #333;
-  min-width: 200px;
+  min-width: 220px;
 
   svg {
     color: var(--black);
@@ -78,14 +78,10 @@
   color: var(--text);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.03);
-    [data-theme="dark"] & {
-      background: rgba(255, 255, 255, 0.06);
-    }
+ 
   }
 
   &.active {
-    background: var(--glass-bg);
     color: var(--text);
     font-weight: 600;
     border: 1px solid var(--border-color);
