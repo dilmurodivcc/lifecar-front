@@ -1,12 +1,10 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
 import { FaSearch, FaThLarge } from "react-icons/fa";
 import Card from "@/components/layout/Card";
 import { useState, useRef, useEffect } from "react";
 import { PiListBold } from "react-icons/pi";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 interface ServicesPageProps {
   params: Promise<{
@@ -98,7 +96,6 @@ const services = [
 ];
 
 export default function ServicesPage({}: ServicesPageProps) {
-  const { t } = useTranslation();
   const [layout, setLayout] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("default");

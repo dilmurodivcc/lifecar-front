@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
 import { FaSearch, FaThLarge } from "react-icons/fa";
 import Card from "@/components/layout/Card";
@@ -113,7 +112,6 @@ const products = [
 ];
 
 export default function ShopPage({}: ShopPageProps) {
-  const { t } = useTranslation();
   const [layout, setLayout] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("default");

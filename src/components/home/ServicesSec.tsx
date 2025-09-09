@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const services = [
   {
     img: "/img/tint.webp",
@@ -109,7 +111,12 @@ const ServicesSec = () => {
                 {[...column, ...column].map((service, cardIndex) => (
                   <div className="card" key={cardIndex}>
                     <div className="img-wrapper">
-                      <img src={service.img} alt={service.title} />
+                      <Image
+                        src={service.img}
+                        alt={service.title}
+                        width={400}
+                        height={180}
+                      />
                     </div>
                     <div className="card-content">
                       <h4 className="title">{service.title}</h4>

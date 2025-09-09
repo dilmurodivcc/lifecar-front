@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { FaHome, FaArrowLeft } from "react-icons/fa";
 
@@ -59,8 +61,8 @@ export default function NotFound() {
             lineHeight: "1.6",
           }}
         >
-          Kechirasiz, qidirilayotgan sahifa mavjud emas yoki o'chirilgan
-          bo'lishi mumkin.
+          Kechirasiz, qidirilayotgan sahifa mavjud emas yoki o&apos;chirilgan
+          bo&apos;lishi mumkin.
         </p>
         <div
           className="not-found-actions"

@@ -92,7 +92,7 @@ const DefaultErrorFallback: React.FC<{
             color: "var(--text-secondary)",
           }}
         >
-          Kechirasiz, saytda muammo bor. Iltimos, qaytadan urinib ko'ring.
+          Kechirasiz, saytda muammo bor. Iltimos, qaytadan urinib ko&apos;ring.
         </p>
         {process.env.NODE_ENV === "development" && error && (
           <details style={{ margin: "20px 0", textAlign: "left" }}>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import { HiSun, HiMoon, HiChevronDown } from "react-icons/hi";
 import { useRouter, usePathname } from "next/navigation";
@@ -93,7 +94,12 @@ const Header = () => {
   return (
     <header className={shrink ? "shrink" : ""}>
       <div className="logo">
-        <img src="/icons/lifecar.webp" alt="" />
+        <Image
+          src="/icons/lifecar.webp"
+          alt="Lifecar Logo"
+          width={50}
+          height={50}
+        />
         <Link className="logoName" href="/">
           Lifecar
         </Link>
@@ -128,7 +134,13 @@ const Header = () => {
                 onClick={() => changeLanguage(l.value)}
                 className={language === l.value ? "active" : ""}
               >
-                <img src={l.img} alt="" className="lang-img" />
+                <Image
+                  src={l.img}
+                  alt={l.label}
+                  className="lang-img"
+                  width={18}
+                  height={18}
+                />
                 <span>{l.label}</span>
               </li>
             ))}

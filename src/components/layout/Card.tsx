@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Card = (props: {
   img: string;
   title: string;
@@ -13,7 +15,7 @@ const Card = (props: {
       <div className={`card ${layout}`}>
         <div className="card-type">{type}</div>
         <div className="img-wrapper">
-          <img src={img} alt={title} />
+          <Image src={img} alt={title} width={400} height={200} />
         </div>
         <div className="card-content">
           <h4 className="title">{title}</h4>

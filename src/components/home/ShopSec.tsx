@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 const shopItems = [
   {
     img: "/img/malibu.png",
@@ -27,36 +29,34 @@ const ShopSec = () => {
   return (
     <section className="ShopSec">
       <div className="container">
+        <div className="ShopSec-header">
+          <div className="left">
+            <h2 className="ShopSec-title">Shop Car Tuning Parts</h2>
+            <p className="ShopSec-description">
+              We offer a wide range of car tuning parts for all makes and
+              models.
+            </p>
+          </div>
 
-      <div className="ShopSec-header">
-        <div className="left">
-          <h2 className="ShopSec-title">Shop Car Tuning Parts</h2>
-          <p className="ShopSec-description">
-            We offer a wide range of car tuning parts for all makes and models.
-          </p>
+          <button className="ShopSec-button primary-btn">
+            <span>See all products</span>
+          </button>
         </div>
-
-        <button className="ShopSec-button primary-btn">
-          <span>See all products</span>
-        </button>
-      </div>
-      <div className="shop-cards">
-        {shopItems.map((item, idx) => (
-          <div className="shop-card" key={idx}>
-            
-            <img src={item.img} alt="" />
-            <div className="card-content">
-              <div className="top">
-
-              <div className="title">{item.title}</div>
-              <div className="description">{item.description}</div>
-              </div>
-              <div className="bottom">
-                <h5 className="price">{item.price}</h5>
-                <button className="primary-btn">More info</button>
+        <div className="shop-cards">
+          {shopItems.map((item, idx) => (
+            <div className="shop-card" key={idx}>
+              <Image src={item.img} alt={item.title} width={400} height={400} />
+              <div className="card-content">
+                <div className="top">
+                  <div className="title">{item.title}</div>
+                  <div className="description">{item.description}</div>
+                </div>
+                <div className="bottom">
+                  <h5 className="price">{item.price}</h5>
+                  <button className="primary-btn">More info</button>
+                </div>
               </div>
             </div>
-          </div>
           ))}
         </div>
       </div>
