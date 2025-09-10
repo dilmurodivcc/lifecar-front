@@ -32,7 +32,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   const [error, setError] = useState<string>("");
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // ESC key handler for fullscreen exit
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isFullscreen) {
@@ -113,7 +112,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
 
         mapInstance.geoObjects.add(placemark);
 
-        // Fullscreen event handlers
         mapInstance.events.add("fullscreenenter", () => {
           setIsFullscreen(true);
           document.body.style.overflow = "hidden";

@@ -84,7 +84,6 @@
   border: 1px solid var(--border-color);
 }
 
-// Map section
 .footer-map {
   width: 100%;
   display: flex;
@@ -97,7 +96,6 @@
 
   max-width: 600px;
 
-  // Default map container styles
   .yandex-map-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -109,7 +107,6 @@
     box-sizing: border-box !important;
     display: block !important;
 
-    // Override Yandex Maps internal styles
     .ymaps,
     .ymaps canvas,
     .ymaps input,
@@ -121,7 +118,6 @@
     }
   }
 
-  // Fullscreen map styles
   .yandex-map-fullscreen {
     position: fixed !important;
     top: 0 !important;
@@ -133,7 +129,6 @@
     max-width: 100vw !important;
     min-width: 100vw !important;
 
-    // Override Yandex Maps internal styles for fullscreen
     .ymaps,
     .ymaps canvas,
     .ymaps input,

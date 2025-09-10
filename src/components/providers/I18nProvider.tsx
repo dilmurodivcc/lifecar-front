@@ -21,7 +21,6 @@ const I18nProvider = ({ children }: I18nProviderProps) => {
   useEffect(() => {
     if (!isClient || !i18n) return;
 
-    // Get locale from pathname
     const segments = pathname.split("/");
     const locale = segments[1];
 

@@ -154,7 +154,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     category: "automotive",
 
-    // Favicon
   };
 }
 

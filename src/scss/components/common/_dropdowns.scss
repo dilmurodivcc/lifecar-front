@@ -1,6 +1,5 @@
 @use "../../base/variables" as *;
 
-// Common dropdown styles for both services and shop pages
 .filter-dropdown {
   position: relative;
 }
@@ -48,7 +47,7 @@
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  min-width: 200px;
+  min-width: 160px;
   background: var(--white);
   border: 1px solid;
   border-radius: 8px;
@@ -92,7 +91,6 @@
   }
 }
 
-// Mobile responsiveness for dropdowns
 @media (max-width: 768px) {
   .dropdown-button {
     height: 44px;

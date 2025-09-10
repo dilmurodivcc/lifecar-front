@@ -77,7 +77,6 @@
       }
     }
 
-    // Dropdown styles are now in common/dropdowns.scss
 
     .right {
       display: flex;
@@ -137,7 +136,6 @@
     }
   }
 
-  // Mobile responsiveness
   @media (max-width: 768px) {
     .services-header {
       flex-direction: column;

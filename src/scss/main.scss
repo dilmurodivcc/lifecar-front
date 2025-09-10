@@ -11,7 +11,8 @@
 @use "./pages/services/services" as *;
 @use "./pages/services/services-cards" as *;
 @use "./pages/shop/shop" as *;
-// Global Yandex Maps overrides
+@use "./pages/home/contact" as *;
+@use "./pages/contact/contact" as *;
 .yandex-map-container {
   .ymaps,
   .ymaps canvas,

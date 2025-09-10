@@ -18,7 +18,6 @@ const LanguageSwitcher = () => {
   useEffect(() => {
     if (!isClient || !ready || !i18n) return;
 
-    // Get current locale from pathname
     const segments = pathname.split("/");
     const locale = segments[1];
     if (["uz", "ru"].includes(locale)) {
@@ -33,10 +32,8 @@ const LanguageSwitcher = () => {
     const segments = pathname.split("/");
     const newPath = `/${locale}${segments.slice(2).join("/")}`;
 
-    // Update i18n language
     i18n.changeLanguage(locale);
 
-    // Navigate to new locale
     router.push(newPath);
   };
 

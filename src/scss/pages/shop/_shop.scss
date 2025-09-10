@@ -11,7 +11,11 @@
     position: relative;
     z-index: 1;
   }
-
+  .card{
+    img{
+      width: auto !important;
+    }
+  }
   .shop-header {
     padding: 40px 0 60px;
     display: flex;
@@ -79,7 +83,6 @@
       }
     }
 
-    // Dropdown styles are now in common/dropdowns.scss
 
     .right {
       display: flex;
@@ -139,7 +142,6 @@
     }
   }
 
-  // Card styles are now in common/cards.scss
   .pagination {
     display: flex;
     justify-content: center;
@@ -222,7 +224,6 @@
           font-size: 16px;
         }
 
-        // Mobile dropdown styles are now in common/dropdowns.scss
       }
 
       .right {
@@ -253,7 +254,6 @@
           font-size: 14px;
         }
 
-        // Mobile dropdown styles are now in common/dropdowns.scss
       }
 
       .right {

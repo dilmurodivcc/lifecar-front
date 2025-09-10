@@ -6,7 +6,6 @@ const defaultLocale = 'uz';
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Skip middleware for static files and API routes
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -20,12 +19,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if pathname already has a locale
   const hasLocale = locales.some(locale => 
     pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 
-  // If no locale, redirect to default locale
   if (!hasLocale) {
     const url = new URL(`/${defaultLocale}${pathname}`, request.url);
     return NextResponse.redirect(url);

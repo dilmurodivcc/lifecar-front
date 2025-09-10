@@ -1,9 +1,11 @@
 @use "./hero" as *;
 @use "./services" as *;
 @use "./shop" as *;
+@use "./contact" as *;
 
 .home {
   background-color: var(--bg);
   color: var(--text);
   width: 100%;
 }
+ 

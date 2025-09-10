@@ -20,6 +20,7 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -81,10 +82,8 @@ const Header = () => {
     setLanguage(newLanguage);
     setLangOpen(false);
 
-    // Update i18n language
     i18n.changeLanguage(newLanguage);
 
-    // Navigate to new locale
     const segments = pathname.split("/");
     const newPath = `/${newLanguage}${segments.slice(2).join("/")}`;
     router.push(newPath);
@@ -105,19 +104,19 @@ const Header = () => {
       </div>
       <nav>
         <Link href="/" prefetch={true}>
-          Home
+          {t("navigation.home")}
         </Link>
         <Link href="/services" prefetch={true}>
-          Services
+          {t("navigation.services")}
         </Link>
         <Link href="/shop" prefetch={true}>
-          Shop
+          {t("navigation.shop")}
         </Link>
         <Link href="/about" prefetch={true}>
-          About Us
+          {t("navigation.about")}
         </Link>
         <Link href="/contact" prefetch={true}>
-          Contact
+          {t("navigation.contact")}
         </Link>
       </nav>
       <div className="actions">

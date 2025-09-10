@@ -1,6 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const shopItems = [
   {
@@ -26,20 +27,20 @@ const shopItems = [
 ];
 
 const ShopSec = () => {
+  const { t } = useTranslation();
   return (
     <section className="ShopSec">
       <div className="container">
         <div className="ShopSec-header">
           <div className="left">
-            <h2 className="ShopSec-title">Shop Car Tuning Parts</h2>
+            <h2 className="ShopSec-title">{t("shopSec.title")}</h2>
             <p className="ShopSec-description">
-              We offer a wide range of car tuning parts for all makes and
-              models.
+             {t("shopSec.subtitle")}
             </p>
           </div>
 
           <button className="ShopSec-button primary-btn">
-            <span>See all products</span>
+            <span>{t("shopSec.viewAll")}</span>
           </button>
         </div>
         <div className="shop-cards">

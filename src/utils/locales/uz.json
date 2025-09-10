@@ -20,25 +20,10 @@
         "cta": "Xizmatlarimizni ko'rish",
         "learnMore": "Batafsil ma'lumot"
     },
-    "services": {
-        "title": "Bizning Xizmatlar",
-        "subtitle": "Avtomobilingizni professional darajada sozlash va ta'mirlash",
-        "tuning": {
-            "title": "Avto Tuning",
-            "description": "Avtomobilingizni zamonaviy va chiroyli qilish"
-        },
-        "parts": {
-            "title": "Ehtiyot Qismlar",
-            "description": "Original va sifatli avto ehtiyot qismlari"
-        },
-        "repair": {
-            "title": "Ta'mirlash",
-            "description": "Professional avto ta'mirlash xizmatlari"
-        },
-        "accessories": {
-            "title": "Aksessuarlar",
-            "description": "Avtomobilingiz uchun zamonaviy aksessuarlar"
-        }
+    "shopSec": {
+        "title": "Avtotuning ehtiyot qismlari do‘koni",
+        "subtitle": "Biz barcha rusum va modellardagi avtomobillar uchun tuning detallari keng assortimentini taklif etamiz.",
+        "viewAll": "Barcha mahsulotlarni ko‘rish"
     },
     "shop": {
         "title": "Do'kon",

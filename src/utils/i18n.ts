@@ -10,7 +10,6 @@ const resources = {
   ru: { translation: ru },
 };
 
-// Initialize i18n
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -27,7 +26,7 @@ i18n
       caches: ["localStorage", "cookie"],
     },
     react: {
-      useSuspense: false, // Disable suspense for better performance
+      useSuspense: false, 
     },
   });
 

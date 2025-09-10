@@ -1,11 +1,9 @@
-"use client";
-
-// import { useTranslation } from 'react-i18next';
+"use client"
 import ClientLayout from "../../components/layout/ClientLayout";
-import Hero from "@/components/home/Hero";
-import ServicesSec from "@/components/home/ServicesSec";
-import ShopSec from "@/components/home/ShopSec";
-// i18n is initialized in I18nProvider
+import Hero from "@/app/[locale]/home/Hero";
+import ServicesSec from "@/app/[locale]/home/ServicesSec";
+import ShopSec from "@/app/[locale]/home/ShopSec";
+// import ContactSec from "@/app/[locale]/home/ContactSec";
 
 interface HomePageProps {
   params: Promise<{
@@ -13,14 +11,15 @@ interface HomePageProps {
   }>;
 }
 
+
 export default function HomePage({}: HomePageProps) {
-  // const { t } = useTranslation();
 
   return (
     <ClientLayout showHeader={true} showFooter={true}>
       <main className="home">
         <Hero />
         <ShopSec />
+        {/* <ContactSec /> */}
         <ServicesSec />
       </main>
     </ClientLayout>

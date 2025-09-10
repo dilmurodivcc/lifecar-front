@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
-// i18n is initialized in I18nProvider
 
 interface AboutPageProps {
   params: Promise<{

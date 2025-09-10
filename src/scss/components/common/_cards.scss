@@ -1,6 +1,5 @@
 @use "../../base/variables" as *;
 
-// Common card styles for both services and shop pages
 .card {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -70,7 +69,6 @@
     justify-content: center;
 
     img {
-      width: auto;
       height: 200px;
       object-fit: cover;
       border-radius: 12px;
