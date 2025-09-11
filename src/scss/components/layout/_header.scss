@@ -17,9 +17,10 @@ header {
   height: 64px;
   transform: translatex(-50%);
   color: var(--text-white);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   border: 1px solid rgba(0, 0, 0, 0.08);
   z-index: 1000;
+  will-change: transform, opacity;
 
   a {
     color: var(--text);
@@ -152,7 +153,7 @@ header.shrink {
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, 10px);
-  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
   svg {
     width: 20px;
     height: 20px;

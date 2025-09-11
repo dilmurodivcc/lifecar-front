@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import ClientLayout from "../../../components/layout/ClientLayout";
-
 interface AboutPageProps {
   params: Promise<{
     locale: string;

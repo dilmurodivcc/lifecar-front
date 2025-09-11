@@ -10,6 +10,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 interface ContactPageProps {
   params: Promise<{
     locale: string;
@@ -27,79 +28,81 @@ export default function ContactPage({}: ContactPageProps) {
       "_blank"
     );
   };
+  const { t } = useTranslation();
 
   return (
     <ClientLayout showHeader={true} showFooter={false}>
       <main className="contact-page">
         <div className="container">
           <aside className="left">
-            <h2>Bizning Ish Vaqtimiz.</h2>
+            <h2>{t("contact.ourWorkingHours")}</h2>
             <ul className="working-hours">
               <li>
-                <b>Dushanba:</b>{" "}
+                <b>{t("contact.weeks.monday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Seshanba:</b>{" "}
+                <b>{t("contact.weeks.tuesday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Chorshanba:</b>{" "}
+                <b>{t("contact.weeks.wednesday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Payshanba:</b>{" "}
+                <b>{t("contact.weeks.thursday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Juma:</b>{" "}
+                <b>{t("contact.weeks.friday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Shanba:</b>{" "}
+                <b>{t("contact.weeks.saturday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>Yakshanba:</b> <span>Dam olish</span>
+                <b>{t("contact.weeks.sunday")}:</b>{" "}
+                <span>{t("contact.weeks.closed")}</span>
               </li>
             </ul>
-            <h2>Bizning Kontaktlarimiz.</h2>
+            <h2>{t("contact.ourContacts")}</h2>
             <ul className="contact-info">
               <li>
                 <b>
                   {" "}
-                  <FaPhone></FaPhone> Telefon:
+                  <FaPhone></FaPhone> {t("contact.telephone")}:
                 </b>{" "}
                 <a href="tel:+998 33 785 22 22">+998 33 785 22 22</a>
               </li>
               <li>
                 <b>
                   {" "}
-                  <FaPhone></FaPhone> Telefon:
+                  <FaPhone></FaPhone> {t("contact.telephone")}:
                 </b>{" "}
                 <a href="tel:+998 99 814 65 65">+998 99 814 65 65</a>
               </li>
               <li>
                 <b>
                   {" "}
-                  <FaTelegram></FaTelegram> Telegram:
+                  <FaTelegram></FaTelegram> {t("contact.telegram")}:
                 </b>{" "}
                 <a href="https://t.me/lifecar_uz">@lifecar_uz</a>
               </li>
             </ul>
-            <h2>Bizning Ijtimoiy Tarmoqlarimiz.</h2>
+            <h2>{t("contact.ourSocial")}</h2>
             <ul className="social-links">
               <li>
                 <a
@@ -136,7 +139,7 @@ export default function ContactPage({}: ContactPageProps) {
             </ul>
           </aside>
           <aside className="right">
-            <h2>Bizning Manzilimiz.</h2>
+            <h2>{t("contact.ourAddress")}</h2>
             <div className="map">
               <YandexMap theme={"light"} />
             </div>
@@ -146,14 +149,14 @@ export default function ContactPage({}: ContactPageProps) {
                 className="map-button yandex-map-button"
               >
                 <FaYandex />
-                Yandex Karta Mashrut
+                {t("contact.yandexButton")}
               </button>
               <button
                 onClick={openGoogleMaps}
                 className="map-button google-map-button"
               >
                 <FaGoogle />
-                Google Karta Mashrut
+                {t("contact.googleButton")}
               </button>
             </div>
           </aside>

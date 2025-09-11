@@ -25,12 +25,37 @@
         "subtitle": "Biz barcha rusum va modellardagi avtomobillar uchun tuning detallari keng assortimentini taklif etamiz.",
         "viewAll": "Barcha mahsulotlarni ko‘rish"
     },
+    "servicesSec": {
+        "title": "Bizning Xizmatlar"
+    },
     "shop": {
         "title": "Do'kon",
         "subtitle": "Eng yaxshi avto ehtiyot qismlari va aksessuarlar",
         "viewAll": "Barchasini ko'rish",
         "addToCart": "Savatchaga qo'shish",
-        "price": "Narx"
+        "price": "Narx",
+        "filter": {
+            "all": "Barcha mahsulotlar",
+            "parts": "Ehtiyot qismlar",
+            "accessories": "Aksessuarlar",
+            "engine": "Motor qismlari",
+            "brake": "Tormoz tizimi"
+        }
+    },
+    "services": {
+        "filter": {
+            "title": "Filtrlash",
+            "all": "Barcha xizmatlar",
+            "service": "Xizmatlar",
+            "repair": "Ta'mirlash",
+            "maintenance": "Texnik xizmat"
+        },
+        "search": "Qidirish"
+    },
+    "sort": {
+        "title": "Saralash",
+        "priceLow": "Arzonroq",
+        "priceHigh": "Qimmatroq"
     },
     "about": {
         "title": "Biz Haqimizda",
@@ -41,24 +66,65 @@
         "projects": "Bajarilgan Loyihalar"
     },
     "contact": {
-        "title": "Aloqa",
-        "subtitle": "Biz bilan bog'laning",
-        "phone": "Telefon",
-        "email": "Email",
-        "address": "Manzil",
-        "workingHours": "Ish Vaqti",
-        "sendMessage": "Xabar Yuborish",
-        "name": "Ism",
-        "message": "Xabar",
-        "send": "Yuborish"
+        "ourWorkingHours": "Bizning Ish Vaqtimiz.",
+        "ourContacts": "Bizning Kontaktlarimiz.",
+        "ourSocial": "Bizning Ijtimoiy Tarmoqlarimiz.",
+        "ourAddress": "Bizning Manzilimiz.",
+        "telephone": "Telefon",
+        "telegram": "Telegram",
+        "yandexButton": "Yandex karta mashrut",
+        "googleButton": "Google karta mashrut",
+        "send": "Yuborish",
+        "weeks": {
+            "monday": "Dushanba",
+            "tuesday": "Seshanba",
+            "wednesday": "Chorshanba",
+            "thursday": "Payshanba",
+            "friday": "Juma",
+            "saturday": "Shanba",
+            "sunday": "Yakshanba",
+            "closed": "Dam olish"
+        }
     },
     "footer": {
-        "description": "Lifecar - O'zbekistondagi eng ishonchli avto tuning xizmatlari",
-        "quickLinks": "Tezkor Havolalar",
-        "services": "Xizmatlar",
-        "contact": "Aloqa",
-        "followUs": "Bizni Kuzatib Boring",
-        "allRightsReserved": "Barcha huquqlar himoyalangan"
+        "social": {
+            "title": "Ijtimoiy Tarmoqlar",
+            "telegram": "Telegram",
+            "instagram": "Instagram",
+            "youtube": "Youtube",
+            "yandex": "Yandex"
+        },
+        "contact": {
+            "title": "Bog'lanish",
+            "phone": "Telefon",
+            "email": "Email",
+            "address": "Manzil",
+            "workingHours": "Ish Vaqti"
+        },
+        "shop": {
+            "title": "Do'kon",
+            "allProducts": "Barcha mahsulotlar",
+            "steeringWheels": "Steering Wheels",
+            "radarDetectors": "Radar Detectors",
+            "tanirofka": "Tanirofka",
+            "carAccessories": "Car Accessories"
+        },
+        "links": {
+            "title": "Sahifalar",
+            "home": "Bosh sahifa",
+            "contact": "Aloqa",
+            "services": "Xizmatlar",
+            "shop": "Do'kon",
+            "about": "Biz haqimizda"
+        },
+        "map": {
+            "title": "Bizning Manzil",
+            "address": "Toshkent shahar, Chilonzor tumani, Bunyodkor ko'chasi, 1-uy"
+        },
+        "bottom": {
+            "copyright": "Lifecar.uz Tashkent, Uzbekistan",
+            "backToTop": "Tepaga"
+        }
     },
     "common": {
         "loading": "Yuklanmoqda...",

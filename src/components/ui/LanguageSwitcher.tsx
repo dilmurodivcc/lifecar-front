@@ -24,17 +24,58 @@ const LanguageSwitcher = () => {
       setCurrentLocale(locale);
       i18n.changeLanguage(locale);
     }
+
+    const savedScrollPosition = sessionStorage.getItem("scrollPosition");
+    if (savedScrollPosition) {
+      try {
+        const { x, y, timestamp } = JSON.parse(savedScrollPosition);
+        if (Date.now() - timestamp < 5000) {
+          const restoreScroll = () => {
+            window.scrollTo({
+              top: y,
+              left: x,
+              behavior: "instant",
+            });
+          };
+
+          restoreScroll();
+          setTimeout(restoreScroll, 10);
+
+          setTimeout(restoreScroll, 100);
+
+          requestAnimationFrame(() => {
+            setTimeout(restoreScroll, 10);
+          });
+
+          sessionStorage.removeItem("scrollPosition");
+        }
+      } catch {
+        console.warn("Failed to restore scroll position");
+        sessionStorage.removeItem("scrollPosition");
+      }
+    }
   }, [pathname, i18n, ready, isClient]);
 
   const changeLanguage = (locale: string) => {
     if (!i18n) return;
+
+    const currentScrollY = window.scrollY;
+    const currentScrollX = window.scrollX;
+    sessionStorage.setItem(
+      "scrollPosition",
+      JSON.stringify({
+        x: currentScrollX,
+        y: currentScrollY,
+        timestamp: Date.now(),
+      })
+    );
 
     const segments = pathname.split("/");
     const newPath = `/${locale}${segments.slice(2).join("/")}`;
 
     i18n.changeLanguage(locale);
 
-    router.push(newPath);
+    router.replace(newPath);
   };
 
   if (!isClient || !ready) {

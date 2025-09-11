@@ -1,12 +1,15 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      }
-    ]
-  }  
-   
-    
-     
-  
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://lifecar.uz/:1",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lifecar.uz"
+        }
+      ],
+      "permanent": true
+    }
+  ]
+}

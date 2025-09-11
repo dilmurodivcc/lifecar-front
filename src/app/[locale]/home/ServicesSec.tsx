@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const services = [
   {
@@ -94,6 +95,7 @@ const services = [
 ];
 
 const ServicesSec = () => {
+  const { t } = useTranslation();
   const numColumns = 5;
   const columns = Array.from({ length: numColumns }, (): typeof services => []);
   services.forEach((service, i) => {
@@ -103,7 +105,7 @@ const ServicesSec = () => {
   return (
     <section className="SevicesSec">
       <div className="container">
-        <h2 className="section-title">Bizning Xizmatlar</h2>
+        <h2 className="section-title">{t("servicesSec.title")}</h2>
         <div className="services-carousel-wrapper">
           <div className="services-carousel">
             {columns.map((column, colIndex) => (

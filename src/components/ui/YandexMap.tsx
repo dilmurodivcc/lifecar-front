@@ -31,6 +31,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string>("");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -50,9 +51,29 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   }, [isFullscreen]);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const loadYandexMaps = () => {
+      // Check if script is already loaded
       if (window.ymaps) {
         setIsLoaded(true);
+        return;
+      }
+
+      // Check if script is already being loaded
+      const existingScript = document.querySelector(
+        'script[src*="api-maps.yandex.ru"]'
+      );
+      if (existingScript) {
+        existingScript.addEventListener("load", () => {
+          if (window.ymaps) {
+            window.ymaps.ready(() => setIsLoaded(true));
+          }
+        });
         return;
       }
 
@@ -60,75 +81,135 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
       script.src =
         "https://api-maps.yandex.ru/2.1/?apikey=505bbdc0-1128-4609-b1d2-62df54e109ed&lang=ru_RU";
       script.async = true;
+      script.defer = true;
+
       script.onload = () => {
-        window.ymaps.ready(() => setIsLoaded(true));
+        try {
+          if (window.ymaps) {
+            window.ymaps.ready(() => {
+              setIsLoaded(true);
+              setError("");
+            });
+          } else {
+            setError("Yandex Maps API not available");
+          }
+        } catch (err) {
+          console.error("Yandex Maps load error:", err);
+          setError("Yandex Maps yuklanmadi");
+        }
       };
-      script.onerror = () => {
+
+      script.onerror = (err) => {
+        console.error("Yandex Maps script error:", err);
         setError("Yandex Maps yuklanmadi");
       };
+
       document.head.appendChild(script);
     };
 
     loadYandexMaps();
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
     if (!isLoaded || !mapRef.current || map) return;
 
-    try {
-      window.ymaps.ready(() => {
-        const coordinates = [41.294102, 69.173356];
+    const initializeMap = () => {
+      try {
+        if (!window.ymaps) {
+          setError("Yandex Maps API not loaded");
+          return;
+        }
 
-        const mapInstance = new window.ymaps.Map(
-          mapRef.current!,
-          {
-            center: coordinates,
-            zoom: 15,
-            controls: ["zoomControl", "fullscreenControl"],
-            type: "yandex#map",
-          },
-          {
-            suppressMapOpenBlock: true,
-            yandexMapDisablePoiInteractivity: true,
+        window.ymaps.ready(() => {
+          try {
+            const coordinates = [41.294102, 69.173356];
+
+            const mapInstance = new window.ymaps.Map(
+              mapRef.current!,
+              {
+                center: coordinates,
+                zoom: 15,
+                controls: ["zoomControl", "fullscreenControl"],
+                type: "yandex#map",
+              },
+              {
+                suppressMapOpenBlock: true,
+                yandexMapDisablePoiInteractivity: true,
+              }
+            ) as {
+              geoObjects: { add: (placemark: unknown) => void };
+              events: {
+                add: (type: string, callback: (event: unknown) => void) => void;
+              };
+            };
+
+            const placemark = new window.ymaps.Placemark(
+              coordinates,
+              {
+                balloonContent: "Lifecar Auto Tuning",
+                hintContent: "Lifecar Auto Tuning",
+              },
+              {
+                preset: "islands#redDotIcon",
+                iconColor: "#ff0000",
+              }
+            );
+
+            mapInstance.geoObjects.add(placemark);
+
+            mapInstance.events.add("fullscreenenter", () => {
+              setIsFullscreen(true);
+              document.body.style.overflow = "hidden";
+            });
+
+            mapInstance.events.add("fullscreenexit", () => {
+              setIsFullscreen(false);
+              document.body.style.overflow = "";
+            });
+
+            setMap(mapInstance);
+            setError(""); // Clear any previous errors
+          } catch (mapErr) {
+            console.error("Yandex Maps initialization error:", mapErr);
+            setError("Xarita yaratishda xatolik");
           }
-        ) as {
-          geoObjects: { add: (placemark: unknown) => void };
-          events: {
-            add: (type: string, callback: (event: unknown) => void) => void;
-          };
-        };
-
-        const placemark = new window.ymaps.Placemark(
-          coordinates,
-          {
-            balloonContent: "Lifecar Auto Tuning",
-            hintContent: "Lifecar Auto Tuning",
-          },
-          {
-            preset: "islands#redDotIcon",
-            iconColor: "#ff0000",
-          }
-        );
-
-        mapInstance.geoObjects.add(placemark);
-
-        mapInstance.events.add("fullscreenenter", () => {
-          setIsFullscreen(true);
-          document.body.style.overflow = "hidden";
         });
+      } catch (err) {
+        console.error("Yandex Maps setup error:", err);
+        setError("Yandex Maps xatolik");
+      }
+    };
 
-        mapInstance.events.add("fullscreenexit", () => {
-          setIsFullscreen(false);
-          document.body.style.overflow = "";
-        });
+    // Add a small delay to ensure the DOM is ready
+    const timeoutId = setTimeout(initializeMap, 100);
 
-        setMap(mapInstance);
-      });
-    } catch (err) {
-      console.error("Yandex Maps xatolik:", err);
-      setError("Xarita yaratishda xatolik");
-    }
+    return () => clearTimeout(timeoutId);
   }, [isLoaded, map]);
+
+  // Cleanup effect
+  useEffect(() => {
+    return () => {
+      if (map && typeof map === "object" && "destroy" in map) {
+        try {
+          (map as { destroy: () => void }).destroy();
+        } catch (err) {
+          console.warn("Error destroying map:", err);
+        }
+      }
+    };
+  }, [map]);
+
+  if (!mounted) {
+    return (
+      <div
+        className={`w-full h-[250px] rounded-xl bg-gray-100 flex items-center justify-center ${className}`}
+      >
+        <div className="text-center">
+          <p className="text-gray-500 font-medium">Loading map...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (

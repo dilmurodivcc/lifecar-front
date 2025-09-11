@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import ClientLayout from "../../components/layout/ClientLayout";
 import Hero from "@/app/[locale]/home/Hero";
 import ServicesSec from "@/app/[locale]/home/ServicesSec";
 import ShopSec from "@/app/[locale]/home/ShopSec";
-// import ContactSec from "@/app/[locale]/home/ContactSec";
 
 interface HomePageProps {
   params: Promise<{
@@ -11,9 +10,7 @@ interface HomePageProps {
   }>;
 }
 
-
 export default function HomePage({}: HomePageProps) {
-
   return (
     <ClientLayout showHeader={true} showFooter={true}>
       <main className="home">

@@ -6,7 +6,7 @@ import Card from "@/components/layout/Card";
 import Pagination from "@/components/ui/Pagination";
 import { useState, useRef, useEffect } from "react";
 import { PiListBold } from "react-icons/pi";
-
+import { useTranslation } from "react-i18next";
 interface ShopPageProps {
   params: Promise<{
     locale: string;
@@ -121,7 +121,7 @@ export default function ShopPage({}: ShopPageProps) {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const cardsPerPage = 8;
-
+  const { t } = useTranslation();
   const sortRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
@@ -145,18 +145,17 @@ export default function ShopPage({}: ShopPageProps) {
   }, []);
 
   const sortOptions = [
-    { value: "default", label: "Saralash" },
-    { value: "price-low", label: "Arzonroq" },
-    { value: "price-high", label: "Qimmatroq" },
+    { value: "default", label: t("sort.title") },
+    { value: "price-low", label: t("sort.priceLow") },
+    { value: "price-high", label: t("sort.priceHigh") },
   ];
 
   const filterOptions = [
-    { value: "all", label: "Barcha mahsulotlar" },
-    { value: "parts", label: "Ehtiyot qismlar" },
-    { value: "accessories", label: "Aksessuarlar" },
-    { value: "engine", label: "Motor qismlari" },
-    { value: "brake", label: "Tormoz tizimi" },
-
+    { value: "all", label: t("shop.filter.all") },
+    { value: "parts", label: t("shop.filter.parts") },
+    { value: "accessories", label: t("shop.filter.accessories") },
+    { value: "engine", label: t("shop.filter.engine") },
+    { value: "brake", label: t("shop.filter.brake") },
   ];
 
   const filteredProducts = products.filter((product) => {
@@ -283,7 +282,7 @@ export default function ShopPage({}: ShopPageProps) {
               <input
                 type="text"
                 className="input-search-shop"
-                placeholder="Qidirish"
+                placeholder={t("search")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

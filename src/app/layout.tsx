@@ -3,6 +3,7 @@ import { Exo_2, Nunito, Geist } from "next/font/google";
 import type { Metadata } from "next";
 import I18nProvider from "../components/providers/I18nProvider";
 import ErrorBoundary from "../components/common/ErrorBoundary";
+import { getSEOConfig } from "../utils/seo";
 
 const exo2 = Exo_2({
   subsets: ["latin", "cyrillic"],
@@ -31,41 +32,16 @@ function getLocale(): string {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = getLocale();
-
-  const metadataConfig = {
-    uz: {
-      title: "Lifecar | Avto Tuning Xizmatlari O'zbekistonda",
-      description:
-        "Lifecar – Avto tuning, auto parts, auto accessories va professional avto ustalar xizmatlari O'zbekistonda. Professional avto sozlash va ta'mirlash xizmatlari.",
-      keywords:
-        "Lifecar, lifecar tuning, lifecar tyuning, lifecar uz, auto tuning, avtotuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar",
-      openGraphTitle: "Lifecar | Avto Tuning Xizmatlari",
-      openGraphDescription:
-        "Professional avto tuning, ehtiyot qismlar va aksessuarlar O'zbekistonda",
-    },
-    ru: {
-      title: "Lifecar | Авто Тюнинг Услуги в Узбекистане",
-      description:
-        "Lifecar - авто тюнинг, автозапчасти, авто аксессуары и профессиональные услуги авто мастеров в Узбекистане. Профессиональные услуги по настройке и ремонту автомобилей.",
-      keywords:
-        "Lifecar, lifecar tuning, lifecar tyuning, lifecar uz, auto tuning, avtotuning, автотюнинг, avto usta, avto ustalar, автозапчасти, авто аксессуары",
-      openGraphTitle: "Lifecar | Авто Тюнинг Услуги",
-      openGraphDescription:
-        "Профессиональный авто тюнинг, запчасти и аксессуары в Узбекистане",
-    },
-  };
-
-  const config =
-    metadataConfig[locale as keyof typeof metadataConfig] || metadataConfig.uz;
+  const seoConfig = getSEOConfig(locale, "home");
 
   return {
     metadataBase: new URL("https://lifecar.uz"),
     title: {
-      default: config.title,
+      default: seoConfig.title,
       template: `%s | Lifecar`,
     },
-    description: config.description,
-    keywords: config.keywords,
+    description: seoConfig.description,
+    keywords: seoConfig.keywords,
     authors: [{ name: "Lifecar Team" }],
     creator: "Lifecar",
     publisher: "Lifecar",
@@ -77,9 +53,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       locale: locale === "uz" ? "uz_UZ" : "ru_UZ",
-      url: `https://lifecar.uz/${locale}`,
-      title: config.openGraphTitle,
-      description: config.openGraphDescription,
+      url: seoConfig.canonical,
+      title: seoConfig.openGraphTitle,
+      description: seoConfig.openGraphDescription,
       siteName: "Lifecar",
       images: [
         {
@@ -95,8 +71,8 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       site: "@lifecar",
       creator: "@lifecar",
-      title: config.openGraphTitle,
-      description: config.openGraphDescription,
+      title: seoConfig.openGraphTitle,
+      description: seoConfig.openGraphDescription,
       images: ["/icons/lifecar.webp"],
     },
     icons: {
@@ -131,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `https://lifecar.uz/${locale}`,
+      canonical: seoConfig.canonical,
       languages: {
         uz: "https://lifecar.uz/uz",
         ru: "https://lifecar.uz/ru",
@@ -153,7 +129,6 @@ export async function generateMetadata(): Promise<Metadata> {
       yandex: "1234567890",
     },
     category: "automotive",
-
   };
 }
 

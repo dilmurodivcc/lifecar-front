@@ -16,51 +16,65 @@ const Header = () => {
   const [theme, setTheme] = useState("dark");
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { i18n } = useTranslation();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-    }
-  }, [theme]);
+  const segments = pathname.split("/");
+  const locale = segments[1] || "uz";
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    setTheme(savedTheme);
+    setMounted(true);
+    setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const segments = pathname.split("/");
-      const locale = segments[1];
-      if (["uz", "ru"].includes(locale)) {
-        setLanguage(locale);
-        if (i18n) {
-          i18n.changeLanguage(locale);
-        }
-      }
-    }
-  }, [pathname, i18n]);
+    if (!isClient) return;
+
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme, isClient]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isClient) return;
+
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    setTheme(savedTheme);
+  }, [isClient]);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    const segments = pathname.split("/");
+    const locale = segments[1];
+    if (["uz", "ru"].includes(locale)) {
+      setLanguage(locale);
+      if (i18n) {
+        i18n.changeLanguage(locale);
+      }
+    }
+  }, [pathname, i18n, isClient]);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     function handleClick(e: MouseEvent) {
       if (langRef.current && !langRef.current.contains(e.target as Node))
         setLangOpen(false);
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
+  }, [isClient]);
 
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isClient) return;
+
     const handleScroll = () => {
       if (window.scrollY > 30) {
         setShrink(true);
@@ -70,14 +84,17 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isClient]);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
   const changeLanguage = (newLanguage: string) => {
-    if (!i18n) return;
+    if (!i18n || !isClient) return;
+
+    // Save current scroll position
+    const currentScrollY = window.scrollY;
 
     setLanguage(newLanguage);
     setLangOpen(false);
@@ -85,9 +102,66 @@ const Header = () => {
     i18n.changeLanguage(newLanguage);
 
     const segments = pathname.split("/");
-    const newPath = `/${newLanguage}${segments.slice(2).join("/")}`;
-    router.push(newPath);
+    const newPath = `/${newLanguage}/${segments.slice(2).join("/")}`;
+
+    // Use replace instead of push to prevent layout shift
+    router.replace(newPath);
+
+    // Restore scroll position after a short delay
+    setTimeout(() => {
+      window.scrollTo({
+        top: currentScrollY,
+        behavior: "instant",
+      });
+    }, 50);
   };
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <header className="shrink">
+        <div className="logo">
+          <Image
+            src="/icons/lifecar.webp"
+            alt="Lifecar Logo"
+            width={50}
+            height={50}
+          />
+          <Link className="logoName" href={`/${locale}`}>
+            Lifecar
+          </Link>
+        </div>
+        <nav>
+          <Link href={`/${locale}`} prefetch={true}>
+            Home
+          </Link>
+          <Link href={`/${locale}/services`} prefetch={true}>
+            Services
+          </Link>
+          <Link href={`/${locale}/shop`} prefetch={true}>
+            Shop
+          </Link>
+          <Link href={`/${locale}/about`} prefetch={true}>
+            About
+          </Link>
+          <Link href={`/${locale}/contact`} prefetch={true}>
+            Contact
+          </Link>
+        </nav>
+        <div className="actions">
+          <div className="dropdown" ref={langRef} data-open={false}>
+            <button className="language">
+              O&apos;zbek
+              <HiChevronDown />
+            </button>
+          </div>
+          <button className="theme-toggle">
+            <HiSun />
+          </button>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className={shrink ? "shrink" : ""}>
@@ -98,24 +172,24 @@ const Header = () => {
           width={50}
           height={50}
         />
-        <Link className="logoName" href="/">
+        <Link className="logoName" href={`/${locale}`}>
           Lifecar
         </Link>
       </div>
       <nav>
-        <Link href="/" prefetch={true}>
+        <Link href={`/${locale}`} prefetch={true}>
           {t("navigation.home")}
         </Link>
-        <Link href="/services" prefetch={true}>
+        <Link href={`/${locale}/services`} prefetch={true}>
           {t("navigation.services")}
         </Link>
-        <Link href="/shop" prefetch={true}>
+        <Link href={`/${locale}/shop`} prefetch={true}>
           {t("navigation.shop")}
         </Link>
-        <Link href="/about" prefetch={true}>
+        <Link href={`/${locale}/about`} prefetch={true}>
           {t("navigation.about")}
         </Link>
-        <Link href="/contact" prefetch={true}>
+        <Link href={`/${locale}/contact`} prefetch={true}>
           {t("navigation.contact")}
         </Link>
       </nav>

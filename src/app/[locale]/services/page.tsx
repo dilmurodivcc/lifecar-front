@@ -6,7 +6,7 @@ import Card from "@/components/layout/Card";
 import Pagination from "@/components/ui/Pagination";
 import { useState, useRef, useEffect } from "react";
 import { PiListBold } from "react-icons/pi";
-
+import { useTranslation } from "react-i18next";
 interface ServicesPageProps {
   params: Promise<{
     locale: string;
@@ -105,6 +105,7 @@ export default function ServicesPage({}: ServicesPageProps) {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const cardsPerPage = 8;
+  const { t } = useTranslation();
 
   const sortRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
@@ -129,16 +130,16 @@ export default function ServicesPage({}: ServicesPageProps) {
   }, []);
 
   const sortOptions = [
-    { value: "default", label: "Saralash" },
-    { value: "price-low", label: "Arzonroq " },
-    { value: "price-high", label: "Qimmatroq " },
+    { value: "default", label: t("sort.title") },
+    { value: "price-low", label: t("sort.priceLow") },
+    { value: "price-high", label: t("sort.priceHigh") },
   ];
 
   const filterOptions = [
-    { value: "all", label: "Barcha xizmatlar" },
-    { value: "service", label: "Xizmatlar" },
-    { value: "repair", label: "Ta'mirlash" },
-    { value: "maintenance", label: "Texnik xizmat" },
+    { value: "all", label: t("services.filter.all") },
+    { value: "service", label: t("services.filter.service") },
+    { value: "repair", label: t("services.filter.repair") },
+    { value: "maintenance", label: t("services.filter.maintenance") },
   ];
 
   const filteredServices = services.filter((service) => {
@@ -280,7 +281,7 @@ export default function ServicesPage({}: ServicesPageProps) {
               <input
                 type="text"
                 className="input-search-services"
-                placeholder="Qidirish"
+                placeholder={t("search")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

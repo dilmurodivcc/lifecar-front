@@ -2,19 +2,13 @@ import { Metadata } from "next";
 import { getSEOConfig } from "@/utils/seo";
 import StructuredData from "@/components/seo/StructuredData";
 
-const locales = ["uz", "ru"];
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const seoConfig = getSEOConfig(locale, "home");
+  const seoConfig = getSEOConfig(locale, "about");
 
   return {
     title: seoConfig.title,
@@ -38,14 +32,14 @@ export async function generateMetadata({
   };
 }
 
-export default function LocaleLayout({
+export default function AboutLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <StructuredData locale="uz" page="home" />
+      <StructuredData locale="uz" page="about" />
       {children}
     </>
   );
