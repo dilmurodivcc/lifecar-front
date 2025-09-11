@@ -18,10 +18,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   generateEtags: false,
 
-  // Headers for better SEO, security and caching
+  // Headers for better SEO and security
   async headers() {
     return [
-      // Security headers for all pages
       {
         source: "/(.*)",
         headers: [
@@ -39,65 +38,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // HTML files - no cache (always fresh)
-      {
-        source: "/(.*).html",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "no-cache, no-store, must-revalidate",
-          },
-          {
-            key: "Pragma",
-            value: "no-cache",
-          },
-          {
-            key: "Expires",
-            value: "0",
-          },
-        ],
-      },
-      // CSS files - 1 year cache
-      {
-        source: "/(.*).css",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // JavaScript files - 1 year cache
-      {
-        source: "/(.*).js",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Image files - 1 year cache
-      {
-        source: "/(.*).(png|jpg|jpeg|gif|svg|ico|webp|avif)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Static assets from _next folder - 1 year cache
-      {
-        source: "/_next/static/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Icons folder - 1 year cache
       {
         source: "/icons/(.*)",
         headers: [
@@ -107,19 +47,8 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Images folder - 1 year cache
       {
         source: "/img/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Font files - 1 year cache
-      {
-        source: "/(.*).(woff|woff2|ttf|eot)",
         headers: [
           {
             key: "Cache-Control",
