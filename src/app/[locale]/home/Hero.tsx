@@ -11,10 +11,8 @@ const Hero = () => {
   const { t } = useTranslation();
   const pathname = usePathname();
 
-
   const segments = pathname.split("/");
   const locale = segments[1] || "uz";
-
 
   return (
     <>

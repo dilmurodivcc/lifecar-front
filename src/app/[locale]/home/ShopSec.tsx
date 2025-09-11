@@ -34,9 +34,7 @@ const ShopSec = () => {
         <div className="ShopSec-header">
           <div className="left">
             <h2 className="ShopSec-title">{t("shopSec.title")}</h2>
-            <p className="ShopSec-description">
-             {t("shopSec.subtitle")}
-            </p>
+            <p className="ShopSec-description">{t("shopSec.subtitle")}</p>
           </div>
 
           <button className="ShopSec-button primary-btn">
