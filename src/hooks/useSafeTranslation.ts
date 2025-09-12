@@ -10,7 +10,7 @@ export const useSafeTranslation = () => {
     setIsHydrated(true);
   }, []);
 
-  const safeT = (key: string, options?: any): string => {
+  const safeT = (key: string, options?: Record<string, unknown>): string => {
     // During SSR and before hydration, return a fallback
     if (!isHydrated || !i18n.isInitialized) {
       // Return a simple fallback based on the key
@@ -26,8 +26,8 @@ export const useSafeTranslation = () => {
         "shopSec.viewAll": "Barcha mahsulotlarni ko'rish",
         "servicesSec.title": "Bizning Xizmatlar",
         "servicesSec.cta": "Xizmatlarimizni ko'rish",
-        "servicesSec.Boglanish": "Boglanish"
-      }
+        "servicesSec.Boglanish": "Boglanish",
+      };
       return fallbacks[key] || key;
     }
 

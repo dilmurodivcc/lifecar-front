@@ -1,12 +1,9 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import { FaTools, FaCar, FaCheckCircle, FaSmile } from "react-icons/fa";
 
 const AboutSec = () => {
-  const { t } = useSafeTranslation();
-
   return (
     <section className="about-sec">
       <div className="container">
@@ -27,8 +24,8 @@ const AboutSec = () => {
 
             <p className="about-description">
               Bizning kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan
-              ishlaydi va avtomobil tuning xizmatlarida o'zining ishonchliligi
-              bilan mashhur.
+              ishlaydi va avtomobil tuning xizmatlarida o&apos;zining
+              ishonchliligi bilan mashhur.
             </p>
 
             <div className="about-features">
@@ -67,7 +64,7 @@ const AboutSec = () => {
 
             <p className="about-closing">
               Bizning maqsadimiz – sizning avtomobilingizni yanada mukammal
-              qilish va yuqori sifat bilan xizmat ko'rsatishdir.
+              qilish va yuqori sifat bilan xizmat ko&apos;rsatishdir.
             </p>
           </div>
         </div>
