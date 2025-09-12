@@ -10,6 +10,15 @@
   --border-color: rgba(255, 255, 255, 0.12);
   --glass-bg: rgba(255, 255, 255, 0.416);
   --glass-bg-hover: rgba(255, 255, 255, 0.1);
+
+  /* Red color variables */
+  --red-primary: #dc2626;
+  --red-secondary: #ef4444;
+  --red-light: #f87171;
+  --red-dark: #b91c1c;
+  --red-shadow: rgba(220, 38, 38, 0.2);
+  --red-glow: rgba(220, 38, 38, 0.3);
+  --red-glow-hover: rgba(220, 38, 38, 0.5);
 }
 
 [data-theme="light"] {
@@ -24,6 +33,15 @@
   --bg-ter: #f5f5f5;
   --glass-bg: rgba(255, 255, 255, 0.416);
   --glass-bg-hover: rgba(255, 255, 255, 0.1);
+
+  /* Red color variables for light theme */
+  --red-primary: #dc2626;
+  --red-secondary: #ef4444;
+  --red-light: #f87171;
+  --red-dark: #b91c1c;
+  --red-shadow: rgba(220, 38, 38, 0.2);
+  --red-glow: rgba(220, 38, 38, 0.3);
+  --red-glow-hover: rgba(220, 38, 38, 0.5);
 }
 
 $font-family: "Geist", sans-serif;

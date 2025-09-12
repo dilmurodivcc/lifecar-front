@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
+import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import Link from "next/link";
+import { MdMiscellaneousServices } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const services = [
   {
@@ -95,7 +99,10 @@ const services = [
 ];
 
 const ServicesSec = () => {
-  const { t } = useTranslation();
+  const { t } = useSafeTranslation();
+  const pathname = usePathname();
+  const segments = pathname.split("/");
+  const locale = segments[1] || "uz";
   const numColumns = 5;
   const columns = Array.from({ length: numColumns }, (): typeof services => []);
   services.forEach((service, i) => {
@@ -105,7 +112,23 @@ const ServicesSec = () => {
   return (
     <section className="SevicesSec">
       <div className="container">
-        <h2 className="section-title">{t("servicesSec.title")}</h2>
+
+
+        <div className="servicesCenterTitle">
+          <h1>Lifecar | Auto Tuning</h1>
+          <div className="btns">
+          <Link href={`/${locale}/services`} prefetch={true}>
+                <button className="toServices">
+                  <MdMiscellaneousServices /> {t("hero.cta")}
+                </button>
+              </Link>
+              <Link href={`/${locale}/contact`} prefetch={true}>
+                <button className="toContact">
+                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+                </button>
+              </Link>
+          </div>
+        </div>
         <div className="services-carousel-wrapper">
           <div className="services-carousel">
             {columns.map((column, colIndex) => (

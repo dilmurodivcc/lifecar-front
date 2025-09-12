@@ -1,7 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
+import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 
 const shopItems = [
   {
@@ -27,7 +27,7 @@ const shopItems = [
 ];
 
 const ShopSec = () => {
-  const { t } = useTranslation();
+  const { t } = useSafeTranslation();
   return (
     <section className="ShopSec">
       <div className="container">

@@ -10,16 +10,17 @@ interface I18nProviderProps {
 }
 
 const I18nProvider = ({ children }: I18nProviderProps) => {
-  const [isClient, setIsClient] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const { i18n } = useTranslation();
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsClient(true);
+    // Mark as hydrated after the first render
+    setIsHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (!isClient || !i18n) return;
+    if (!isHydrated || !i18n) return;
 
     const segments = pathname.split("/");
     const locale = segments[1];
@@ -27,12 +28,9 @@ const I18nProvider = ({ children }: I18nProviderProps) => {
     if (["uz", "ru"].includes(locale) && i18n.language !== locale) {
       i18n.changeLanguage(locale);
     }
-  }, [pathname, i18n, isClient]);
+  }, [pathname, i18n, isHydrated]);
 
-  if (!isClient) {
-    return <>{children}</>;
-  }
-
+  // Always render children, but i18n will be handled by the safe translation hook
   return <>{children}</>;
 };
 

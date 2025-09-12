@@ -10,6 +10,9 @@ const resources = {
   ru: { translation: ru },
 };
 
+// Check if we're on the server side
+const isServer = typeof window === "undefined";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -19,15 +22,21 @@ i18n
     supportedLngs: ["uz", "ru"],
     debug: process.env.NODE_ENV === "development",
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
     detection: {
-      order: ["querystring", "cookie", "localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage", "cookie"],
+      order: isServer
+        ? []
+        : ["querystring", "cookie", "localStorage", "navigator", "htmlTag"],
+      caches: isServer ? [] : ["localStorage", "cookie"],
     },
     react: {
-      useSuspense: false, 
+      useSuspense: false,
     },
+    // Ensure consistent behavior between server and client
+    lng: isServer ? "uz" : undefined,
+    // Add this to prevent hydration mismatches
+    initImmediate: false,
   });
 
 export default i18n;

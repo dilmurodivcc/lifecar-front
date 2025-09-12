@@ -26,7 +26,9 @@
         "viewAll": "Barcha mahsulotlarni ko‘rish"
     },
     "servicesSec": {
-        "title": "Bizning Xizmatlar"
+        "title": "Bizning Xizmatlar",
+        "cta": "Xizmatlarimizni ko'rish",
+        "Boglanish": "Boglanish"
     },
     "shop": {
         "title": "Do'kon",

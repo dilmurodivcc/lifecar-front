@@ -1,0 +1,145 @@
+.about-sec {
+  color: var(--text);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .about-image {
+    position: relative;
+
+    .about-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  .about-text {
+    padding-left: 20px;
+
+    @media (max-width: 768px) {
+      padding-left: 0;
+    }
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    position: relative;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .about-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .about-features {
+    margin-bottom: 32px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 16px;
+    padding: 12px 0;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateX(8px);
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--red-primary);
+      filter: drop-shadow(0 0 8px var(--red-glow));
+      transition: color 0.3s ease, filter 0.3s ease;
+
+      &:hover {
+        color: var(--red-secondary);
+        filter: drop-shadow(0 0 12px var(--red-glow-hover));
+      }
+    }
+
+    .feature-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text);
+
+      .highlight {
+        color: var(--red-primary);
+        font-weight: 600;
+        text-shadow: 0 0 10px var(--red-glow);
+        transition: text-shadow 0.3s ease;
+
+        &:hover {
+          text-shadow: 0 0 15px var(--red-glow-hover);
+        }
+      }
+    }
+  }
+
+  .about-closing {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text);
+    font-style: italic;
+    border-left: 4px solid var(--red-primary);
+    padding-left: 20px;
+    margin-top: 24px;
+  }
+}
+
+// Additional responsive adjustments
+@media (max-width: 480px) {
+  .about-sec {
+    padding: 60px 0;
+
+    .container {
+      padding: 0 15px;
+    }
+
+    .about-title {
+      font-size: 1.8rem;
+    }
+
+    .about-description,
+    .about-closing {
+      font-size: 1rem;
+    }
+
+    .feature-item {
+      .feature-text {
+        font-size: 0.95rem;
+      }
+    }
+  }
+}
