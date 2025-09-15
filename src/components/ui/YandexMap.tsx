@@ -233,7 +233,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
         minHeight: isFullscreen ? "100vh" : "250px",
         width: isFullscreen ? "100vw" : "100%",
         maxWidth: isFullscreen ? "100vw" : "100%",
-        minWidth: isFullscreen ? "100vw" : "300px",
         borderRadius: isFullscreen ? "0" : "10px",
         overflow: "hidden",
         boxSizing: "border-box",

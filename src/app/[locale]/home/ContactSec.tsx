@@ -129,14 +129,14 @@ const ContactSec = () => {
                 className="map-button yandex-map-button"
               >
                 <FaYandex />
-                {t("contact.yandexButton")} <FaLocationDot className="map-button-icon" /> 
+                {t("contact.yandexButton")} 
               </button>
               <button
                 onClick={openGoogleMaps}
                 className="map-button google-map-button"
               >
                 <FaGoogle />
-                {t("contact.googleButton")} <FaLocationDot className="map-button-icon" />
+                {t("contact.googleButton")} 
               </button>
             </div>
           </aside>
