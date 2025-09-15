@@ -135,7 +135,6 @@
     display: grid !important;
     grid-template-columns: 200px 1fr;
     gap: 20px;
-    padding: 16px;
     height: auto;
     min-height: 150px;
 
@@ -216,7 +215,6 @@
   }
 
   .card {
-    padding: 16px;
 
     .img-wrapper {
       img {
@@ -273,12 +271,11 @@
 
 @media (max-width: 480px) {
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr; 
     gap: 15px;
   }
 
   .card {
-    padding: 12px;
 
     .img-wrapper {
       img {
@@ -288,23 +285,24 @@
 
     .card-content {
       .title {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
 
       .desc {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
       }
 
       .card-bottom {
         .price {
-          font-size: 0.95rem;
+          font-size: 0.85rem;
         }
 
         .time {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
         }
       }
     }
+
 
     &.list {
       grid-template-columns: 1fr;
@@ -320,6 +318,16 @@
           min-height: 120px;
         }
       }
+    }
+  }
+  @media (max-width: 380px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 320px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
     }
   }
 }

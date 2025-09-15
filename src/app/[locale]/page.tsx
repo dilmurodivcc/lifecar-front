@@ -13,7 +13,7 @@ interface HomePageProps {
 
 export default function HomePage({}: HomePageProps) {
   return (
-    <ClientLayout showHeader={true} showFooter={true}>
+    <ClientLayout showHeader={true} showFooter={true} showSpace={false}>
       <main className="home">
         <ServicesSec />
         <ContactSec />

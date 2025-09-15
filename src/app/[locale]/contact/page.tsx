@@ -31,7 +31,7 @@ export default function ContactPage({}: ContactPageProps) {
   const { t } = useTranslation();
 
   return (
-    <ClientLayout showHeader={true} showFooter={false}>
+    <ClientLayout showHeader={true} showFooter={false} showSpace={true}>
       <main className="contact-page">
         <div className="container">
           <aside className="left">

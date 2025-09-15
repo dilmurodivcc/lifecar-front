@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { FaPhone, FaTelegram, FaInstagram, FaYoutube, FaYandex, FaGoogle } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -139,7 +140,7 @@ const ContactSec = () => {
               </button>
             </div>
           </aside>
-          <img className="img" src="/img/logoWithPointer.png" alt="" />
+          <Image className="img" src="/img/logoWithPointer.png" alt="Map with pointer" width={650} height={650} />
 
         </div>
     </section>

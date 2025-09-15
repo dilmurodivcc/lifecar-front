@@ -6,14 +6,16 @@ export default function ClientLayout({
   children,
   showHeader = true,
   showFooter = true,
+  showSpace = true,
 }: {
   children: React.ReactNode;
   showHeader?: boolean;
   showFooter?: boolean;
+  showSpace?: boolean;
 }) {
   return (
     <>
-      {/* <div className="space" style={{ height: "110px" }}></div> */}
+      {showSpace && <div className="space" style={{ height: "110px" }}></div>}
       {showHeader && <Header />}
       {children}
       {showFooter && <Footer />}

@@ -15,6 +15,7 @@
   padding: 10px 12px;
   line-clamp: 1;
   -webkit-line-clamp: 1;
+  background-color: red;
   -webkit-box-orient: vertical;
   overflow: hidden;
   border-radius: 10px;
@@ -26,8 +27,21 @@
   background-color: var(--black);
   color: var(--white);
   border: 1px solid #333;
+  width: max-content;
+  min-width: 150px;
+span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+&.filter{
   min-width: 220px;
-
+}
   svg {
     color: var(--black);
     transition: transform 0.2s ease-in-out;
@@ -47,7 +61,7 @@
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  min-width: 160px;
+  width: max-content;
   background: var(--white);
   border: 1px solid;
   border-radius: 8px;

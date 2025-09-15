@@ -110,7 +110,7 @@ const ServicesSec = () => {
   });
 
   return (
-    <section className="SevicesSec">
+    <section className="ServicesSec">
       <div className="container">
 
 

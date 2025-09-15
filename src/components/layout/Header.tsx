@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { HiSun, HiMoon, HiChevronDown } from "react-icons/hi";
+import { HiSun, HiMoon, HiChevronDown, HiMenu, HiX } from "react-icons/hi";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -16,9 +16,11 @@ const Header = () => {
   const [theme, setTheme] = useState("dark");
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [mounted, setMounted] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { i18n } = useTranslation();
@@ -65,6 +67,11 @@ const Header = () => {
     function handleClick(e: MouseEvent) {
       if (langRef.current && !langRef.current.contains(e.target as Node))
         setLangOpen(false);
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target as Node)
+      )
+        setMobileMenuOpen(false);
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
@@ -141,9 +148,7 @@ const Header = () => {
           <Link href={`/${locale}/shop`} prefetch={true}>
             Shop
           </Link>
-          <Link href={`/${locale}/about`} prefetch={true}>
-            About
-          </Link>
+
           <Link href={`/${locale}/contact`} prefetch={true}>
             Contact
           </Link>
@@ -176,7 +181,8 @@ const Header = () => {
           Lifecar
         </Link>
       </div>
-      <nav>
+
+      <nav className="desktop-nav">
         <Link href={`/${locale}`} prefetch={true}>
           {t("navigation.home")}
         </Link>
@@ -186,14 +192,13 @@ const Header = () => {
         <Link href={`/${locale}/shop`} prefetch={true}>
           {t("navigation.shop")}
         </Link>
-        <Link href={`/${locale}/about`} prefetch={true}>
-          {t("navigation.about")}
-        </Link>
+      
         <Link href={`/${locale}/contact`} prefetch={true}>
           {t("navigation.contact")}
         </Link>
       </nav>
-      <div className="actions">
+
+      <div className="actions desktop-actions">
         <div className="dropdown" ref={langRef} data-open={langOpen}>
           <button className="language" onClick={() => setLangOpen((v) => !v)}>
             {languages.find((l) => l.value === language)?.label}
@@ -221,6 +226,88 @@ const Header = () => {
         <button className="theme-toggle" onClick={toggleTheme}>
           {theme === "light" ? <HiMoon /> : <HiSun />}
         </button>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="mobile-menu-btn"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        {mobileMenuOpen ? <HiX /> : <HiMenu />}
+      </button>
+
+      {/* Mobile Menu */}
+      <div
+        className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}
+        ref={mobileMenuRef}
+      >
+        <nav className="mobile-nav">
+          <Link
+            href={`/${locale}`}
+            prefetch={true}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("navigation.home")}
+          </Link>
+          <Link
+            href={`/${locale}/services`}
+            prefetch={true}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("navigation.services")}
+          </Link>
+          <Link
+            href={`/${locale}/shop`}
+            prefetch={true}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("navigation.shop")}
+          </Link>
+          <Link
+            href={`/${locale}/about`}
+            prefetch={true}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("navigation.about")}
+          </Link>
+          <Link
+            href={`/${locale}/contact`}
+            prefetch={true}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {t("navigation.contact")}
+          </Link>
+        </nav>
+
+        <div className="mobile-actions">
+          <div className="dropdown" ref={langRef} data-open={langOpen}>
+            <button className="language" onClick={() => setLangOpen((v) => !v)}>
+              {languages.find((l) => l.value === language)?.label}
+              <HiChevronDown />
+            </button>
+            <ul className="dropdown-menu">
+              {languages.map((l) => (
+                <li
+                  key={l.value}
+                  onClick={() => changeLanguage(l.value)}
+                  className={language === l.value ? "active" : ""}
+                >
+                  <Image
+                    src={l.img}
+                    alt={l.label}
+                    className="lang-img"
+                    width={18}
+                    height={18}
+                  />
+                  <span>{l.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {theme === "light" ? <HiMoon /> : <HiSun />}
+          </button>
+        </div>
       </div>
     </header>
   );

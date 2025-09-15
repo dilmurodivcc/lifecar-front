@@ -93,7 +93,6 @@ const Footer = () => {
               <a href="#">Contact</a>
               <a href="#">Services</a>
               <a href="#">Shop</a>
-              <a href="#">About</a>
             </div>
             <div className="footer-col">
               <div className="footer-col-title">Shop</div>
@@ -167,10 +166,9 @@ const Footer = () => {
           <div className="footer-col">
             <div className="footer-col-title">{t("footer.links.title")}</div>
             <a href="#">{t("navigation.home")}</a>
-            <a href="#">{t("navigation.contact")}</a>
             <a href="#">{t("navigation.services")}</a>
             <a href="#">{t("navigation.shop")}</a>
-            <a href="#">{t("navigation.about")}</a>
+            <a href="#">{t("navigation.contact")}</a>
           </div>
           <div className="footer-col">
             <div className="footer-col-title">{t("footer.shop.title")}</div>

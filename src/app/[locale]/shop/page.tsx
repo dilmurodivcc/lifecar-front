@@ -188,7 +188,7 @@ export default function ShopPage({}: ShopPageProps) {
   };
 
   return (
-    <ClientLayout showHeader={true} showFooter={true}>
+    <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
       <main className="shop">
         <div className="container">
           <div className="shop-header">
@@ -208,7 +208,10 @@ export default function ShopPage({}: ShopPageProps) {
                   className="dropdown-button"
                   onClick={() => setIsSortOpen(!isSortOpen)}
                 >
+                  <span>
                   {sortOptions.find((option) => option.value === sortBy)?.label}
+
+                  </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       stroke="currentColor"
@@ -243,13 +246,15 @@ export default function ShopPage({}: ShopPageProps) {
                 data-open={isFilterOpen}
               >
                 <button
-                  className="dropdown-button"
+                  className="dropdown-button filter"
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
                 >
+                  <span>
                   {
                     filterOptions.find((option) => option.value === filterBy)
                       ?.label
                   }
+                  </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       stroke="currentColor"
@@ -282,7 +287,7 @@ export default function ShopPage({}: ShopPageProps) {
               <input
                 type="text"
                 className="input-search-shop"
-                placeholder={t("search")}
+                placeholder={t("common.search")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

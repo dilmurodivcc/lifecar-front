@@ -186,7 +186,7 @@ export default function ServicesPage({}: ServicesPageProps) {
   };
 
   return (
-    <ClientLayout showHeader={true} showFooter={true}>
+    <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
       <main className="services">
         <div className="container">
           <div className="services-header">
@@ -207,7 +207,9 @@ export default function ServicesPage({}: ServicesPageProps) {
                   className="dropdown-button"
                   onClick={() => setIsSortOpen(!isSortOpen)}
                 >
-                  {sortOptions.find((option) => option.value === sortBy)?.label}
+                  <span>
+                    {sortOptions.find((option) => option.value === sortBy)?.label}
+                  </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       stroke="currentColor"
@@ -242,13 +244,15 @@ export default function ServicesPage({}: ServicesPageProps) {
                 data-open={isFilterOpen}
               >
                 <button
-                  className="dropdown-button"
+                  className="dropdown-button filter"
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
                 >
-                  {
+                  <span>
+                    {
                     filterOptions.find((option) => option.value === filterBy)
                       ?.label
                   }
+                  </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       stroke="currentColor"
@@ -281,7 +285,7 @@ export default function ServicesPage({}: ServicesPageProps) {
               <input
                 type="text"
                 className="input-search-services"
-                placeholder={t("search")}
+                placeholder={t("common.search")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

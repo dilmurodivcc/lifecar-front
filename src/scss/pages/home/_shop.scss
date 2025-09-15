@@ -1,10 +1,31 @@
 .ShopSec {
   padding: 80px 0;
 
+  // Responsive Design
+  @media (max-width: 1200px) {
+    padding: 70px 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 50px 0;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
     gap: 50px;
+
+    @media (max-width: 768px) {
+      gap: 40px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 30px;
+    }
   }
 
   .ShopSec-header {
@@ -14,13 +35,14 @@
     gap: 20px;
     margin-bottom: 20px;
 
-    .ShopSec-title {
-      font-size: 3rem;
-      text-align: start;
-      color: var(--text);
-      font-weight: 700;
-      letter-spacing: -1px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
     }
+
+
   }
 
   .left {
@@ -34,6 +56,20 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 12px;
+    }
   }
 
   .shop-card {
@@ -54,7 +90,23 @@
       height: 400px;
       object-fit: cover;
       border-radius: 20px;
+      width: auto;
+
+      @media (max-width: 1200px) {
+        height: 350px;
+      }
+
+      @media (max-width: 768px) {
+        height: 300px;
+        border-radius: 16px;
+      }
+
+      @media (max-width: 480px) {
+        height: 250px;
+        border-radius: 12px;
+      }
     }
+
     .card-content {
       display: flex;
       flex-direction: column;
@@ -62,24 +114,63 @@
       gap: 10px;
       padding: 20px;
       text-align: start;
+
+      @media (max-width: 768px) {
+        padding: 16px;
+        gap: 8px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 12px;
+        gap: 6px;
+      }
+
       .top {
         display: flex;
         flex-direction: column;
         gap: 10px;
         margin-bottom: 8px;
+
+        @media (max-width: 480px) {
+          gap: 6px;
+          margin-bottom: 6px;
+        }
       }
+
       .bottom {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 10px;
         width: 100%;
+
+        @media (max-width: 480px) {
+          gap: 8px;
+        }
+
         .price {
           font-size: 1.2rem;
           font-weight: 600;
           color: var(--text);
+
+          @media (max-width: 768px) {
+            font-size: 1.1rem;
+          }
+
+          @media (max-width: 480px) {
+            font-size: 1rem;
+          }
         }
       }
+    }
+
+    // Responsive Design
+    @media (max-width: 768px) {
+      border-radius: 16px;
+    }
+
+    @media (max-width: 480px) {
+      border-radius: 12px;
     }
   }
 

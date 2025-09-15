@@ -1,16 +1,54 @@
 .contactSec {
   margin: 100px 0;
+
+  @media (max-width: 1200px) {
+    margin: 80px 0;
+  }
+
+  @media (max-width: 768px) {
+    margin: 60px 0;
+  }
+
+  @media (max-width: 480px) {
+    margin: 50px 0;
+  }
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 100px;
+
+    @media (max-width: 1200px) {
+      gap: 80px;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 30px;
+    }
   }
+
   .left {
     width: 50%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      gap: 16px;
+    }
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+    @media (max-width: 480px) {
+      gap: 12px;
+    }
     .working-hours {
       display: flex;
       flex-direction: column;
@@ -87,32 +125,42 @@
       letter-spacing: -1px;
     }
   }
-  h2 {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -1px;
-  }
-  .img{
+
+  .img {
     width: 650px;
     object-fit: cover;
     border-radius: 50%;
-    filter: drop-shadow(0 0 10px  var(--box-shadow));
+    filter: drop-shadow(0 0 10px var(--box-shadow));
     transition: all 0.4s ease;
     z-index: 10;
     position: relative;
     cursor: pointer;
 
     &:hover {
-      filter: drop-shadow(0 0 15px  var(--box-shadow));
+      filter: drop-shadow(0 0 15px var(--box-shadow));
+    }
+
+    // Responsive Design
+    @media (max-width: 1200px) {
+      width: 450px;
+      height: auto !important ;
+    }
+    @media (max-width: 1000px) {
+      display: none;
     }
   }
+
   .map-buttons {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    @media (max-width: 768px) {
+      gap: 8px;
+    }
+
     .map-button {
       display: flex;
       align-items: center;
@@ -125,19 +173,43 @@
       color: var(--text);
       cursor: pointer;
       transition: all 0.3s ease;
+
+      @media (max-width: 768px) {
+        padding: 8px;
+        gap: 8px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 6px;
+        gap: 6px;
+        font-size: 14px;
+      }
+
       &:hover {
         background: var(--bg-sec);
         color: var(--text-white);
       }
+
       .map-button-icon {
         width: 12px !important;
         height: 12px !important;
         margin-left: -5px !important;
+
+        @media (max-width: 480px) {
+          width: 10px !important;
+          height: 10px !important;
+        }
       }
     }
+
     svg {
       width: 20px;
       height: 20px;
+
+      @media (max-width: 480px) {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }
