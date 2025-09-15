@@ -138,7 +138,9 @@ const Header = () => {
             Lifecar
           </Link>
         </div>
-        <nav>
+
+        {/* Desktop Navigation - Hidden on mobile by CSS */}
+        <nav className="desktop-nav">
           <Link href={`/${locale}`} prefetch={true}>
             Home
           </Link>
@@ -148,12 +150,13 @@ const Header = () => {
           <Link href={`/${locale}/shop`} prefetch={true}>
             Shop
           </Link>
-
           <Link href={`/${locale}/contact`} prefetch={true}>
             Contact
           </Link>
         </nav>
-        <div className="actions">
+
+        {/* Desktop Actions - Hidden on mobile by CSS */}
+        <div className="actions desktop-actions">
           <div className="dropdown" ref={langRef} data-open={false}>
             <button className="language">
               O&apos;zbek
@@ -164,6 +167,11 @@ const Header = () => {
             <HiSun />
           </button>
         </div>
+
+        {/* Mobile Menu Button - Hidden on desktop by CSS */}
+        <button className="mobile-menu-btn">
+          <HiMenu />
+        </button>
       </header>
     );
   }
@@ -192,7 +200,7 @@ const Header = () => {
         <Link href={`/${locale}/shop`} prefetch={true}>
           {t("navigation.shop")}
         </Link>
-      
+
         <Link href={`/${locale}/contact`} prefetch={true}>
           {t("navigation.contact")}
         </Link>
@@ -263,13 +271,7 @@ const Header = () => {
           >
             {t("navigation.shop")}
           </Link>
-          <Link
-            href={`/${locale}/about`}
-            prefetch={true}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            {t("navigation.about")}
-          </Link>
+
           <Link
             href={`/${locale}/contact`}
             prefetch={true}

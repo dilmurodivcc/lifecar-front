@@ -1,6 +1,6 @@
 .contact-page {
   .container {
-    padding: 40px 0;
+    padding: 40px 20px;
     margin-top: 20px;
     display: flex;
     align-items: start;
@@ -159,4 +159,38 @@
     }
   }
 
+}
+
+
+@media (max-width: 1308px) {
+  .contact-page {
+    .container {
+      gap: 100px;
+    }
+    .map,
+    .yandex-map-container,
+    .ymaps-2-1-79-map {
+      width: 10 0%;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .contact-page {
+    .container {
+      flex-direction: column;
+      gap: 50px;
+      .left {
+        width: 100%;
+      }
+      .right {
+        width: 100%;
+      }
+      .map,
+      .yandex-map-container,
+      .ymaps-2-1-79-map {
+        width: 100%;
+      }
+    }
+  }
 }

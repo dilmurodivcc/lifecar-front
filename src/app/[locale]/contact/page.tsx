@@ -149,6 +149,7 @@ export default function ContactPage({}: ContactPageProps) {
                 className="map-button yandex-map-button"
               >
                 <FaYandex />
+                
                 {t("contact.yandexButton")}
               </button>
               <button

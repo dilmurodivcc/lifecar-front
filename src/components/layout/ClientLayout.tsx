@@ -15,7 +15,7 @@ export default function ClientLayout({
 }) {
   return (
     <>
-      {showSpace && <div className="space" style={{ height: "110px" }}></div>}
+      {showSpace && <div className="space" style={{ height: "110px" }}></div>}  
       {showHeader && <Header />}
       {children}
       {showFooter && <Footer />}
