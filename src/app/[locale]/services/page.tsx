@@ -208,7 +208,10 @@ export default function ServicesPage({}: ServicesPageProps) {
                   onClick={() => setIsSortOpen(!isSortOpen)}
                 >
                   <span>
-                    {sortOptions.find((option) => option.value === sortBy)?.label}
+                    {
+                      sortOptions.find((option) => option.value === sortBy)
+                        ?.label
+                    }
                   </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -249,9 +252,9 @@ export default function ServicesPage({}: ServicesPageProps) {
                 >
                   <span>
                     {
-                    filterOptions.find((option) => option.value === filterBy)
-                      ?.label
-                  }
+                      filterOptions.find((option) => option.value === filterBy)
+                        ?.label
+                    }
                   </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path

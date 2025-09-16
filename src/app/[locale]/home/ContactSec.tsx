@@ -3,8 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { FaPhone, FaTelegram, FaInstagram, FaYoutube, FaYandex, FaGoogle } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
+import {
+  FaPhone,
+  FaTelegram,
+  FaInstagram,
+  FaYoutube,
+  FaYandex,
+  FaGoogle,
+} from "react-icons/fa";
 
 const ContactSec = () => {
   const openYandexMaps = () => {
@@ -12,15 +18,18 @@ const ContactSec = () => {
   };
 
   const openGoogleMaps = () => {
-    window.open("https://www.google.com/maps/search/?api=1&query=Lifecar Auto Tuning", "_blank");
+    window.open(
+      "https://www.google.com/maps/search/?api=1&query=Lifecar Auto Tuning",
+      "_blank"
+    );
   };
   const { t } = useTranslation();
 
   return (
     <>
-    <section className="contactSec">
-      <div className="container">
-    <aside className="left">
+      <section className="contactSec">
+        <div className="container">
+          <aside className="left">
             <h2>{t("contact.ourWorkingHours")}</h2>
             <ul className="working-hours">
               <li>
@@ -123,29 +132,33 @@ const ContactSec = () => {
                 </a>
               </li>
             </ul>
-          <div className="map-buttons">
+            <div className="map-buttons">
               <button
                 onClick={openYandexMaps}
                 className="map-button yandex-map-button"
               >
                 <FaYandex />
-                {t("contact.yandexButton")} 
+                {t("contact.yandexButton")}
               </button>
               <button
                 onClick={openGoogleMaps}
                 className="map-button google-map-button"
               >
                 <FaGoogle />
-                {t("contact.googleButton")} 
+                {t("contact.googleButton")}
               </button>
             </div>
           </aside>
-          <Image className="img" src="/img/logoWithPointer.png" alt="Map with pointer" width={650} height={650} />
-
+          <Image
+            className="img"
+            src="/img/logoWithPointer.png"
+            alt="Map with pointer"
+            width={650}
+            height={650}
+          />
         </div>
-    </section>
+      </section>
     </>
- 
   );
 };
 

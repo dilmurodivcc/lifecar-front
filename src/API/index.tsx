@@ -18,7 +18,7 @@ const getCurrentLanguage = (): string => {
 const API = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_API_URL ||
-    "upbeat-peace-7fb19faf3b.strapiapp.com/api",
+    "https://upbeat-peace-7fb19faf3b.strapiapp.com/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -31,7 +31,7 @@ API.interceptors.request.use(
       config.timeout = 20000;
     }
 
-      const currentLanguage = getCurrentLanguage();
+    const currentLanguage = getCurrentLanguage();
     if (config.params) {
       config.params.locale = currentLanguage;
     } else {

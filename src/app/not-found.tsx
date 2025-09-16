@@ -14,7 +14,7 @@ export default function NotFound() {
         justifyContent: "center",
         background: "var(--bg)",
         color: "var(--text)",
-        padding: "20px",
+        height: "100vh",
       }}
     >
       <div

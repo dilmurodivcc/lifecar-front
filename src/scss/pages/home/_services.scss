@@ -61,7 +61,6 @@
       .btns {
         gap: 16px;
         margin-top: 16px;
-
       }
     }
 
@@ -91,7 +90,6 @@
 
       h1 {
         font-size: 2rem;
-
       }
 
       .btns {
@@ -249,10 +247,22 @@
   gap: 20px;
   width: 400px;
   flex-shrink: 0;
-  animation: scroll 40s linear infinite;
+  animation: scroll 60s linear infinite;
 
   &:nth-child(even) {
-    animation: scroll-reverse 30s linear infinite;
+    animation: scroll-reverse 45s linear infinite;
+  }
+
+  &:nth-child(3n) {
+    animation: scroll 75s linear infinite;
+  }
+
+  &:nth-child(4n) {
+    animation: scroll-reverse 50s linear infinite;
+  }
+
+  &:nth-child(5n) {
+    animation: scroll 80s linear infinite;
   }
 
   &:hover {
@@ -417,4 +427,39 @@
     color: var(--primary);
     white-space: nowrap;
   }
+}
+
+// Loading and Error States
+.loading-state,
+.error-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 40px 20px;
+
+  p {
+    background: var(--bg-ter);
+    padding: 20px 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    height: 300px;
+    font-size: 1rem;
+
+    p {
+      padding: 16px 24px;
+    }
+  }
+}
+
+.error-state p {
+  color: #e74c3c;
+  border-color: #e74c3c;
 }

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import I18nProvider from "../components/providers/I18nProvider";
 import ErrorBoundary from "../components/common/ErrorBoundary";
 import { getSEOConfig } from "../utils/seo";
+import QueryProvider from "../components/providers/QueryProvider";
 
 const exo2 = Exo_2({
   subsets: ["latin", "cyrillic"],
@@ -297,9 +298,11 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="antialiased">
-        <ErrorBoundary>
-          <I18nProvider>{children}</I18nProvider>
-        </ErrorBoundary>
+        <QueryProvider>
+          <ErrorBoundary>
+            <I18nProvider>{children}</I18nProvider>
+          </ErrorBoundary>
+        </QueryProvider>
       </body>
     </html>
   );

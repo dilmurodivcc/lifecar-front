@@ -28,9 +28,6 @@
       flex-direction: column;
 
       &:hover {
-        
-
-
         .img-wrapper {
           img {
             transform: scale(1.1);
@@ -308,7 +305,6 @@
     padding: 30px 0;
     position: relative;
 
-
     .pagination-numbers {
       display: flex;
       gap: 8px;
@@ -360,8 +356,6 @@
           transform: translateY(-2px);
           box-shadow: 0 0px 3px var(--box-shadow);
           border: 1px solid var(--border-color-strong);
-
-
         }
       }
     }

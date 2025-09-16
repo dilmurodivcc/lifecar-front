@@ -1,123 +1,176 @@
+import React from "react";
 import Image from "next/image";
 import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import Link from "next/link";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import useServices from "@/hooks/useServices";
 
-const services = [
-  {
-    img: "/img/tint.webp",
-    title: "Tanirofka Pro",
-    desc: "Avtomobil oynalarini professional qoraytirish xizmati.",
-    price: "100$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Audio Tizim Plus",
-    desc: "Sifatli audio tizimlar o‘rnatish va sozlash.",
-    price: "150$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "GPS Kuzatuv",
-    desc: "Avtomobil uchun zamonaviy GPS kuzatuv tizimi.",
-    price: "80$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Keramik Qoplama",
-    desc: "Uzoq muddatli himoya va yorqinlik uchun.",
-    price: "300$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Shovqin Izolyatsiyasi",
-    desc: "Salondagi shovqinni kamaytirish.",
-    price: "250$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Signalizatsiya",
-    desc: "Eng so'nggi rusmdagi avtomobil signalizatsiyalari.",
-    price: "180$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Ximchistka",
-    desc: "Salonni to'liq kimyoviy tozalash.",
-    price: "120$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Polirovka",
-    desc: "Kuzovni yaltiratish va mayda chiziqlarni yo'qotish.",
-    price: "160$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Motor Diagnostikasi",
-    desc: "Dvigatelni to'liq kompyuter diagnostikasi.",
-    price: "40$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Faralarni Sozlash",
-    desc: "Faralarni to'g'ri sozlash va yoritishini yaxshilash.",
-    price: "30$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Konditsioner Tozalash",
-    desc: "Konditsioner sistemasini tozalash va to'ldirish.",
-    price: "50$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Shinalarni Almashtirish",
-    desc: "Mavsumiy shinalarni o'rnatish va balansirovka.",
-    price: "20$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Tormoz Tizimi",
-    desc: "Tormoz tizimini tekshirish va ta'mirlash.",
-    price: "70$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Elektronika",
-    desc: "Avtoelektronika bilan bog'liq muammolarni bartaraf etish.",
-    price: "90$",
-  },
-  {
-    img: "/img/tint.webp",
-    title: "Kuzov Ta'miri",
-    desc: "Kichik avariya sonrası kuzovni tiklash.",
-    price: "400$",
-  },
-];
+// TypeScript interfaces
+interface ServiceImage {
+  url: string;
+  alternativeText?: string;
+  width?: number;
+  height?: number;
+}
+
+interface ServiceLocalization {
+  id: number;
+  documentId: string;
+  title: string;
+  description: string;
+  price_from: string;
+  slug: string;
+  locale: string;
+}
+
+interface Service {
+  id: number;
+  documentId: string;
+  title: string;
+  description: string;
+  price_from: string;
+  slug: string;
+  locale: string;
+  image?: ServiceImage;
+  localizations?: ServiceLocalization[];
+}
+
+interface ProcessedService {
+  id: string | number;
+  title: string;
+  description: string;
+  price: string;
+  image: string;
+  slug: string;
+}
+
+// Helper function to get the correct service data based on locale
+const getServiceData = (
+  service: Service,
+  locale: string
+): ProcessedService | null => {
+  // Safety checks
+  if (!service || typeof service !== "object") {
+    return null;
+  }
+
+  // If current locale matches, use the service data directly
+  if (service.locale === locale) {
+    return {
+      id: service.id || "unknown",
+      title: service.title || "Untitled Service",
+      description: service.description || "No description available",
+      price: service.price_from || "Price on request",
+      image: service.image?.url || "/img/tint.webp",
+      slug: service.slug || "unknown-slug",
+    };
+  }
+
+  // Otherwise, find the localization for the current locale
+  const localization = service.localizations?.find(
+    (loc: ServiceLocalization) => loc && loc.locale === locale
+  );
+  if (localization) {
+    return {
+      id: service.id || "unknown",
+      title: localization.title || "Untitled Service",
+      description: localization.description || "No description available",
+      price: localization.price_from || "Price on request",
+      image: service.image?.url || "/img/tint.webp",
+      slug: localization.slug || "unknown-slug",
+    };
+  }
+
+  // Fallback to the original service data
+  return {
+    id: service.id || "unknown",
+    title: service.title || "Untitled Service",
+    description: service.description || "No description available",
+    price: service.price_from || "Price on request",
+    image: service.image?.url || "/img/tint.webp",
+    slug: service.slug || "unknown-slug",
+  };
+};
 
 const ServicesSec = () => {
   const { t } = useSafeTranslation();
   const pathname = usePathname();
   const segments = pathname.split("/");
   const locale = segments[1] || "uz";
+  const { data, isLoading, error } = useServices();
+
+  // Process API data with safety checks
+  const services = React.useMemo(() => {
+    // The actual services are in data.data.data (axios response structure)
+    const servicesArray = data?.data?.data;
+
+    if (!servicesArray || !Array.isArray(servicesArray)) {
+      return [];
+    }
+
+    const processedServices = servicesArray
+      .map((service: Service) => {
+        try {
+          return getServiceData(service, locale);
+        } catch (error) {
+          console.error("Error processing service:", service, error);
+          return null;
+        }
+      })
+      .filter((service): service is ProcessedService => service !== null); // Remove any null values
+
+    return processedServices;
+  }, [data, locale]);
+
+  // Create infinite carousel effect by duplicating services
   const numColumns = 5;
-  const columns = Array.from({ length: numColumns }, (): typeof services => []);
-  services.forEach((service, i) => {
-    columns[i % numColumns].push(service);
-  });
+  const columns = React.useMemo(() => {
+    const cols = Array.from(
+      { length: numColumns },
+      (): ProcessedService[] => []
+    );
 
-  return (
-    <section className="ServicesSec">
-      <div className="container">
+    // Only process if we have services
+    if (services.length > 0) {
+      // Create a much longer array of repeated services for seamless infinite scroll
+      // We need many more repetitions to make the loop invisible
+      const repeatedServices: ProcessedService[] = [];
+      const repetitions = 25; // Repeat services 25 times for very smooth infinite effect
 
+      for (let i = 0; i < repetitions; i++) {
+        // Shuffle services occasionally to make repetition less noticeable
+        const shuffledServices =
+          i % 3 === 0
+            ? [...services].sort(() => Math.random() - 0.5)
+            : services;
+        repeatedServices.push(...shuffledServices);
+      }
 
-        <div className="servicesCenterTitle">
-          <h1>Lifecar | Auto Tuning</h1>
-          <div className="btns">
-          <Link href={`/${locale}/services`} prefetch={true}>
+      // Distribute the repeated services across columns
+      repeatedServices.forEach((service, i) => {
+        if (service) {
+          cols[i % numColumns].push(service);
+        }
+      });
+    } else {
+      // Fallback: Create empty columns if no services
+      console.log("No services available, creating empty columns");
+    }
+
+    return cols;
+  }, [services, numColumns]);
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <section className="ServicesSec">
+        <div className="container">
+          <div className="servicesCenterTitle">
+            <h1>Lifecar | Auto Tuning</h1>
+            <div className="btns">
+              <Link href={`/${locale}/services`} prefetch={true}>
                 <button className="toServices">
                   <MdMiscellaneousServices /> {t("hero.cta")}
                 </button>
@@ -127,31 +180,132 @@ const ServicesSec = () => {
                   <FaPhoneAlt /> {t("servicesSec.Boglanish")}
                 </button>
               </Link>
+            </div>
+          </div>
+          <div className="loading-state">
+            <p>Xizmatlar yuklanmoqda...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <section className="ServicesSec">
+        <div className="container">
+          <div className="servicesCenterTitle">
+            <h1>Lifecar | Auto Tuning</h1>
+            <div className="btns">
+              <Link href={`/${locale}/services`} prefetch={true}>
+                <button className="toServices">
+                  <MdMiscellaneousServices /> {t("hero.cta")}
+                </button>
+              </Link>
+              <Link href={`/${locale}/contact`} prefetch={true}>
+                <button className="toContact">
+                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="error-state">
+            <p>Xizmatlar yuklanmadi. Iltimos, qaytadan urinib ko&apos;ring.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show empty state if no services
+  if (services.length === 0) {
+    return (
+      <section className="ServicesSec">
+        <div className="container">
+          <div className="servicesCenterTitle">
+            <h1>Lifecar | Auto Tuning</h1>
+            <div className="btns">
+              <Link href={`/${locale}/services`} prefetch={true}>
+                <button className="toServices">
+                  <MdMiscellaneousServices /> {t("hero.cta")}
+                </button>
+              </Link>
+              <Link href={`/${locale}/contact`} prefetch={true}>
+                <button className="toContact">
+                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="loading-state">
+            <p>Hozircha xizmatlar mavjud emas.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="ServicesSec">
+      <div className="container">
+        <div className="servicesCenterTitle">
+          <h1>Lifecar | Auto Tuning</h1>
+          <div className="btns">
+            <Link href={`/${locale}/services`} prefetch={true}>
+              <button className="toServices">
+                <MdMiscellaneousServices /> {t("hero.cta")}
+              </button>
+            </Link>
+            <Link href={`/${locale}/contact`} prefetch={true}>
+              <button className="toContact">
+                <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+              </button>
+            </Link>
           </div>
         </div>
         <div className="services-carousel-wrapper">
           <div className="services-carousel">
             {columns.map((column, colIndex) => (
               <div className="carousel-column" key={colIndex}>
-                {[...column, ...column].map((service, cardIndex) => (
-                  <div className="card-home" key={cardIndex}>
-                    <div className="img-wrapper">
-                      <Image
-                        src={service.img}
-                        alt={service.title}
-                        width={400}
-                        height={180}
-                      />
-                    </div>
-                    <div className="card-content">
-                      <h4 className="title">{service.title}</h4>
-                      <div className="card-bottom">
-                        <p className="description">{service.desc}</p>
-                        <h4 className="price">{service.price}</h4>
+                {column.map((service, cardIndex) => {
+                  if (!service) return null;
+                  return (
+                    <div
+                      className="card-home"
+                      key={`${service.id}-${cardIndex}`}
+                    >
+                      <div className="img-wrapper">
+                        <Image
+                          src={service.image || "/img/tint.webp"}
+                          alt={service.title || "Service"}
+                          width={400}
+                          height={180}
+                          priority={cardIndex < 10} // Prioritize first 10 images
+                          onError={(e) => {
+                            console.error("Image load error:", e);
+                            // Fallback to default image on error
+                            e.currentTarget.src = "/img/tint.webp";
+                          }}
+                          unoptimized={false}
+                        />
+                      </div>
+                      <div className="card-content">
+                        <h4 className="title">
+                          {service.title || "Untitled Service"}
+                        </h4>
+                        <div className="card-bottom">
+                          <p className="description">
+                            {service.description || "No description available"}
+                          </p>
+                          <h4 className="price">
+                            {service.price || "Price on request"}
+                          </h4>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ))}
           </div>

@@ -6,14 +6,11 @@ export const useSafeTranslation = () => {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    // Mark as hydrated after the first render
     setIsHydrated(true);
   }, []);
 
   const safeT = (key: string, options?: Record<string, unknown>): string => {
-    // During SSR and before hydration, return a fallback
     if (!isHydrated || !i18n.isInitialized) {
-      // Return a simple fallback based on the key
       const fallbacks: Record<string, string> = {
         "hero.title": "Lifecar - Avto Tuning Xizmatlari",
         "hero.subtitle":
