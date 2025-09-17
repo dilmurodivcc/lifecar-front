@@ -100,7 +100,6 @@ const Header = () => {
   const changeLanguage = (newLanguage: string) => {
     if (!i18n || !isClient) return;
 
-    // Save current scroll position
     const currentScrollY = window.scrollY;
 
     setLanguage(newLanguage);
@@ -111,10 +110,8 @@ const Header = () => {
     const segments = pathname.split("/");
     const newPath = `/${newLanguage}/${segments.slice(2).join("/")}`;
 
-    // Use replace instead of push to prevent layout shift
     router.replace(newPath);
 
-    // Restore scroll position after a short delay
     setTimeout(() => {
       window.scrollTo({
         top: currentScrollY,
@@ -123,7 +120,6 @@ const Header = () => {
     }, 50);
   };
 
-  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <header className="shrink">
@@ -139,7 +135,6 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation - Hidden on mobile by CSS */}
         <nav className="desktop-nav">
           <Link href={`/${locale}`} prefetch={true}>
             Home
@@ -155,7 +150,6 @@ const Header = () => {
           </Link>
         </nav>
 
-        {/* Desktop Actions - Hidden on mobile by CSS */}
         <div className="actions desktop-actions">
           <div className="dropdown" ref={langRef} data-open={false}>
             <button className="language">
@@ -168,7 +162,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button - Hidden on desktop by CSS */}
         <button className="mobile-menu-btn">
           <HiMenu />
         </button>
@@ -236,7 +229,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Button */}
       <button
         className="mobile-menu-btn"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -244,7 +236,6 @@ const Header = () => {
         {mobileMenuOpen ? <HiX /> : <HiMenu />}
       </button>
 
-      {/* Mobile Menu */}
       <div
         className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}
         ref={mobileMenuRef}

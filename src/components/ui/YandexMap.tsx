@@ -58,13 +58,11 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
     if (!mounted) return;
 
     const loadYandexMaps = () => {
-      // Check if script is already loaded
       if (window.ymaps) {
         setIsLoaded(true);
         return;
       }
 
-      // Check if script is already being loaded
       const existingScript = document.querySelector(
         'script[src*="api-maps.yandex.ru"]'
       );
@@ -130,18 +128,13 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
                 center: coordinates,
                 zoom: 15,
                 controls: ["zoomControl", "fullscreenControl"],
-                type: "yandex#map",
+                type: theme === "dark" ? "yandex#satellite" : "yandex#map",
               },
               {
                 suppressMapOpenBlock: true,
                 yandexMapDisablePoiInteractivity: true,
               }
-            ) as {
-              geoObjects: { add: (placemark: unknown) => void };
-              events: {
-                add: (type: string, callback: (event: unknown) => void) => void;
-              };
-            };
+            );
 
             const placemark = new window.ymaps.Placemark(
               coordinates,
@@ -155,20 +148,20 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
               }
             );
 
-            mapInstance.geoObjects.add(placemark);
+            (mapInstance as any).geoObjects.add(placemark);
 
-            mapInstance.events.add("fullscreenenter", () => {
+            (mapInstance as any).events.add("fullscreenenter", () => {
               setIsFullscreen(true);
               document.body.style.overflow = "hidden";
             });
 
-            mapInstance.events.add("fullscreenexit", () => {
+            (mapInstance as any).events.add("fullscreenexit", () => {
               setIsFullscreen(false);
               document.body.style.overflow = "";
             });
 
             setMap(mapInstance);
-            setError(""); // Clear any previous errors
+            setError("");
           } catch (mapErr) {
             console.error("Yandex Maps initialization error:", mapErr);
             setError("Xarita yaratishda xatolik");
@@ -180,13 +173,22 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
       }
     };
 
-    // Add a small delay to ensure the DOM is ready
     const timeoutId = setTimeout(initializeMap, 100);
 
     return () => clearTimeout(timeoutId);
-  }, [isLoaded, map]);
+  }, [isLoaded, map, theme]);
 
-  // Cleanup effect
+  // ✅ Theme o'zgarsa map type almashtirish
+  useEffect(() => {
+    if (map && typeof (map as any).setType === "function") {
+      if (theme === "dark") {
+        (map as any).setType("yandex#satellite");
+      } else {
+        (map as any).setType("yandex#map");
+      }
+    }
+  }, [theme, map]);
+
   useEffect(() => {
     return () => {
       if (map && typeof map === "object" && "destroy" in map) {
@@ -226,7 +228,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   return (
     <div
       ref={mapRef}
-      className={`yandex-map-container ${className} ${
+      className={`relative yandex-map-container ${className} ${
         isFullscreen ? "yandex-map-fullscreen" : ""
       }`}
       style={{
@@ -238,9 +240,8 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
         boxSizing: "border-box",
       }}
     >
-      {/* Dark mode CSS overlay */}
       {theme === "dark" && !isFullscreen && (
-        <div className="absolute inset-0 bg-black/40 pointer-events-none mix-blend-multiply" />
+        <div className="absolute inset-0 bg-black/30 pointer-events-none mix-blend-multiply" />
       )}
     </div>
   );

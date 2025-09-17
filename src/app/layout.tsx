@@ -2,7 +2,6 @@ import "./../scss/main.scss";
 import { Exo_2, Nunito, Geist } from "next/font/google";
 import type { Metadata } from "next";
 import I18nProvider from "../components/providers/I18nProvider";
-import ErrorBoundary from "../components/common/ErrorBoundary";
 import { getSEOConfig } from "../utils/seo";
 import QueryProvider from "../components/providers/QueryProvider";
 
@@ -234,7 +233,6 @@ export default function RootLayout({
           }}
         />
 
-        {/* Additional meta tags for better SEO and compatibility */}
         <meta name="theme-color" content="#1a1a1a" />
         <meta name="msapplication-TileColor" content="#1a1a1a" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
@@ -243,7 +241,6 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
         />
 
-        {/* Favicon fallbacks for maximum compatibility */}
         <link rel="icon" href="/icons/lifecar.ico" type="image/x-icon" />
         <link
           rel="shortcut icon"
@@ -299,9 +296,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <QueryProvider>
-          <ErrorBoundary>
             <I18nProvider>{children}</I18nProvider>
-          </ErrorBoundary>
         </QueryProvider>
       </body>
     </html>

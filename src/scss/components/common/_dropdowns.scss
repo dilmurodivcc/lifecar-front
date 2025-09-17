@@ -90,9 +90,7 @@ span{
   border-radius: 6px;
   color: var(--text);
 
-  &:hover {
- 
-  }
+
 
   &.active {
     color: var(--text);
@@ -131,16 +129,9 @@ span{
   .dropdown-button {
     height: 40px;
     font-size: 12px;
-    min-width: 100px;
+    min-width: 120px;
     padding: 6px 12px;
   }
 
-  .dropdown-menu {
-    min-width: 100px;
-
-    .dropdown-item {
-      padding: 4px 6px;
-      font-size: 12px;
-    }
-  }
+ 
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
-import useServices from "@/hooks/useServices";
+import { useServices } from "@/hooks/useServices";
 
 // TypeScript interfaces
 interface ServiceImage {
@@ -46,17 +46,14 @@ interface ProcessedService {
   slug: string;
 }
 
-// Helper function to get the correct service data based on locale
 const getServiceData = (
   service: Service,
   locale: string
 ): ProcessedService | null => {
-  // Safety checks
   if (!service || typeof service !== "object") {
     return null;
   }
 
-  // If current locale matches, use the service data directly
   if (service.locale === locale) {
     return {
       id: service.id || "unknown",
@@ -68,7 +65,6 @@ const getServiceData = (
     };
   }
 
-  // Otherwise, find the localization for the current locale
   const localization = service.localizations?.find(
     (loc: ServiceLocalization) => loc && loc.locale === locale
   );
@@ -83,7 +79,6 @@ const getServiceData = (
     };
   }
 
-  // Fallback to the original service data
   return {
     id: service.id || "unknown",
     title: service.title || "Untitled Service",
@@ -101,9 +96,7 @@ const ServicesSec = () => {
   const locale = segments[1] || "uz";
   const { data, isLoading, error } = useServices();
 
-  // Process API data with safety checks
   const services = React.useMemo(() => {
-    // The actual services are in data.data.data (axios response structure)
     const servicesArray = data?.data?.data;
 
     if (!servicesArray || !Array.isArray(servicesArray)) {
@@ -122,9 +115,8 @@ const ServicesSec = () => {
       .filter((service): service is ProcessedService => service !== null); // Remove any null values
 
     return processedServices;
-  }, [data, locale]);
+  }, [data?.data?.data, locale]);
 
-  // Create infinite carousel effect by duplicating services
   const numColumns = 5;
   const columns = React.useMemo(() => {
     const cols = Array.from(
@@ -132,18 +124,20 @@ const ServicesSec = () => {
       (): ProcessedService[] => []
     );
 
-    // Only process if we have services
     if (services.length > 0) {
-      // Create a much longer array of repeated services for seamless infinite scroll
       // We need many more repetitions to make the loop invisible
       const repeatedServices: ProcessedService[] = [];
       const repetitions = 25; // Repeat services 25 times for very smooth infinite effect
 
       for (let i = 0; i < repetitions; i++) {
-        // Shuffle services occasionally to make repetition less noticeable
+        // Use a stable shuffle based on service IDs to prevent infinite re-renders
         const shuffledServices =
           i % 3 === 0
-            ? [...services].sort(() => Math.random() - 0.5)
+            ? [...services].sort((a, b) => {
+                const aId = typeof a.id === "string" ? a.id : a.id.toString();
+                const bId = typeof b.id === "string" ? b.id : b.id.toString();
+                return aId.localeCompare(bId);
+              })
             : services;
         repeatedServices.push(...shuffledServices);
       }
