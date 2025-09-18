@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import { MdMiscellaneousServices } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useServices } from "@/hooks/useServices";
+import SkeletonCard from "@/components/ui/SkeletonCard";
 
 // TypeScript interfaces
 interface ServiceImage {
@@ -94,7 +95,12 @@ const ServicesSec = () => {
   const pathname = usePathname();
   const segments = pathname.split("/");
   const locale = segments[1] || "uz";
-  const { data, isLoading, error } = useServices();
+  const { data, isLoading } = useServices();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const services = React.useMemo(() => {
     const servicesArray = data?.data?.data;
@@ -107,8 +113,7 @@ const ServicesSec = () => {
       .map((service: Service) => {
         try {
           return getServiceData(service, locale);
-        } catch (error) {
-          console.error("Error processing service:", service, error);
+        } catch {
           return null;
         }
       })
@@ -150,19 +155,18 @@ const ServicesSec = () => {
       });
     } else {
       // Fallback: Create empty columns if no services
-      console.log("No services available, creating empty columns");
     }
 
     return cols;
   }, [services, numColumns]);
 
-  // Show loading state
-  if (isLoading) {
+  // Show loading state with skeleton cards
+  if (isLoading || !isClient) {
     return (
       <section className="ServicesSec">
         <div className="container">
           <div className="servicesCenterTitle">
-            <h1>Lifecar | Auto Tuning</h1>
+            <h1>{t("hero.title")}</h1>
             <div className="btns">
               <Link href={`/${locale}/services`} prefetch={true}>
                 <button className="toServices">
@@ -176,49 +180,30 @@ const ServicesSec = () => {
               </Link>
             </div>
           </div>
-          <div className="loading-state">
-            <p>Xizmatlar yuklanmoqda...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Show error state
-  if (error) {
-    return (
-      <section className="ServicesSec">
-        <div className="container">
-          <div className="servicesCenterTitle">
-            <h1>Lifecar | Auto Tuning</h1>
-            <div className="btns">
-              <Link href={`/${locale}/services`} prefetch={true}>
-                <button className="toServices">
-                  <MdMiscellaneousServices /> {t("hero.cta")}
-                </button>
-              </Link>
-              <Link href={`/${locale}/contact`} prefetch={true}>
-                <button className="toContact">
-                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
-                </button>
-              </Link>
+          <div className="services-carousel-wrapper">
+            <div className="services-carousel">
+              {Array.from({ length: 5 }, (_, colIndex) => (
+                <div className="carousel-column" key={colIndex}>
+                  {Array.from({ length: 3 }, (_, cardIndex) => (
+                    <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
+                  ))}
+                </div>
+              ))}
             </div>
-          </div>
-          <div className="error-state">
-            <p>Xizmatlar yuklanmadi. Iltimos, qaytadan urinib ko&apos;ring.</p>
+            <div className="carousel-fade"></div>
           </div>
         </div>
       </section>
     );
   }
 
-  // Show empty state if no services
+  // Show skeleton if no services (hide empty state from user)
   if (services.length === 0) {
     return (
       <section className="ServicesSec">
         <div className="container">
           <div className="servicesCenterTitle">
-            <h1>Lifecar | Auto Tuning</h1>
+            <h1>{t("hero.title")}</h1>
             <div className="btns">
               <Link href={`/${locale}/services`} prefetch={true}>
                 <button className="toServices">
@@ -232,8 +217,17 @@ const ServicesSec = () => {
               </Link>
             </div>
           </div>
-          <div className="loading-state">
-            <p>Hozircha xizmatlar mavjud emas.</p>
+          <div className="services-carousel-wrapper">
+            <div className="services-carousel">
+              {Array.from({ length: 5 }, (_, colIndex) => (
+                <div className="carousel-column" key={colIndex}>
+                  {Array.from({ length: 3 }, (_, cardIndex) => (
+                    <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="carousel-fade"></div>
           </div>
         </div>
       </section>
@@ -244,7 +238,7 @@ const ServicesSec = () => {
     <section className="ServicesSec">
       <div className="container">
         <div className="servicesCenterTitle">
-          <h1>Lifecar | Auto Tuning</h1>
+          <h1>{t("hero.title")}</h1>
           <div className="btns">
             <Link href={`/${locale}/services`} prefetch={true}>
               <button className="toServices">
@@ -277,7 +271,6 @@ const ServicesSec = () => {
                           height={180}
                           priority={cardIndex < 10} // Prioritize first 10 images
                           onError={(e) => {
-                            console.error("Image load error:", e);
                             // Fallback to default image on error
                             e.currentTarget.src = "/img/tint.webp";
                           }}

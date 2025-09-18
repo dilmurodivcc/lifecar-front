@@ -50,7 +50,6 @@ const LanguageSwitcher = () => {
           sessionStorage.removeItem("scrollPosition");
         }
       } catch {
-        console.warn("Failed to restore scroll position");
         sessionStorage.removeItem("scrollPosition");
       }
     }

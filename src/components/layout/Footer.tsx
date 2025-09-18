@@ -1,14 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { FaYoutube, FaPhone, FaTelegram, FaInstagram } from "react-icons/fa6";
 import { TbBrandYandex } from "react-icons/tb";
 import { IoMdArrowRoundUp } from "react-icons/io";
 import YandexMap from "../ui/YandexMap";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const segments = pathname.split("/");
+  const locale = segments[1] || "uz";
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [mounted, setMounted] = useState(false);
 
@@ -48,100 +53,22 @@ const Footer = () => {
     };
   }, [mounted]);
 
-  // Prevent hydration mismatch by not rendering until mounted
-  if (!mounted) {
-    return (
-      <footer className="footer">
-        <div className="footer-grid">
-          <div className="footer-contact">
-            <div className="footer-col-title">Social Media</div>
-            <div className="footer-social">
-              <a href="#" aria-label="X">
-                <FaTelegram />
-              </a>
-              <a href="#" aria-label="GitHub">
-                <FaInstagram />
-              </a>
-              <a href="#" aria-label="Reddit">
-                <FaYoutube />
-              </a>
-              <a href="#" aria-label="YouTube">
-                <TbBrandYandex />
-              </a>
-            </div>
-            <div className="footer-col-title">Contact</div>
-            <div className="footer-contact-info">
-              <a href="tel:+998 33 785 22 22">
-                {" "}
-                <FaPhone /> +998 33 785 22 22
-              </a>
-              <a href="tel:+998 99 814 65 65">
-                {" "}
-                <FaPhone /> +998 99 814 65 65
-              </a>
-              <a href="https://t.me/lifecar_uz">
-                {" "}
-                <FaTelegram /> @lifecar_uz
-              </a>
-            </div>
-          </div>
-
-          <div className="footer-links-grid">
-            <div className="footer-col">
-              <div className="footer-col-title">Links</div>
-              <a href="#">Home</a>
-              <a href="#">Contact</a>
-              <a href="#">Services</a>
-              <a href="#">Shop</a>
-            </div>
-            <div className="footer-col">
-              <div className="footer-col-title">Shop</div>
-              <a href="#">All Products</a>
-              <a href="#">Steering Wheels</a>
-              <a href="#">Radar Detectors</a>
-              <a href="#">Tanirofka</a>
-              <a href="#">Car Accessories</a>
-            </div>
-          </div>
-
-          <div className="footer-map">
-            <div className="footer-col-title">Map</div>
-            <YandexMap theme="dark" />
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <div className="footer-copyright">
-            © {new Date().getFullYear()} Lifecar Auto Tuning
-          </div>
-          <div
-            className="footer-backToTop"
-            style={{ cursor: "pointer" }}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            Back to Top <IoMdArrowRoundUp />
-          </div>
-        </div>
-      </footer>
-    );
-  }
-
   return (
     <footer className="footer">
       <div className="footer-grid">
         <div className="footer-contact">
           <div className="footer-col-title">{t("footer.social.title")}</div>
           <div className="footer-social">
-            <a href="#" aria-label="X">
+            <a href="https://t.me/lifecar_uz" aria-label="X">
               <FaTelegram />
             </a>
-            <a href="#" aria-label="GitHub">
+            <a href="https://instagram.com/life_car.uzb" aria-label="GitHub">
               <FaInstagram />
             </a>
-            <a href="#" aria-label="Reddit">
+            <a href="https://youtube.com/@LIFECARUZB" aria-label="Reddit">
               <FaYoutube />
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href="https://yandex.com/@lifecar_uz" aria-label="YouTube">
               <TbBrandYandex />
             </a>
           </div>
@@ -165,18 +92,24 @@ const Footer = () => {
         <div className="footer-links-grid">
           <div className="footer-col">
             <div className="footer-col-title">{t("footer.links.title")}</div>
-            <a href="#">{t("navigation.home")}</a>
-            <a href="#">{t("navigation.services")}</a>
-            <a href="#">{t("navigation.shop")}</a>
-            <a href="#">{t("navigation.contact")}</a>
+            <Link href={`/${locale}`}>{t("navigation.home")}</Link>
+            <Link href={`/${locale}/services`}>{t("navigation.services")}</Link>
+            <Link href={`/${locale}/shop`}>{t("navigation.shop")}</Link>
+            <Link href={`/${locale}/contact`}>{t("navigation.contact")}</Link>
           </div>
           <div className="footer-col">
             <div className="footer-col-title">{t("footer.shop.title")}</div>
-            <a href="#"> {t("footer.shop.allProducts")}</a>
-            <a href="#">{t("footer.shop.steeringWheels")}</a>
-            <a href="#">{t("footer.shop.radarDetectors")}</a>
-            <a href="#">{t("footer.shop.tanirofka")}</a>
-            <a href="#">{t("footer.shop.carAccessories")}</a>
+            <Link href={`/${locale}/shop`}>{t("footer.shop.allProducts")}</Link>
+            <Link href={`/${locale}/shop`}>
+              {t("footer.shop.steeringWheels")}
+            </Link>
+            <Link href={`/${locale}/shop`}>
+              {t("footer.shop.radarDetectors")}
+            </Link>
+            <Link href={`/${locale}/shop`}>{t("footer.shop.tanirofka")}</Link>
+            <Link href={`/${locale}/shop`}>
+              {t("footer.shop.carAccessories")}
+            </Link>
           </div>
         </div>
 

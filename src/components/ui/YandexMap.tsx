@@ -91,14 +91,12 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
           } else {
             setError("Yandex Maps API not available");
           }
-        } catch (err) {
-          console.error("Yandex Maps load error:", err);
+        } catch {
           setError("Yandex Maps yuklanmadi");
         }
       };
 
-      script.onerror = (err) => {
-        console.error("Yandex Maps script error:", err);
+      script.onerror = () => {
         setError("Yandex Maps yuklanmadi");
       };
 
@@ -162,13 +160,11 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
 
             setMap(mapInstance);
             setError("");
-          } catch (mapErr) {
-            console.error("Yandex Maps initialization error:", mapErr);
+          } catch {
             setError("Xarita yaratishda xatolik");
           }
         });
-      } catch (err) {
-        console.error("Yandex Maps setup error:", err);
+      } catch {
         setError("Yandex Maps xatolik");
       }
     };
@@ -178,7 +174,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
     return () => clearTimeout(timeoutId);
   }, [isLoaded, map, theme]);
 
-  // ✅ Theme o'zgarsa map type almashtirish
   useEffect(() => {
     if (map && typeof (map as any).setType === "function") {
       if (theme === "dark") {

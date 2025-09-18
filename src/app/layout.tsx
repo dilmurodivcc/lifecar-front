@@ -296,7 +296,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <QueryProvider>
-            <I18nProvider>{children}</I18nProvider>
+          <I18nProvider>{children}</I18nProvider>
         </QueryProvider>
       </body>
     </html>

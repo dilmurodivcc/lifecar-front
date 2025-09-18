@@ -46,14 +46,12 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
     queryKey: ["services", locale, filters],
     queryFn: async () => {
       try {
-        // First try the direct services endpoint
         try {
           const params: Record<string, unknown> = {
             locale: locale,
             populate: "*",
           };
 
-          // Add Strapi filters
           if (filters.search) {
             params.filters = {
               $or: [
@@ -94,16 +92,9 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
             };
           }
 
-          console.log("API Request params:", params);
           const response = await API.get("/services", { params });
-          console.log("API Response:", response.data);
           return response;
-        } catch (servicesError) {
-          console.log(
-            "Services endpoint failed, trying categories endpoint:",
-            servicesError
-          );
-
+        } catch {
           const categoriesParams: Record<string, unknown> = {
             locale: locale,
             populate: {
@@ -122,7 +113,6 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
           const categoriesResponse = await API.get("/services-categories", {
             params: categoriesParams,
           });
-          console.log("Categories API Response:", categoriesResponse.data);
 
           const allServices =
             categoriesResponse.data.data?.flatMap(
@@ -198,7 +188,6 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
           };
         }
       } catch (error) {
-        console.error("API Error:", error);
         throw error;
       }
     },
@@ -209,13 +198,10 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
 
   useEffect(() => {
     if (error) {
-      console.error("useServices error:", error);
+      // Error handling can be added here if needed
     }
   }, [error]);
 
-  console.log("useServices data:", data);
-  console.log("useServices isLoading:", isLoading);
-  console.log("useServices error:", error);
   return { data, isLoading, error };
 };
 
@@ -238,13 +224,10 @@ const useServiceCategories = (locale: string = "uz") => {
 
   useEffect(() => {
     if (error) {
-      console.error("useServiceCategories error:", error);
+      // Error handling can be added here if needed
     }
   }, [error]);
 
-  console.log("useServiceCategories data:", data);
-  console.log("useServiceCategories isLoading:", isLoading);
-  console.log("useServiceCategories error:", error);
   return { data, isLoading, error };
 };
 

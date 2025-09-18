@@ -31,7 +31,6 @@ API.interceptors.request.use(
       config.timeout = 20000;
     }
 
-    // Only add locale if it's not already set
     if (!config.params?.locale) {
       const currentLanguage = getCurrentLanguage();
       if (config.params) {
@@ -41,7 +40,6 @@ API.interceptors.request.use(
       }
     }
 
-    console.log("API Request:", config.url, config.params);
     return config;
   },
   (error) => {
@@ -51,21 +49,11 @@ API.interceptors.request.use(
 
 API.interceptors.response.use(
   (response) => {
-    console.log(
-      "API Response:",
-      response.config.url,
-      response.status,
-      response.data
-    );
+   
     return response;
   },
   (error) => {
-    console.error(
-      "API Error:",
-      error.config?.url,
-      error.response?.status,
-      error.response?.data
-    );
+
     return Promise.reject(error);
   }
 );

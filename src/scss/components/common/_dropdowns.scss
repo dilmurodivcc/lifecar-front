@@ -28,7 +28,7 @@
   color: var(--white);
   border: 1px solid #333;
   width: max-content;
-  min-width: 150px;
+  min-width: 170px;
 span{
   white-space: nowrap;
   overflow: hidden;
@@ -61,7 +61,7 @@ span{
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  width: max-content;
+  width: 240px !important;
   background: var(--white);
   border: 1px solid;
   border-radius: 8px;
@@ -107,7 +107,6 @@ span{
   .dropdown-button {
     height: 44px;
     font-size: 14px;
-    min-width: 100px;
     padding: 8px 16px;
   }
 
@@ -129,7 +128,6 @@ span{
   .dropdown-button {
     height: 40px;
     font-size: 12px;
-    min-width: 120px;
     padding: 6px 12px;
   }
 

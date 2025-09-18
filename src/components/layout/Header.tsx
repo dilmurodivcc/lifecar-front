@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { HiSun, HiMoon, HiChevronDown, HiMenu, HiX } from "react-icons/hi";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const languages = [
   { label: "O'zbek", value: "uz", img: "/icons/uz.avif" },
@@ -13,7 +14,30 @@ const languages = [
 ];
 
 const Header = () => {
-  const [theme, setTheme] = useState("dark");
+  // Safe theme access with fallback
+  const [localTheme, setLocalTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "dark";
+    }
+    return "dark";
+  });
+
+  let theme = localTheme;
+  let toggleTheme = () => {
+    const newTheme = localTheme === "light" ? "dark" : "light";
+    setLocalTheme(newTheme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+    }
+  };
+
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+    toggleTheme = themeContext.toggleTheme;
+  } catch {
+  }
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,21 +56,14 @@ const Header = () => {
   useEffect(() => {
     setMounted(true);
     setIsClient(true);
+
+    // Apply theme on mount
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      setLocalTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
   }, []);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme, isClient]);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    setTheme(savedTheme);
-  }, [isClient]);
 
   useEffect(() => {
     if (!isClient) return;
@@ -92,10 +109,6 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isClient]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
 
   const changeLanguage = (newLanguage: string) => {
     if (!i18n || !isClient) return;
@@ -158,7 +171,7 @@ const Header = () => {
             </button>
           </div>
           <button className="theme-toggle">
-            <HiSun />
+            {theme === "light" ? <HiMoon /> : <HiSun />}
           </button>
         </div>
 
@@ -171,17 +184,17 @@ const Header = () => {
 
   return (
     <header className={shrink ? "shrink" : ""}>
-      <div className="logo">
-        <Image
-          src="/icons/lifecar.webp"
-          alt="Lifecar Logo"
-          width={50}
-          height={50}
-        />
-        <Link className="logoName" href={`/${locale}`}>
-          Lifecar
-        </Link>
-      </div>
+      <Link href={`/${locale}`}>
+        <div className="logo">
+          <Image
+            src="/icons/lifecar.webp"
+            alt="Lifecar Logo"
+            width={50}
+            height={50}
+          />
+          <span className="logoName">Lifecar</span>
+        </div>
+      </Link>
 
       <nav className="desktop-nav">
         <Link href={`/${locale}`} prefetch={true}>

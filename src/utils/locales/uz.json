@@ -15,14 +15,14 @@
         "address": "Manzil"
     },
     "hero": {
-        "title": "Lifecar - Avto Tuning Xizmatlari",
+        "title": "Lifecar | Auto Tuning",
         "subtitle": "Professional avto tuning, ehtiyot qismlar va aksessuarlar O'zbekistonda",
         "cta": "Xizmatlarimizni ko'rish",
         "learnMore": "Batafsil ma'lumot"
     },
     "shopSec": {
         "title": "Avtotuning ehtiyot qismlari do‘koni",
-        "subtitle": "Biz barcha rusum va modellardagi avtomobillar uchun tuning detallari keng assortimentini taklif etamiz.",
+        "subtitle": "Barcha avtomobillar uchun tuning detallar.",
         "viewAll": "Barcha mahsulotlarni ko‘rish"
     },
     "servicesSec": {
@@ -42,7 +42,8 @@
             "accessories": "Aksessuarlar",
             "engine": "Motor qismlari",
             "brake": "Tormoz tizimi"
-        }
+        },
+        "featuredOnly": "Faqat tavsiya etilgan"
     },
     "services": {
         "filter": {

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import {
@@ -13,6 +13,14 @@ import {
 } from "react-icons/fa";
 
 const ContactSec = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+  const { t } = useTranslation();
+
+  // Handle hydration
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   const openYandexMaps = () => {
     window.open("https://yandex.com/maps/?text=Lifecar Auto Tuning", "_blank");
   };
@@ -23,7 +31,65 @@ const ContactSec = () => {
       "_blank"
     );
   };
-  const { t } = useTranslation();
+
+  // Show loading state during hydration to prevent mismatch
+  if (!isHydrated) {
+    return (
+      <section className="contactSec">
+        <div className="container">
+          <aside className="left">
+            <h2>Loading...</h2>
+            <ul className="working-hours">
+              {Array.from({ length: 7 }).map((_, index) => (
+                <li key={index}>
+                  <b>Loading...</b>
+                  <p>Loading...</p>
+                </li>
+              ))}
+            </ul>
+            <h2>Loading...</h2>
+            <ul className="contact-info">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <li key={index}>
+                  <b>Loading...</b>
+                  <a href="#">Loading...</a>
+                </li>
+              ))}
+            </ul>
+            <h2>Loading...</h2>
+            <ul className="social-links">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <li key={index}>
+                  <a href="#" className="loading-link">
+                    <div
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        background: "#ccc",
+                      }}
+                    ></div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="map-buttons">
+              <button className="map-button yandex-map-button" disabled>
+                <FaYandex />
+                Loading...
+              </button>
+              <button className="map-button google-map-button" disabled>
+                <FaGoogle />
+                Loading...
+              </button>
+            </div>
+          </aside>
+          <div
+            style={{ width: "650px", height: "650px", background: "#f0f0f0" }}
+          ></div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>
