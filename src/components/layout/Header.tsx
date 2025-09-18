@@ -36,8 +36,7 @@ const Header = () => {
     const themeContext = useTheme();
     theme = themeContext.theme;
     toggleTheme = themeContext.toggleTheme;
-  } catch {
-  }
+  } catch {}
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -155,7 +154,7 @@ const Header = () => {
           <Link href={`/${locale}/services`} prefetch={true}>
             Services
           </Link>
-          <Link href={`/${locale}/shop`} prefetch={true}>
+          <Link href={`/${locale}/products`} prefetch={true}>
             Shop
           </Link>
           <Link href={`/${locale}/contact`} prefetch={true}>
@@ -203,7 +202,7 @@ const Header = () => {
         <Link href={`/${locale}/services`} prefetch={true}>
           {t("navigation.services")}
         </Link>
-        <Link href={`/${locale}/shop`} prefetch={true}>
+        <Link href={`/${locale}/products`} prefetch={true}>
           {t("navigation.shop")}
         </Link>
 
@@ -269,7 +268,7 @@ const Header = () => {
             {t("navigation.services")}
           </Link>
           <Link
-            href={`/${locale}/shop`}
+            href={`/${locale}/products`}
             prefetch={true}
             onClick={() => setMobileMenuOpen(false)}
           >

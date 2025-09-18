@@ -17,6 +17,7 @@ interface Service {
   price_from: string;
   categoryId?: number;
   categoryName?: string;
+  slug?: string;
   image?: {
     data?: {
       attributes?: {
@@ -398,6 +399,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                   <SkeletonCard
                     key={`skeleton-${index}`}
                     layout={layout as "grid" | "list"}
+                    showImage={true}
                   />
                 ))
               : servicesError || categoriesError
@@ -406,6 +408,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                   <SkeletonCard
                     key={`skeleton-error-${index}`}
                     layout={layout as "grid" | "list"}
+                    showImage={true}
                   />
                 ))
               : !currentServices || currentServices.length === 0
@@ -414,6 +417,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                   <SkeletonCard
                     key={`skeleton-empty-${index}`}
                     layout={layout as "grid" | "list"}
+                    showImage={true}
                   />
                 ))
               : currentServices.map((service: unknown, index: number) => {
@@ -444,6 +448,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                       price_from: string;
                       categoryId?: number;
                       categoryName?: string;
+                      slug?: string;
                       image?: {
                         data?: {
                           attributes?: {
@@ -492,6 +497,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                         time={undefined}
                         layout={layout}
                         type={categoryName}
+                        slug={typedService.slug || ""}
                       />
                     );
                   } catch {

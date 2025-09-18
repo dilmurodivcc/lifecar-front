@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 const Card = (props: {
   img: string;
   title: string;
@@ -8,10 +8,9 @@ const Card = (props: {
   time?: string;
   layout: string;
   type: string;
+  slug: string;
 }) => {
-  const { img, title, desc, price, time, layout, type } = props;
-
-  // Validate and sanitize image URL
+  const { img, title, desc, price, time, layout, type, slug } = props;
   const isValidImageUrl = (url: string) => {
     if (!url || typeof url !== "string") return false;
     return url.startsWith("http") || url.startsWith("/");
@@ -21,7 +20,7 @@ const Card = (props: {
 
   return (
     <>
-      <div className={`card ${layout}`}>
+      <Link href={`/product/${slug}`} className={`card ${layout}`} >
         <div className="card-type">{type}</div>
         <div className="img-wrapper">
           <Image
@@ -30,7 +29,6 @@ const Card = (props: {
             width={400}
             height={200}
             onError={(e) => {
-              // Fallback to placeholder on error
               e.currentTarget.src = "/img/placeholder.jpg";
             }}
           />
@@ -43,7 +41,7 @@ const Card = (props: {
             {time && <h4 className="time">{time}</h4>}
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

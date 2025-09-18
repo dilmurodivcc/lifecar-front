@@ -78,13 +78,13 @@ const Footer = () => {
               {" "}
               <FaPhone /> +998 33 785 22 22
             </a>
-            <a href="tel:+998 99 814 65 65">
+            <a href="tel:+998 94 618 88 48">
               {" "}
-              <FaPhone /> +998 99 814 65 65
+              <FaPhone /> +998 94 618 88 48
             </a>
-            <a href="https://t.me/lifecar_uz">
+            <a href="https://t.me/TuningLifeCar">
               {" "}
-              <FaTelegram /> @lifecar_uz
+              <FaTelegram /> @TuningLifeCar
             </a>
           </div>
         </div>
@@ -94,20 +94,24 @@ const Footer = () => {
             <div className="footer-col-title">{t("footer.links.title")}</div>
             <Link href={`/${locale}`}>{t("navigation.home")}</Link>
             <Link href={`/${locale}/services`}>{t("navigation.services")}</Link>
-            <Link href={`/${locale}/shop`}>{t("navigation.shop")}</Link>
+            <Link href={`/${locale}/products`}>{t("navigation.shop")}</Link>
             <Link href={`/${locale}/contact`}>{t("navigation.contact")}</Link>
           </div>
           <div className="footer-col">
             <div className="footer-col-title">{t("footer.shop.title")}</div>
-            <Link href={`/${locale}/shop`}>{t("footer.shop.allProducts")}</Link>
-            <Link href={`/${locale}/shop`}>
+            <Link href={`/${locale}/products`}>
+              {t("footer.shop.allProducts")}
+            </Link>
+            <Link href={`/${locale}/products`}>
               {t("footer.shop.steeringWheels")}
             </Link>
-            <Link href={`/${locale}/shop`}>
+            <Link href={`/${locale}/products`}>
               {t("footer.shop.radarDetectors")}
             </Link>
-            <Link href={`/${locale}/shop`}>{t("footer.shop.tanirofka")}</Link>
-            <Link href={`/${locale}/shop`}>
+            <Link href={`/${locale}/products`}>
+              {t("footer.shop.tanirofka")}
+            </Link>
+            <Link href={`/${locale}/products`}>
               {t("footer.shop.carAccessories")}
             </Link>
           </div>

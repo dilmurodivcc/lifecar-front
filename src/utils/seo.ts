@@ -41,7 +41,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       openGraphTitle: "Avto Ehtiyot Qismlar va Aksessuarlar | Lifecar",
       openGraphDescription:
         "Original ehtiyot qismlar va tuning aksessuarlar barcha mashina turlari uchun.",
-      canonical: "https://lifecar.uz/uz/shop",
+      canonical: "https://lifecar.uz/uz/products",
     },
     about: {
       title: "Lifecar Haqida | Avto Tuning Kompaniyasi | Toshkent",
@@ -99,7 +99,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       openGraphTitle: "Автозапчасти и Аксессуары | Lifecar",
       openGraphDescription:
         "Оригинальные запчасти и тюнинг аксессуары для всех типов автомобилей.",
-      canonical: "https://lifecar.uz/ru/shop",
+      canonical: "https://lifecar.uz/ru/products",
     },
     about: {
       title: "О Lifecar | Авто Тюнинг Компания | Ташкент",

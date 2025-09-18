@@ -141,6 +141,33 @@
         "showMore": "Ko'proq ko'rsatish",
         "showLess": "Kamroq ko'rsatish"
     },
+    "breadcrumb": {
+        "home": "Bosh sahifa",
+        "shop": "Do'kon"
+    },
+    "productDetail": {
+        "notFound": {
+            "title": "Mahsulot topilmadi",
+            "message": "Kechirasiz, so'ralgan mahsulot topilmadi.",
+            "backToShop": "Do'konga qaytish"
+        },
+        "discount": "chegirma",
+        "fullInfo": {
+            "title": "Mahsulot haqida to'liq ma'lumot",
+            "showMore": "Ko'proq ma'lumot",
+            "showLess": "Kamroq ma'lumot"
+        },
+        "specs": {
+            "brand": "Brend",
+            "warranty": "Kafolat",
+            "date": "Sana",
+            "delivery": "Yetkazib berish",
+            "quantity": "Miqdor",
+            "available": "Mavjud",
+            "notAvailable": "Mavjud emas",
+            "pieces": "dona"
+        }
+    },
     "seo": {
         "title": "Lifecar | Avto Tuning Xizmatlari O'zbekistonda",
         "description": "Lifecar - Avto tuning, auto parts, auto accessories va professional avto ustalar xizmatlari O'zbekistonda. Professional avto sozlash va ta'mirlash xizmatlari.",

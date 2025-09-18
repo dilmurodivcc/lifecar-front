@@ -44,6 +44,7 @@ interface Product {
     delivary: boolean;
     quantity: number;
     brand: string;
+    img?: ProductImage[];
   };
   localizations?: Array<{
     id: number;
@@ -134,7 +135,6 @@ const useProducts = (locale: string = "uz", filters: ProductFilters = {}) => {
 
   useEffect(() => {
     if (error) {
-      // Error handling can be added here if needed
     }
   }, [error]);
 
@@ -145,7 +145,7 @@ const useProductCategories = (locale: string = "uz") => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["product-categories", locale],
     queryFn: async () => {
-      const response = await API.get("/product-categories", {
+      const response = await API.get("/product  -categroys", {
         params: {
           locale: locale,
           populate: "*",
@@ -160,12 +160,45 @@ const useProductCategories = (locale: string = "uz") => {
 
   useEffect(() => {
     if (error) {
-      // Error handling can be added here if needed
     }
   }, [error]);
 
   return { data, isLoading, error };
 };
 
-export { useProducts, useProductCategories };
+const useProductBySlug = (slug: string, locale: string = "uz") => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["product", slug, locale],
+    queryFn: async () => {
+      try {
+        const response = await API.get("/products", {
+          params: {
+            locale: locale,
+            "populate[product_categroy]": true,
+            "populate[detail][populate]": "*",
+            filters: {
+              slug: { $eq: slug },
+            },
+          },
+        });
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    enabled: !!slug,
+    retry: 1,
+    retryDelay: 1000,
+  });
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error fetching product:", error);
+    }
+  }, [error]);
+
+  return { data, isLoading, error };
+};
+
+export { useProducts, useProductCategories, useProductBySlug };
 export type { Product, ProductFilters, ProductsResponse, ProductCategory };

@@ -217,7 +217,7 @@ export default function ShopPage({ params }: ShopPageProps) {
             </div>
             <section className="cards-grid grid">
               {Array.from({ length: 8 }).map((_, index) => (
-                <SkeletonCard key={index} layout="grid" />
+                <SkeletonCard key={index} layout="grid" showImage={true} />
               ))}
             </section>
           </div>
@@ -328,16 +328,7 @@ export default function ShopPage({ params }: ShopPageProps) {
               </div>
             </div>
             <div className="right">
-              <div className="featured-toggle">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={showFeaturedOnly}
-                    onChange={(e) => setShowFeaturedOnly(e.target.checked)}
-                  />
-                  <span>{t("shop.featuredOnly")}</span>
-                </label>
-              </div>
+              
               <input
                 type="text"
                 className="input-search-shop"
@@ -354,7 +345,11 @@ export default function ShopPage({ params }: ShopPageProps) {
             {productsLoading ? (
               // Show skeleton loading cards
               Array.from({ length: cardsPerPage }).map((_, index) => (
-                <SkeletonCard key={index} layout={layout as "grid" | "list"} />
+                <SkeletonCard
+                  key={index}
+                  layout={layout as "grid" | "list"}
+                  showImage={true}
+                />
               ))
             ) : productsError ? (
               <div className="error-message">
@@ -381,6 +376,7 @@ export default function ShopPage({ params }: ShopPageProps) {
                     price={product.price}
                     layout={layout}
                     type={product.product_categroy?.name || "product"}
+                    slug={product.slug}
                   />
                 );
               })
