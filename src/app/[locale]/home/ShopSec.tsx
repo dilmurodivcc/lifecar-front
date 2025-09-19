@@ -11,12 +11,10 @@ interface ShopSecProps {
 
 const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
   const { t } = useSafeTranslation();
-  const [isHydrated, setIsHydrated] = useState(false);
   const [currentLocale, setCurrentLocale] = useState("uz");
 
   // Handle hydration
   useEffect(() => {
-    setIsHydrated(true);
     setCurrentLocale(locale);
   }, [locale]);
 

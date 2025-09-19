@@ -145,7 +145,7 @@ const useProductCategories = (locale: string = "uz") => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["product-categories", locale],
     queryFn: async () => {
-      const response = await API.get("/product  -categroys", {
+      const response = await API.get("/product-categroys", {
         params: {
           locale: locale,
           populate: "*",

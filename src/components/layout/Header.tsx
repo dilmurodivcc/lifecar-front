@@ -37,7 +37,7 @@ const Header = () => {
     theme = themeContext.theme;
     toggleTheme = themeContext.toggleTheme;
   } catch {}
-  const [language, setLanguage] = useState("uz");
+    const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);

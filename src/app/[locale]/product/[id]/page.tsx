@@ -5,6 +5,7 @@ import { useProductBySlug, type Product } from "@/hooks/useProducts";
 import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import Image from "next/image";
 import Link from "next/link";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 interface ProductDetailProps {
   params: Promise<{
@@ -16,8 +17,8 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   const [slug, setSlug] = useState("");
   const [locale, setLocale] = useState("uz");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [showExpandButton, setShowExpandButton] = useState(false);
   const { t } = useSafeTranslation();
 
   useEffect(() => {
@@ -34,26 +35,42 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
     }
   }, []);
 
-  const {
-    data: productData,
-    isLoading,
-    error,
-  } = useProductBySlug(slug, locale);
+  const { data: productData, isLoading } = useProductBySlug(slug, locale);
   const product = productData?.data?.data?.[0] as Product | undefined;
+
+  // Check if content overflows and needs expand button
+  useEffect(() => {
+    if (product?.detail?.full_info) {
+      const checkOverflow = () => {
+        const contentElement = document.querySelector(".detail-content");
+        if (contentElement) {
+          const isOverflowing =
+            contentElement.scrollHeight > contentElement.clientHeight;
+          setShowExpandButton(isOverflowing);
+        }
+      };
+
+      // Check after a short delay to ensure DOM is rendered
+      const timeoutId = setTimeout(checkOverflow, 100);
+
+      // Also check on window resize
+      window.addEventListener("resize", checkOverflow);
+
+      return () => {
+        clearTimeout(timeoutId);
+        window.removeEventListener("resize", checkOverflow);
+      };
+    }
+  }, [product?.detail?.full_info]);
 
   if (isLoading) {
     return (
       <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
         <div className="product-detail-loading">
           <div className="container">
-            <div className="loading-skeleton">
-              <div className="skeleton-image"></div>
-              <div className="skeleton-content">
-                <div className="skeleton-title"></div>
-                <div className="skeleton-desc"></div>
-                <div className="skeleton-price"></div>
-                <div className="skeleton-button"></div>
-              </div>
+            <div className="loading-content">
+              <LoadingSpinner size="large" />
+              <div className="loading-text">{t("productDetail.loading")}</div>
             </div>
           </div>
         </div>
@@ -222,16 +239,18 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                           <p key={index}>{paragraph}</p>
                         ))}
                     </div>
-                    <button
-                      className="expand-btn"
-                      onClick={() =>
-                        setIsDescriptionExpanded(!isDescriptionExpanded)
-                      }
-                    >
-                      {isDescriptionExpanded
-                        ? t("productDetail.fullInfo.showLess")
-                        : t("productDetail.fullInfo.showMore")}
-                    </button>
+                    {showExpandButton && (
+                      <button
+                        className="expand-btn"
+                        onClick={() =>
+                          setIsDescriptionExpanded(!isDescriptionExpanded)
+                        }
+                      >
+                        {isDescriptionExpanded
+                          ? t("productDetail.fullInfo.showLess")
+                          : t("productDetail.fullInfo.showMore")}
+                      </button>
+                    )}
                   </div>
 
                   <div className="product-specs">

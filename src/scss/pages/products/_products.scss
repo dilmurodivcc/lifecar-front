@@ -11,6 +11,11 @@
     position: relative;
     z-index: 1;
   }
+  .card {
+    .desc{
+      color: var(--text);
+    }
+  }
 
   .shop-header {
     padding: 40px 0 60px;

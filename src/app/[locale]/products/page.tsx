@@ -27,7 +27,7 @@ export default function ShopPage({ params }: ShopPageProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
+  const [showFeaturedOnly] = useState(false);
   const [locale, setLocale] = useState("uz");
   const [isHydrated, setIsHydrated] = useState(false);
   const cardsPerPage = 8;
@@ -328,7 +328,6 @@ export default function ShopPage({ params }: ShopPageProps) {
               </div>
             </div>
             <div className="right">
-              
               <input
                 type="text"
                 className="input-search-shop"

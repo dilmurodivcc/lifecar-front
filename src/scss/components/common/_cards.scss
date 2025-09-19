@@ -192,7 +192,7 @@
 
     .desc {
       font-size: 0.95rem;
-      color: var(--text-secondary);
+      color: var(--text) !important;
       line-height: 1.5;
       margin: 0;
       flex-grow: 1;

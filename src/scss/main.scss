@@ -8,6 +8,7 @@
 @use "./components/layout/card" as *;
 @use "./components/common/dropdowns" as *;
 @use "./components/common/cards" as *;
+@use "./components/ui/loading-spinner" as *;
 @use "./pages/services/services" as *;
 @use "./pages/services/services-cards" as *;
 @use "./pages/products/products" as *;

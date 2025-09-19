@@ -155,11 +155,16 @@
     grid-template-columns: 1fr;
     gap: 32px;
   }
+  .footer-map,
+  .map {
+    width: 100vw;
+  }
 }
 
 @media (max-width: 900px) {
   .footer-grid {
     grid-template-columns: 1fr;
+
     gap: 32px;
   }
   .footer-links-grid {
@@ -175,11 +180,10 @@
     align-items: flex-start;
     margin-top: 20px;
   }
-
 }
 
 @media (max-width: 768px) {
-  .footer-map{
+  .footer-map {
     max-width: 88vw;
   }
 }
