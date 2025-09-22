@@ -15,12 +15,8 @@ const languages = [
 
 const Header = () => {
   // Safe theme access with fallback
-  const [localTheme, setLocalTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "dark";
-    }
-    return "dark";
-  });
+  const [localTheme, setLocalTheme] = useState("dark");
+  const [mounted, setMounted] = useState(false);
 
   let theme = localTheme;
   let toggleTheme = () => {
@@ -34,14 +30,15 @@ const Header = () => {
 
   try {
     const themeContext = useTheme();
-    theme = themeContext.theme;
-    toggleTheme = themeContext.toggleTheme;
+    if (mounted) {
+      theme = themeContext.theme;
+      toggleTheme = themeContext.toggleTheme;
+    }
   } catch {}
-    const [language, setLanguage] = useState("uz");
+  const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -149,28 +146,28 @@ const Header = () => {
 
         <nav className="desktop-nav">
           <Link href={`/${locale}`} prefetch={true}>
-            Home
+            {t("navigation.home")}
           </Link>
           <Link href={`/${locale}/services`} prefetch={true}>
-            Services
+            {t("navigation.services")}
           </Link>
           <Link href={`/${locale}/products`} prefetch={true}>
-            Shop
+            {t("navigation.shop")}
           </Link>
           <Link href={`/${locale}/contact`} prefetch={true}>
-            Contact
+            {t("navigation.contact")}
           </Link>
         </nav>
 
         <div className="actions desktop-actions">
           <div className="dropdown" ref={langRef} data-open={false}>
             <button className="language">
-              O&apos;zbek
+              {t("header.languages.uz")}
               <HiChevronDown />
             </button>
           </div>
-          <button className="theme-toggle">
-            {theme === "light" ? <HiMoon /> : <HiSun />}
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
           </button>
         </div>
 
@@ -237,7 +234,7 @@ const Header = () => {
           </ul>
         </div>
         <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === "light" ? <HiMoon /> : <HiSun />}
+          {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
         </button>
       </div>
 
@@ -310,7 +307,7 @@ const Header = () => {
             </ul>
           </div>
           <button className="theme-toggle" onClick={toggleTheme}>
-            {theme === "light" ? <HiMoon /> : <HiSun />}
+            {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
           </button>
         </div>
       </div>

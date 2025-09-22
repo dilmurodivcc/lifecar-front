@@ -60,15 +60,10 @@ export default function ServicesPage({ params }: ServicesPageProps) {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
   const cardsPerPage = 8;
   const { t } = useTranslation();
 
   const [locale, setLocale] = useState("uz");
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -102,7 +97,13 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     data: services,
     isLoading: servicesLoading,
     error: servicesError,
-  } = useServices(locale);
+  } = useServices(locale, {
+    search: debouncedSearchTerm,
+    categoryId: filterBy,
+    sortBy: sortBy,
+    page: currentPage,
+    pageSize: cardsPerPage,
+  });
 
   const {
     data: categories,
@@ -154,78 +155,9 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     { value: "price-high", label: t("sort.priceHigh") },
   ];
 
-  // Try to get services from both sources
-  const servicesFromCategories = Array.isArray(categories?.data?.data)
-    ? categories.data.data.flatMap((category: Category) => {
-        return (
-          category.services?.map((service: Service) => ({
-            ...service,
-            categoryId: category.id,
-            categoryName: category.name,
-          })) || []
-        );
-      })
-    : [];
-
-  const servicesFromDirect = Array.isArray(services?.data?.data)
-    ? services.data.data.map((service: Service) => ({
-        ...service,
-        categoryId:
-          service.service_categories?.data?.id ||
-          service.service_categories?.id,
-        categoryName:
-          service.service_categories?.data?.attributes?.name ||
-          service.service_categories?.name ||
-          "Service",
-      }))
-    : [];
-
-  const allServices =
-    servicesFromCategories.length > 0
-      ? servicesFromCategories
-      : servicesFromDirect;
-
-  const filteredServices = allServices.filter((service: Service) => {
-    const matchesSearch =
-      !debouncedSearchTerm ||
-      service.title
-        ?.toLowerCase()
-        .includes(debouncedSearchTerm.toLowerCase()) ||
-      service.description
-        ?.toLowerCase()
-        .includes(debouncedSearchTerm.toLowerCase());
-
-    const matchesFilter =
-      filterBy === "all" || service.categoryId === parseInt(filterBy);
-
-    return matchesSearch && matchesFilter;
-  });
-
-  const sortedServices = [...filteredServices].sort(
-    (a: Service, b: Service) => {
-      switch (sortBy) {
-        case "price-low":
-          const aPrice = parseInt(a.price_from?.replace(/[^\d]/g, "") || "0");
-          const bPrice = parseInt(b.price_from?.replace(/[^\d]/g, "") || "0");
-          return aPrice - bPrice;
-        case "price-high":
-          const aPriceHigh = parseInt(
-            a.price_from?.replace(/[^\d]/g, "") || "0"
-          );
-          const bPriceHigh = parseInt(
-            b.price_from?.replace(/[^\d]/g, "") || "0"
-          );
-          return bPriceHigh - aPriceHigh;
-        default:
-          return 0;
-      }
-    }
-  );
-
-  const totalPages = Math.ceil(sortedServices.length / cardsPerPage);
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const endIndex = startIndex + cardsPerPage;
-  const currentServices = sortedServices.slice(startIndex, endIndex);
+  // Get services from API with server-side filtering
+  const currentServices = services?.data?.data || [];
+  const totalPages = services?.data?.meta?.pagination?.pageCount || 1;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -238,10 +170,10 @@ export default function ServicesPage({ params }: ServicesPageProps) {
         <main className="services">
           <div className="container">
             <div className="error-state">
-              <h2>Something went wrong</h2>
+              <h2>{t("common.error")}</h2>
               <p>{error}</p>
               <button onClick={() => window.location.reload()}>
-                Try Again
+                {t("common.tryAgain")}
               </button>
             </div>
           </div>
@@ -393,121 +325,50 @@ export default function ServicesPage({ params }: ServicesPageProps) {
           </div>
 
           <section className={`cards-grid ${layout}`}>
-            {!isClient || servicesLoading || categoriesLoading
-              ? // Show skeleton cards while loading or not client-side
-                Array.from({ length: 8 }, (_, index) => (
-                  <SkeletonCard
-                    key={`skeleton-${index}`}
-                    layout={layout as "grid" | "list"}
-                    showImage={true}
+            {servicesLoading ? (
+              // Show skeleton cards while loading
+              Array.from({ length: 8 }, (_, index) => (
+                <SkeletonCard
+                  key={`skeleton-${index}`}
+                  layout={layout as "grid" | "list"}
+                  showImage={true}
+                />
+              ))
+            ) : servicesError ? (
+              // Show error message
+              <div className="error-message">
+                {t("common.error")}: {servicesError.message}
+              </div>
+            ) : currentServices.length === 0 ? (
+              // Show no services message
+              <div className="no-services">{t("services.noServices")}</div>
+            ) : (
+              currentServices.map((service: Service) => {
+                // Use the best available image format
+                const imageUrl =
+                  service.image?.data?.attributes?.url ||
+                  service.image?.url ||
+                  "/img/placeholder.jpg";
+
+                const categoryName =
+                  service.service_categories?.data?.attributes?.name ||
+                  service.service_categories?.name ||
+                  "Service";
+
+                return (
+                  <Card
+                    key={service.id}
+                    img={imageUrl}
+                    title={service.title}
+                    desc={service.description}
+                    price={service.price_from}
+                    layout={layout}
+                    type={categoryName}
+                    slug={service.slug || ""}
                   />
-                ))
-              : servicesError || categoriesError
-              ? // Show skeleton cards on error (hide error from user)
-                Array.from({ length: 8 }, (_, index) => (
-                  <SkeletonCard
-                    key={`skeleton-error-${index}`}
-                    layout={layout as "grid" | "list"}
-                    showImage={true}
-                  />
-                ))
-              : !currentServices || currentServices.length === 0
-              ? // Show skeleton cards when no services (hide empty state from user)
-                Array.from({ length: 8 }, (_, index) => (
-                  <SkeletonCard
-                    key={`skeleton-empty-${index}`}
-                    layout={layout as "grid" | "list"}
-                    showImage={true}
-                  />
-                ))
-              : currentServices.map((service: unknown, index: number) => {
-                  try {
-                    if (!service || typeof service !== "object") {
-                      return (
-                        <div key={`error-${index}`} className="error-card">
-                          Invalid service data
-                        </div>
-                      );
-                    }
-
-                    if (Array.isArray(service)) {
-                      return (
-                        <div
-                          key={`array-error-${index}`}
-                          className="error-card"
-                        >
-                          Invalid service data (array)
-                        </div>
-                      );
-                    }
-
-                    const typedService = service as {
-                      id: number;
-                      title: string;
-                      description: string;
-                      price_from: string;
-                      categoryId?: number;
-                      categoryName?: string;
-                      slug?: string;
-                      image?: {
-                        data?: {
-                          attributes?: {
-                            url: string;
-                          };
-                        };
-                        url?: string;
-                      };
-                      service_categories?: {
-                        data?: {
-                          attributes?: {
-                            name: string;
-                          };
-                        };
-                        name?: string;
-                      };
-                    };
-                    const getImageUrl = () => {
-                      const imageUrl =
-                        typedService.image?.data?.attributes?.url ||
-                        typedService.image?.url ||
-                        typedService.image;
-
-                      if (
-                        imageUrl &&
-                        typeof imageUrl === "string" &&
-                        imageUrl.startsWith("http")
-                      ) {
-                        return imageUrl;
-                      }
-
-                      return "/img/placeholder.jpg";
-                    };
-
-                    const categoryName = typedService.categoryName || "Service";
-
-                    return (
-                      <Card
-                        key={typedService.id || index}
-                        img={getImageUrl()}
-                        title={typedService.title || "Service"}
-                        desc={
-                          typedService.description || "No description available"
-                        }
-                        price={typedService.price_from || "Price on request"}
-                        time={undefined}
-                        layout={layout}
-                        type={categoryName}
-                        slug={typedService.slug || ""}
-                      />
-                    );
-                  } catch {
-                    return (
-                      <div key={index} className="error-card">
-                        Error loading service
-                      </div>
-                    );
-                  }
-                })}
+                );
+              })
+            )}
           </section>
 
           <Pagination

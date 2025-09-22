@@ -41,7 +41,8 @@
             "repair": "Ремонт",
             "maintenance": "Технические услуги"
         },
-        "featuredOnly": "Только рекомендуемые"
+        "featuredOnly": "Только рекомендуемые",
+        "noProducts": "Товары не найдены"
     },
     "services": {
         "filter": {
@@ -50,7 +51,8 @@
             "service": "Услуги",
             "repair": "Ремонт",
             "maintenance": "Технические услуги"
-        }
+        },
+        "noServices": "Услуги не найдены"
     },
     "sort": {
         "title": "Сортировка",
@@ -135,7 +137,8 @@
         "next": "Далее",
         "previous": "Предыдущий",
         "showMore": "Показать больше",
-        "showLess": "Показать меньше"
+        "showLess": "Показать меньше",
+        "tryAgain": "Попробовать снова"
     },
     "breadcrumb": {
         "home": "Главная",

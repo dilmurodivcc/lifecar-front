@@ -15,7 +15,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       description:
         "Lifecar - O'zbekistondagi eng yaxshi avto tuning xizmatlari. Professional avto ustalar, original ehtiyot qismlar, tuning aksessuarlar va avto ta'mirlash xizmatlari. Toshkentda avto tuning markazi.",
       keywords:
-        "lifecar, lifecar tuning, lifecar uz, avto tuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar, tuning, avto ta'mirlash, toshkent avto tuning, professional avto ustalar, original ehtiyot qismlar, avto modifikatsiya, avto sozlash",
+        "lifecar, life car, Life Car, Life Car Uzbekistan, lifecar uz,  lifecar tuning, lifecar uz, avto tuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar, tuning, avto ta'mirlash, toshkent avto tuning, professional avto ustalar, original ehtiyot qismlar, avto modifikatsiya, avto sozlash",
       openGraphTitle: "Lifecar | Professional Avto Tuning Xizmatlari",
       openGraphDescription:
         "O'zbekistondagi eng yaxshi avto tuning markazi. Professional xizmatlar va original ehtiyot qismlar.",

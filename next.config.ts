@@ -57,7 +57,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Redirects for better SEO
   async redirects() {
     return [
       {

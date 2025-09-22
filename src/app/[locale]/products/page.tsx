@@ -352,10 +352,10 @@ export default function ShopPage({ params }: ShopPageProps) {
               ))
             ) : productsError ? (
               <div className="error-message">
-                Error loading products: {productsError.message}
+                {t("common.error")}: {productsError.message}
               </div>
             ) : currentProducts.length === 0 ? (
-              <div className="no-products">No products found</div>
+              <div className="no-products">{t("shop.noProducts")}</div>
             ) : (
               currentProducts.map((product: Product) => {
                 // Use the best available image format

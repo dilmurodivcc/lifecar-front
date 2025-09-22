@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { FaDirections } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 interface YandexMapProps {
   theme: "light" | "dark";
   className?: string;
@@ -32,6 +33,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   const [error, setError] = useState<string>("");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -246,7 +248,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
             window.open(`https://yandex.uz/maps/-/CLqABUnb`, "_blank");
           }}
         >
-          Машрут
+          {t("contact.yandexButton")}
           <FaDirections />
         </button>
       </div>

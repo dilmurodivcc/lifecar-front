@@ -119,16 +119,6 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
     <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
       <div className="product-detail">
         <div className="container">
-          <div className="breadcrumb">
-            <Link href="/">{t("breadcrumb.home")}</Link>
-            <span>/</span>
-            <Link href="/shop">{t("breadcrumb.shop")}</Link>
-            <span>/</span>
-            <span>{product.product_categroy?.name}</span>
-            <span>/</span>
-            <span>{product.title}</span>
-          </div>
-
           <div className="product-content">
             <div className="product-gallery">
               <div className="main-image">

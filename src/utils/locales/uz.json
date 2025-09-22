@@ -43,7 +43,8 @@
             "engine": "Motor qismlari",
             "brake": "Tormoz tizimi"
         },
-        "featuredOnly": "Faqat tavsiya etilgan"
+        "featuredOnly": "Faqat tavsiya etilgan",
+        "noProducts": "Mahsulotlar topilmadi"
     },
     "services": {
         "filter": {
@@ -53,7 +54,8 @@
             "repair": "Ta'mirlash",
             "maintenance": "Texnik xizmat"
         },
-        "search": "Qidirish"
+        "search": "Qidirish",
+        "noServices": "Xizmatlar topilmadi"
     },
     "sort": {
         "title": "Saralash",
@@ -139,7 +141,8 @@
         "next": "Keyingi",
         "previous": "Oldingi",
         "showMore": "Ko'proq ko'rsatish",
-        "showLess": "Kamroq ko'rsatish"
+        "showLess": "Kamroq ko'rsatish",
+        "tryAgain": "Qayta urinish"
     },
     "breadcrumb": {
         "home": "Bosh sahifa",
