@@ -1,0 +1,27 @@
+.yandex-map-container {
+  position: relative;
+  .directions {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 100%;
+    z-index: 1000;
+    .directions-button {
+      border: 1px solid var(--border-color);
+      background-color: var(--text);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      width: 22%;
+      height: 22px; 
+
+      padding: 10px;
+      border-radius: 6px;
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      gap: 5px;
+    }
+  }
+}

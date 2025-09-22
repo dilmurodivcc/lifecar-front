@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
+import { FaDirections } from "react-icons/fa";
 interface YandexMapProps {
   theme: "light" | "dark";
   className?: string;
@@ -238,6 +238,18 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
       {theme === "dark" && !isFullscreen && (
         <div className="absolute inset-0 bg-black/30 pointer-events-none mix-blend-multiply" />
       )}
+
+      <div className="directions">
+        <button
+          className="directions-button"
+          onClick={() => {
+            window.open(`https://yandex.uz/maps/-/CLqABUnb`, "_blank");
+          }}
+        >
+          Машрут
+          <FaDirections />
+        </button>
+      </div>
     </div>
   );
 };
