@@ -14,7 +14,7 @@ const languages = [
 ];
 
 const Header = () => {
-      const [localTheme, setLocalTheme] = useState("dark");
+  const [localTheme, setLocalTheme] = useState("dark");
   const [mounted, setMounted] = useState(false);
 
   let theme = localTheme;
@@ -47,6 +47,24 @@ const Header = () => {
 
   const segments = pathname.split("/");
   const locale = segments[1] || "uz";
+
+  // Function to check if a link is active
+  const isActiveLink = (href: string) => {
+    const cleanHref = href.replace(`/${locale}`, "") || "/";
+    const cleanPathname = pathname.replace(`/${locale}`, "") || "/";
+
+    // Exact match for home page
+    if (cleanHref === "/" && cleanPathname === "/") {
+      return true;
+    }
+
+    // For other pages, check if pathname starts with the href
+    if (cleanHref !== "/" && cleanPathname.startsWith(cleanHref)) {
+      return true;
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -191,17 +209,38 @@ const Header = () => {
       </Link>
 
       <nav className="desktop-nav">
-        <Link href={`/${locale}`} prefetch={true}>
+        <Link
+          href={`/${locale}`}
+          className={`nav-link ${isActiveLink(`/${locale}`) ? "active" : ""}`}
+          prefetch={true}
+        >
           {t("navigation.home")}
         </Link>
-        <Link href={`/${locale}/services`} prefetch={true}>
+        <Link
+          href={`/${locale}/services`}
+          className={`nav-link ${
+            isActiveLink(`/${locale}/services`) ? "active" : ""
+          }`}
+          prefetch={true}
+        >
           {t("navigation.services")}
         </Link>
-        <Link href={`/${locale}/products`} prefetch={true}>
+        <Link
+          href={`/${locale}/products`}
+          className={`nav-link ${
+            isActiveLink(`/${locale}/products`) ? "active" : ""
+          }`}
+          prefetch={true}
+        >
           {t("navigation.shop")}
         </Link>
-
-        <Link href={`/${locale}/contact`} prefetch={true}>
+        <Link
+          href={`/${locale}/contact`}
+          className={`nav-link ${
+            isActiveLink(`/${locale}/contact`) ? "active" : ""
+          }`}
+          prefetch={true}
+        >
           {t("navigation.contact")}
         </Link>
       </nav>
@@ -250,6 +289,7 @@ const Header = () => {
         <nav className="mobile-nav">
           <Link
             href={`/${locale}`}
+            className={`nav-link ${isActiveLink(`/${locale}`) ? "active" : ""}`}
             prefetch={true}
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -257,6 +297,9 @@ const Header = () => {
           </Link>
           <Link
             href={`/${locale}/services`}
+            className={`nav-link ${
+              isActiveLink(`/${locale}/services`) ? "active" : ""
+            }`}
             prefetch={true}
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -264,14 +307,19 @@ const Header = () => {
           </Link>
           <Link
             href={`/${locale}/products`}
+            className={`nav-link ${
+              isActiveLink(`/${locale}/products`) ? "active" : ""
+            }`}
             prefetch={true}
             onClick={() => setMobileMenuOpen(false)}
           >
             {t("navigation.shop")}
           </Link>
-
           <Link
             href={`/${locale}/contact`}
+            className={`nav-link ${
+              isActiveLink(`/${locale}/contact`) ? "active" : ""
+            }`}
             prefetch={true}
             onClick={() => setMobileMenuOpen(false)}
           >
