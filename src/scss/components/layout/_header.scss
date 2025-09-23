@@ -58,16 +58,12 @@ header {
       padding: 8px 0;
 
       &:hover {
-        color: var(--text-white);
-        text-shadow: 0 0 10px var(--text-white);
+        color: var(--black);
       }
 
       &.active {
         font-weight: 600;
-        color: var(--text-white);
-        text-shadow: 0 0 10px var(--text-white);
-
-    
+        color: var(--black);
       }
     }
   }
@@ -94,7 +90,7 @@ header {
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
-    color: var(--text-white);
+    color: var(--black);
     transition: all 0.2s ease;
 
     svg {
@@ -159,17 +155,22 @@ header {
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
-        color: var(--red-primary);
+           //light theme
+           [data-theme="light"] & {
+            color: var(--black);
+            background-color: rgba(0, 0, 0, 0.048);
+          }
       }
 
       &.active {
-        background-color: var(--red-primary);
-        color: var(--text-white);
+        color: var(--black);
         font-weight: 600;
+        background-color: rgba(255, 255, 255, 0.1);
 
-        &:hover {
-          background-color: var(--red-primary);
-          opacity: 0.9;
+        //light theme
+        [data-theme="light"] & {
+          color: var(--black);
+          background-color: rgba(0, 0, 0, 0.048);
         }
       }
     }
