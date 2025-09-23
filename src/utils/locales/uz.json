@@ -70,6 +70,25 @@
         "clients": "Mamnun Mijozlar",
         "projects": "Bajarilgan Loyihalar"
     },
+    "aboutSection": {
+        "title": "Biz haqimizda",
+        "description": "Bizning kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan ishlaydi va avtomobil tuning xizmatlarida o'zining ishonchliligi bilan mashhur.",
+        "features": {
+            "experience": {
+                "text": "20+ yil tajriba – malakali va tajribali masterlar jamoasi"
+            },
+            "company": {
+                "text": "10+ yil kompaniya faoliyati – ishonchli tuning servis"
+            },
+            "guarantee": {
+                "text": "Har bir ishga kafolat – sifat va ishonch bizning ustuvorligimiz"
+            },
+            "clients": {
+                "text": "Kuniga 10+ mamnun mijoz – mijozlarimiz bizga qayta-qayta murojaat qiladi"
+            }
+        },
+        "closing": "Bizning maqsadimiz – sizning avtomobilingizni yanada mukammal qilish va yuqori sifat bilan xizmat ko'rsatishdir."
+    },
     "contact": {
         "ourWorkingHours": "Bizning Ish Vaqtimiz.",
         "ourContacts": "Bizning Kontaktlarimiz.",
@@ -142,7 +161,8 @@
         "previous": "Oldingi",
         "showMore": "Ko'proq ko'rsatish",
         "showLess": "Kamroq ko'rsatish",
-        "tryAgain": "Qayta urinish"
+        "tryAgain": "Qayta urinish",
+        "moreInfo": "Batafsil ma'lumot"
     },
     "breadcrumb": {
         "home": "Bosh sahifa",

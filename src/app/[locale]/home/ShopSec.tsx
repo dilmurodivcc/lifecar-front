@@ -13,17 +13,15 @@ const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
   const { t } = useSafeTranslation();
   const [currentLocale, setCurrentLocale] = useState("uz");
 
-  // Handle hydration
   useEffect(() => {
     setCurrentLocale(locale);
   }, [locale]);
 
-  // Fetch featured products (limit to 3 for home page)
   const { data: productsData, isLoading } = useProducts(currentLocale, {
     page: 1,
     pageSize: 3,
-    sortBy: "default", // Show newest products
-    featured: true, // Only show featured products
+    sortBy: "default",
+    featured: true,
   });
 
   const products = productsData?.data?.data || [];
@@ -75,7 +73,7 @@ const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
                         href={`/${locale}/product/${product.slug}`}
                         className="primary-btn"
                       >
-                        More info
+                        {t("common.moreInfo")}
                       </Link>
                     </div>
                   </div>

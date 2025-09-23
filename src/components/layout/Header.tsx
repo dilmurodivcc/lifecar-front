@@ -14,8 +14,7 @@ const languages = [
 ];
 
 const Header = () => {
-  // Safe theme access with fallback
-  const [localTheme, setLocalTheme] = useState("dark");
+      const [localTheme, setLocalTheme] = useState("dark");
   const [mounted, setMounted] = useState(false);
 
   let theme = localTheme;
@@ -53,7 +52,6 @@ const Header = () => {
     setMounted(true);
     setIsClient(true);
 
-    // Apply theme on mount
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme") || "dark";
       setLocalTheme(savedTheme);
@@ -214,7 +212,7 @@ const Header = () => {
             {languages.find((l) => l.value === language)?.label}
             <HiChevronDown />
           </button>
-          <ul className="dropdown-menu">
+          <ul className="dropdown-menu lang">
             {languages.map((l) => (
               <li
                 key={l.value}
@@ -287,7 +285,7 @@ const Header = () => {
               {languages.find((l) => l.value === language)?.label}
               <HiChevronDown />
             </button>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu lang">
               {languages.map((l) => (
                 <li
                   key={l.value}

@@ -6,6 +6,7 @@ import {
   FaGoogle,
   FaInstagram,
   FaPhone,
+  FaTiktok,
   FaYandex,
   FaYoutube,
 } from "react-icons/fa";
@@ -107,7 +108,7 @@ export default function ContactPage({}: ContactPageProps) {
               <li>
                 <a
                   className="telegram-map-button"
-                  href="https://t.me/lifecar_uz"
+                  href="https://t.me/TuningLifeCar"
                 >
                   <FaTelegram></FaTelegram>
                 </a>
@@ -115,7 +116,7 @@ export default function ContactPage({}: ContactPageProps) {
               <li>
                 <a
                   className="instagram-map-button"
-                  href="https://instagram.com/lifecar_uz"
+                  href="https://instagram.com/life_car.uzb"
                 >
                   <FaInstagram></FaInstagram>
                 </a>
@@ -123,7 +124,7 @@ export default function ContactPage({}: ContactPageProps) {
               <li>
                 <a
                   className="youtube-map-button"
-                  href="https://youtube.com/@lifecar_uz"
+                  href="https://youtube.com/@LIFECARUZB"
                 >
                   <FaYoutube></FaYoutube>
                 </a>
@@ -131,9 +132,17 @@ export default function ContactPage({}: ContactPageProps) {
               <li>
                 <a
                   className="yandex-map-button"
-                  href="https://youtube.com/@lifecar_uz"
+                  href="https://yandex.uz/maps/-/CLqABUnb"
                 >
                   <FaYandex></FaYandex>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="tiktok-map-button"
+                  href="https://tiktok.com/@life_car.uzb"
+                >
+                  <FaTiktok></FaTiktok>
                 </a>
               </li>
             </ul>

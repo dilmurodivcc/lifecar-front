@@ -6,6 +6,7 @@ import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import Image from "next/image";
 import Link from "next/link";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 interface ProductDetailProps {
   params: Promise<{
@@ -19,7 +20,12 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [showExpandButton, setShowExpandButton] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { t } = useSafeTranslation();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     params.then((resolvedParams) => {
@@ -28,49 +34,47 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   }, [params]);
 
   useEffect(() => {
+    if (!mounted) return;
+
     const pathname = window.location.pathname;
     const localeMatch = pathname.match(/^\/([a-z]{2})\//);
     if (localeMatch) {
       setLocale(localeMatch[1]);
     }
-  }, []);
+  }, [mounted]);
 
   const { data: productData, isLoading } = useProductBySlug(slug, locale);
   const product = productData?.data?.data?.[0] as Product | undefined;
 
-  // Check if content overflows and needs expand button
   useEffect(() => {
-    if (product?.detail?.full_info) {
-      const checkOverflow = () => {
-        const contentElement = document.querySelector(".detail-content");
-        if (contentElement) {
-          const isOverflowing =
-            contentElement.scrollHeight > contentElement.clientHeight;
-          setShowExpandButton(isOverflowing);
-        }
-      };
+    if (!mounted || !product?.detail?.full_info) return;
 
-      // Check after a short delay to ensure DOM is rendered
-      const timeoutId = setTimeout(checkOverflow, 100);
+    const checkOverflow = () => {
+      const contentElement = document.querySelector(".detail-content");
+      if (contentElement) {
+        const isOverflowing =
+          contentElement.scrollHeight > contentElement.clientHeight;
+        setShowExpandButton(isOverflowing);
+      }
+    };
 
-      // Also check on window resize
-      window.addEventListener("resize", checkOverflow);
+    const timeoutId = setTimeout(checkOverflow, 100);
 
-      return () => {
-        clearTimeout(timeoutId);
-        window.removeEventListener("resize", checkOverflow);
-      };
-    }
-  }, [product?.detail?.full_info]);
+    window.addEventListener("resize", checkOverflow);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, [mounted, product?.detail?.full_info]);
 
   if (isLoading) {
     return (
-      <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
+      <ClientLayout showHeader={true} showFooter={false} showSpace={true}>
         <div className="product-detail-loading">
-          <div className="container">
-            <div className="loading-content">
+          <div className="container" style={{ minHeight: "80vh" }}>
+            <div className="loading-content" style={{ marginTop: "100px" }}>
               <LoadingSpinner size="large" />
-              <div className="loading-text">{t("productDetail.loading")}</div>
             </div>
           </div>
         </div>
@@ -84,10 +88,10 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
         <div className="product-detail-error">
           <div className="container">
             <div className="error-content">
-              <h2>{t("productDetail.notFound.title")}</h2>
-              <p>{t("productDetail.notFound.message")}</p>
+              <h2>{t("common.notFound.title")}</h2>
+              <p>{t("common.notFound.message")}</p>
               <Link href="/shop" className="primary-btn">
-                {t("productDetail.notFound.backToShop")}
+                {t("common.notFound.backToShop")}
               </Link>
             </div>
           </div>
@@ -140,7 +144,7 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                       )
                     }
                   >
-                    ‹
+                    <FaArrowLeft />
                   </button>
                   <button
                     className="nav-btn next"
@@ -150,7 +154,7 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                       )
                     }
                   >
-                    ›
+                    <FaArrowRight />
                   </button>
                 </div>
                 <div className="image-counter">
@@ -228,19 +232,19 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                         .map((paragraph, index) => (
                           <p key={index}>{paragraph}</p>
                         ))}
+                      {mounted && showExpandButton && (
+                        <button
+                          className="expand-btn"
+                          onClick={() =>
+                            setIsDescriptionExpanded(!isDescriptionExpanded)
+                          }
+                        >
+                          {isDescriptionExpanded
+                            ? t("productDetail.fullInfo.showLess")
+                            : t("productDetail.fullInfo.showMore")}
+                        </button>
+                      )}
                     </div>
-                    {showExpandButton && (
-                      <button
-                        className="expand-btn"
-                        onClick={() =>
-                          setIsDescriptionExpanded(!isDescriptionExpanded)
-                        }
-                      >
-                        {isDescriptionExpanded
-                          ? t("productDetail.fullInfo.showLess")
-                          : t("productDetail.fullInfo.showMore")}
-                      </button>
-                    )}
                   </div>
 
                   <div className="product-specs">

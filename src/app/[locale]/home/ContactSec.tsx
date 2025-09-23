@@ -10,13 +10,13 @@ import {
   FaYoutube,
   FaYandex,
   FaGoogle,
+  FaTiktok,
 } from "react-icons/fa";
 
 const ContactSec = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const { t } = useTranslation();
 
-  // Handle hydration
   useEffect(() => {
     setIsHydrated(true);
   }, []);
@@ -32,31 +32,30 @@ const ContactSec = () => {
     );
   };
 
-  // Show loading state during hydration to prevent mismatch
   if (!isHydrated) {
     return (
       <section className="contactSec">
         <div className="container">
           <aside className="left">
-            <h2>Loading...</h2>
+            <h2>{t("common.loading")}</h2>
             <ul className="working-hours">
               {Array.from({ length: 7 }).map((_, index) => (
                 <li key={index}>
-                  <b>Loading...</b>
-                  <p>Loading...</p>
+                  <b>{t("common.loading")}</b>
+                  <p>{t("common.loading")}</p>
                 </li>
               ))}
             </ul>
-            <h2>Loading...</h2>
+            <h2>{t("common.loading")}</h2>
             <ul className="contact-info">
               {Array.from({ length: 3 }).map((_, index) => (
                 <li key={index}>
-                  <b>Loading...</b>
-                  <a href="#">Loading...</a>
+                  <b>{t("common.loading")}</b>
+                  <a href="#">{t("common.loading")}</a>
                 </li>
               ))}
             </ul>
-            <h2>Loading...</h2>
+            <h2>{t("common.loading")}</h2>
             <ul className="social-links">
               {Array.from({ length: 4 }).map((_, index) => (
                 <li key={index}>
@@ -75,11 +74,11 @@ const ContactSec = () => {
             <div className="map-buttons">
               <button className="map-button yandex-map-button" disabled>
                 <FaYandex />
-                Loading...
+                {t("common.loading")}
               </button>
               <button className="map-button google-map-button" disabled>
                 <FaGoogle />
-                Loading...
+                {t("common.loading")}
               </button>
             </div>
           </aside>
@@ -168,7 +167,7 @@ const ContactSec = () => {
               <li>
                 <a
                   className="telegram-map-button"
-                  href="https://t.me/lifecar_uz"
+                  href="https://t.me/TuningLifeCar"
                 >
                   <FaTelegram></FaTelegram>
                 </a>
@@ -176,7 +175,7 @@ const ContactSec = () => {
               <li>
                 <a
                   className="instagram-map-button"
-                  href="https://instagram.com/lifecar_uz"
+                  href="https://instagram.com/life_car.uzb"
                 >
                   <FaInstagram></FaInstagram>
                 </a>
@@ -184,7 +183,7 @@ const ContactSec = () => {
               <li>
                 <a
                   className="youtube-map-button"
-                  href="https://youtube.com/@lifecar_uz"
+                  href="https://youtube.com/@LIFECARUZB"
                 >
                   <FaYoutube></FaYoutube>
                 </a>
@@ -192,9 +191,17 @@ const ContactSec = () => {
               <li>
                 <a
                   className="yandex-map-button"
-                  href="https://youtube.com/@lifecar_uz"
+                  href="https://yandex.uz/maps/-/CLqABUnb"
                 >
                   <FaYandex></FaYandex>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="tiktok-map-button"
+                  href="https://tiktok.com/@life_car.uzb"
+                >
+                  <FaTiktok></FaTiktok>
                 </a>
               </li>
             </ul>

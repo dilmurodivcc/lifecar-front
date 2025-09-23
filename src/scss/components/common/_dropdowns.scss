@@ -24,7 +24,7 @@
   font-weight: 500;
   transition: all 0.2s ease-in-out;
   height: 50px;
-  background-color: var(--black);
+  background-color: var(--white) !important;
   color: var(--white);
   border: 1px solid #333;
   width: max-content;
@@ -61,7 +61,6 @@ span{
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  width: 240px !important;
   background: var(--white);
   border: 1px solid;
   border-radius: 8px;
@@ -72,6 +71,12 @@ span{
   visibility: hidden;
   transform: translate(-50%, 10px);
   transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  &.sort {
+    width: 160px !important;
+  }
+  &.filter {
+    width: 240px !important;
+  }
 }
 
 .filter-dropdown[data-open="true"] .dropdown-menu {
@@ -111,7 +116,6 @@ span{
   }
 
   .dropdown-menu {
-    min-width: 150px;
 
     .dropdown-item {
       padding: 8px 10px;
@@ -120,6 +124,14 @@ span{
         width: 16px;
         height: 16px;
       }
+    }
+  }
+  .dropdown-menu {
+    &.sort {
+      width: 140px !important;
+    }
+    &.filter {
+      width: 200px !important;
     }
   }
 }

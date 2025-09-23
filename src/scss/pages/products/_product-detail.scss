@@ -36,9 +36,7 @@
         object-fit: cover;
         transition: transform 0.3s ease;
 
-        &:hover {
-          transform: scale(1.05);
-        }
+      
       }
 
       .image-navigation {
@@ -71,7 +69,6 @@
 
           &:hover {
             background: var(--red-primary);
-            transform: scale(1.1);
           }
         }
       }
@@ -99,7 +96,7 @@
       gap: 12px;
       margin-top: 20px;
       overflow-x: auto;
-      padding: 4px 0;
+      padding: 4px 4px;
 
       .thumbnail {
         flex-shrink: 0;
@@ -120,7 +117,6 @@
 
         &:hover {
           border-color: var(--red-primary);
-          transform: scale(1.05);
         }
 
         &.active {
@@ -277,7 +273,6 @@
     // Loading spinner styles
     .product-detail-loading {
       padding: 80px 0;
-      min-height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -672,6 +667,12 @@
 
       &.expanded {
         max-height: none;
+
+        .expand-btn {
+          position: static;
+          margin-top: 16px;
+          border-radius: 12px;
+        }
       }
 
       &::after {
@@ -701,37 +702,34 @@
           margin-bottom: 0;
         }
       }
-    }
 
-    .expand-btn {
-      margin-top: 16px;
-      padding: 12px 24px;
-      background: var(--bg-ter);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      .expand-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+        padding: 12px 24px;
+        background: var(--bg-ter);
+        border: 1px solid var(--border-color);
+        border-radius: 0 0 16px 16px;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        z-index: 10;
+        backdrop-filter: blur(10px);
 
-      &:hover {
-        background: var(--glass-bg-hover);
-        border-color: var(--red-primary);
-        color: var(--red-primary);
-        transform: translateY(-2px);
-      }
+        &:hover {
+          box-shadow: 0 8px 32px var(--box-shadow);
+        }
 
-      &::after {
-        content: "▼";
-        transition: transform 0.3s ease;
-      }
-
-      &:hover::after {
-        transform: translateY(2px);
+     
       }
     }
   }
@@ -768,7 +766,6 @@
   }
 }
 
-// Extra small screens (400px and below)
 @media (max-width: 400px) {
   .product-detail {
     padding: 10px 0 30px;

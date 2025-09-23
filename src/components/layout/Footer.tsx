@@ -2,12 +2,22 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaYoutube, FaPhone, FaTelegram, FaInstagram } from "react-icons/fa6";
+import {
+  FaYoutube,
+  FaPhone,
+  FaTelegram,
+  FaInstagram,
+  FaTiktok,
+} from "react-icons/fa6";
 import { TbBrandYandex } from "react-icons/tb";
 import { IoMdArrowRoundUp } from "react-icons/io";
 import YandexMap from "../ui/YandexMap";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
+import {
+  useProductCategories,
+  type ProductCategory,
+} from "@/hooks/useProducts";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -16,6 +26,10 @@ const Footer = () => {
   const locale = segments[1] || "uz";
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [mounted, setMounted] = useState(false);
+
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useProductCategories(locale);
+  const categories = categoriesData?.data?.data || [];
 
   useEffect(() => {
     setMounted(true);
@@ -59,17 +73,20 @@ const Footer = () => {
         <div className="footer-contact">
           <div className="footer-col-title">{t("footer.social.title")}</div>
           <div className="footer-social">
-            <a href="https://t.me/lifecar_uz" aria-label="X">
+            <a href="https://t.me/lifecar_uz" aria-label="X" target="_blank">
               <FaTelegram />
             </a>
-            <a href="https://instagram.com/life_car.uzb" aria-label="GitHub">
+            <a href="https://instagram.com/life_car.uzb" aria-label="GitHub" target="_blank">
               <FaInstagram />
             </a>
-            <a href="https://youtube.com/@LIFECARUZB" aria-label="Reddit">
+            <a href="https://youtube.com/@LIFECARUZB" aria-label="Reddit" target="_blank">
               <FaYoutube />
             </a>
-            <a href="https://yandex.com/@lifecar_uz" aria-label="YouTube">
+            <a href="https://yandex.uz/maps/-/CLqABUnb" aria-label="YouTube" target="_blank">
               <TbBrandYandex />
+            </a>
+            <a href="https://tiktok.com/@life_car.uzb" aria-label="TikTok" target="_blank">
+              <FaTiktok />
             </a>
           </div>
           <div className="footer-col-title">{t("footer.contact.title")}</div>
@@ -102,30 +119,30 @@ const Footer = () => {
             <Link href={`/${locale}/products`}>
               {t("footer.shop.allProducts")}
             </Link>
-            <Link href={`/${locale}/products`}>
-              {t("footer.shop.steeringWheels")}
-            </Link>
-            <Link href={`/${locale}/products`}>
-              {t("footer.shop.radarDetectors")}
-            </Link>
-            <Link href={`/${locale}/products`}>
-              {t("footer.shop.tanirofka")}
-            </Link>
-            <Link href={`/${locale}/products`}>
-              {t("footer.shop.carAccessories")}
-            </Link>
+            {!mounted || categoriesLoading ? (
+              <div>Loading...</div>
+            ) : (
+              categories.slice(0, 4).map((category: ProductCategory) => (
+                <Link
+                  key={category.id}
+                  href={`/${locale}/products?category=${category.id}`}
+                >
+                  {category.name}
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
         <div className="footer-map">
           <div className="footer-col-title">{t("footer.map.title")}</div>
-          <YandexMap theme={theme} />
+          {mounted && <YandexMap theme={theme} />}
         </div>
       </div>
 
       <div className="footer-bottom">
         <div className="footer-copyright">
-          © {new Date().getFullYear()} {t("footer.bottom.copyright")}
+          © 2024 {t("footer.bottom.copyright")}
         </div>
         <div
           className="footer-backToTop"

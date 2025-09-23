@@ -2,8 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import { FaTools, FaCar, FaCheckCircle, FaSmile } from "react-icons/fa";
+import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 
 const AboutSec = () => {
+  const { t } = useSafeTranslation();
+
   return (
     <section className="about-sec">
       <div className="container">
@@ -20,52 +23,44 @@ const AboutSec = () => {
           </div>
 
           <div className="about-text">
-            <h2 className="about-title">Biz haqimizda</h2>
+            <h2 className="about-title">{t("aboutSection.title")}</h2>
 
-            <p className="about-description">
-              Bizning kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan
-              ishlaydi va avtomobil tuning xizmatlarida o&apos;zining
-              ishonchliligi bilan mashhur.
-            </p>
+            <p className="about-description">{t("aboutSection.description")}</p>
 
             <div className="about-features">
               <div className="feature-item">
                 <FaTools className="feature-icon" />
                 <span className="feature-text">
-                  <span className="highlight">20+ yil</span> tajriba – malakali
-                  va tajribali masterlar jamoasi
+                  <span className="highlight">20+ yil</span>{" "}
+                  {t("aboutSection.features.experience.text")}
                 </span>
               </div>
 
               <div className="feature-item">
                 <FaCar className="feature-icon" />
                 <span className="feature-text">
-                  <span className="highlight">10+ yil</span> kompaniya faoliyati
-                  – ishonchli tuning servis
+                  <span className="highlight">10+ yil</span>{" "}
+                  {t("aboutSection.features.company.text")}
                 </span>
               </div>
 
               <div className="feature-item">
                 <FaCheckCircle className="feature-icon" />
                 <span className="feature-text">
-                  Har bir ishga <span className="highlight">kafolat</span> –
-                  sifat va ishonch bizning ustuvorligimiz
+                  {t("aboutSection.features.guarantee.text")}
                 </span>
               </div>
 
               <div className="feature-item">
                 <FaSmile className="feature-icon" />
                 <span className="feature-text">
-                  Kuniga <span className="highlight">10+ mamnun mijoz</span> –
-                  mijozlarimiz bizga qayta-qayta murojaat qiladi
+                  <span className="highlight">10+ mamnun mijoz</span>{" "}
+                  {t("aboutSection.features.clients.text")}
                 </span>
               </div>
             </div>
 
-            <p className="about-closing">
-              Bizning maqsadimiz – sizning avtomobilingizni yanada mukammal
-              qilish va yuqori sifat bilan xizmat ko&apos;rsatishdir.
-            </p>
+            <p className="about-closing">{t("aboutSection.closing")}</p>
           </div>
         </div>
       </div>

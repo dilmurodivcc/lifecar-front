@@ -68,7 +68,6 @@
   }
 }
 
-// Alternative minimalistic spinner
 .loading-spinner-minimal {
   position: relative;
   display: inline-block;
@@ -84,8 +83,8 @@
   }
 
   &.spinner-large {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
   }
 
   &::before {
@@ -115,7 +114,6 @@
   }
 }
 
-// Pulse animation for loading text
 .loading-text {
   margin-top: 16px;
   color: var(--text);

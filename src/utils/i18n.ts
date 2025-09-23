@@ -10,7 +10,6 @@ const resources = {
   ru: { translation: ru },
 };
 
-// Check if we're on the server side
 const isServer = typeof window === "undefined";
 
 i18n
@@ -33,9 +32,7 @@ i18n
     react: {
       useSuspense: false,
     },
-    // Ensure consistent behavior between server and client
     lng: isServer ? "uz" : undefined,
-    // Add this to prevent hydration mismatches
     initImmediate: false,
   });
 

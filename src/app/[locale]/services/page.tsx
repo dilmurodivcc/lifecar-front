@@ -91,7 +91,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     getLocale();
   }, [params]);
 
-  // Client-side filtering will be applied to categories data
 
   const {
     data: services,
@@ -155,7 +154,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     { value: "price-high", label: t("sort.priceHigh") },
   ];
 
-  // Get services from API with server-side filtering
   const currentServices = services?.data?.data || [];
   const totalPages = services?.data?.meta?.pagination?.pageCount || 1;
 
@@ -219,7 +217,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                     />
                   </svg>
                 </button>
-                <div className="dropdown-menu">
+                <div className="dropdown-menu sort">
                   {sortOptions.map((option) => (
                     <div
                       key={option.value}
@@ -247,7 +245,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                 >
                   <span>
                     {
-                      // Show selected category label, fallback to "All"
                       filterBy === "all"
                         ? t("services.filter.all")
                         : categories?.data?.data?.find(
@@ -266,7 +263,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                     />
                   </svg>
                 </button>
-                <div className="dropdown-menu">
+                <div className="dropdown-menu filter">
                   {/* Always show "All" option */}
                   <div
                     key="all"
@@ -280,7 +277,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                   >
                     {t("services.filter.all")}
                   </div>
-                  {/* Render categories from API */}
                   {categories?.data?.data &&
                   Array.isArray(categories.data.data) &&
                   categories.data.data.length > 0 ? (
@@ -326,7 +322,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
 
           <section className={`cards-grid ${layout}`}>
             {servicesLoading ? (
-              // Show skeleton cards while loading
               Array.from({ length: 8 }, (_, index) => (
                 <SkeletonCard
                   key={`skeleton-${index}`}
@@ -335,16 +330,13 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                 />
               ))
             ) : servicesError ? (
-              // Show error message
               <div className="error-message">
                 {t("common.error")}: {servicesError.message}
               </div>
             ) : currentServices.length === 0 ? (
-              // Show no services message
               <div className="no-services">{t("services.noServices")}</div>
             ) : (
               currentServices.map((service: Service) => {
-                // Use the best available image format
                 const imageUrl =
                   service.image?.data?.attributes?.url ||
                   service.image?.url ||

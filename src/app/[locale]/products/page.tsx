@@ -35,12 +35,10 @@ export default function ShopPage({ params }: ShopPageProps) {
   const sortRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
-  // Handle hydration
   useEffect(() => {
     setIsHydrated(true);
   }, []);
 
-  // Load saved preferences from localStorage after hydration
   useEffect(() => {
     if (!isHydrated) return;
 
@@ -61,7 +59,6 @@ export default function ShopPage({ params }: ShopPageProps) {
     } catch {}
   }, [isHydrated]);
 
-  // Save layout preference to localStorage
   const handleLayoutChange = (newLayout: "grid" | "list") => {
     setLayout(newLayout);
     if (isHydrated) {
@@ -71,7 +68,6 @@ export default function ShopPage({ params }: ShopPageProps) {
     }
   };
 
-  // Save sort preference to localStorage
   const handleSortChange = (newSortBy: string) => {
     setSortBy(newSortBy);
     if (isHydrated) {
@@ -81,7 +77,6 @@ export default function ShopPage({ params }: ShopPageProps) {
     }
   };
 
-  // Save filter preference to localStorage
   const handleFilterChange = (newFilterBy: string) => {
     setFilterBy(newFilterBy);
     if (isHydrated) {
@@ -91,19 +86,16 @@ export default function ShopPage({ params }: ShopPageProps) {
     }
   };
 
-  // Get locale from params
   useEffect(() => {
     params.then((resolvedParams) => {
       setLocale(resolvedParams.locale);
     });
   }, [params]);
 
-  // Reset current page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, sortBy, filterBy]);
 
-  // Use API hooks
   const {
     data: productsData,
     isLoading: productsLoading,
@@ -137,14 +129,12 @@ export default function ShopPage({ params }: ShopPageProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  // Sort options
   const sortOptions = [
     { value: "default", label: t("sort.title") },
     { value: "price-low", label: t("sort.priceLow") },
     { value: "price-high", label: t("sort.priceHigh") },
   ];
 
-  // Filter options from API
   const filterOptions = [
     { value: "all", label: t("shop.filter.all") },
     ...(categoriesData?.data?.data?.map((category: any) => ({
@@ -153,7 +143,6 @@ export default function ShopPage({ params }: ShopPageProps) {
     })) || []),
   ];
 
-  // Get products from API
   const products = productsData?.data?.data || [];
   const totalPages = productsData?.data?.meta?.pagination?.pageCount || 1;
   const currentProducts = products;
@@ -163,7 +152,6 @@ export default function ShopPage({ params }: ShopPageProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Show loading state during hydration to prevent mismatch
   if (!isHydrated) {
     return (
       <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
@@ -266,7 +254,7 @@ export default function ShopPage({ params }: ShopPageProps) {
                     />
                   </svg>
                 </button>
-                <div className="dropdown-menu">
+                <div className="dropdown-menu sort">
                   {sortOptions.map((option) => (
                     <div
                       key={option.value}
@@ -309,7 +297,7 @@ export default function ShopPage({ params }: ShopPageProps) {
                     />
                   </svg>
                 </button>
-                <div className="dropdown-menu">
+                <div className="dropdown-menu filter">
                   {filterOptions.map((option) => (
                     <div
                       key={option.value}
@@ -342,7 +330,6 @@ export default function ShopPage({ params }: ShopPageProps) {
           </div>
           <section className={`cards-grid ${layout}`}>
             {productsLoading ? (
-              // Show skeleton loading cards
               Array.from({ length: cardsPerPage }).map((_, index) => (
                 <SkeletonCard
                   key={index}
@@ -358,7 +345,6 @@ export default function ShopPage({ params }: ShopPageProps) {
               <div className="no-products">{t("shop.noProducts")}</div>
             ) : (
               currentProducts.map((product: Product) => {
-                // Use the best available image format
                 const imageUrl =
                   product.image?.formats?.large?.url ||
                   product.image?.formats?.medium?.url ||

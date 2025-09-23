@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import { useServices } from "@/hooks/useServices";
 import SkeletonCard from "@/components/ui/SkeletonCard";
 
-// TypeScript interfaces
 interface ServiceImage {
   url: string;
   alternativeText?: string;
@@ -117,7 +116,7 @@ const ServicesSec = () => {
           return null;
         }
       })
-      .filter((service): service is ProcessedService => service !== null); // Remove any null values
+      .filter((service): service is ProcessedService => service !== null);
 
     return processedServices;
   }, [data?.data?.data, locale]);
@@ -130,12 +129,10 @@ const ServicesSec = () => {
     );
 
     if (services.length > 0) {
-      // We need many more repetitions to make the loop invisible
       const repeatedServices: ProcessedService[] = [];
-      const repetitions = 25; // Repeat services 25 times for very smooth infinite effect
+      const repetitions = 25;
 
       for (let i = 0; i < repetitions; i++) {
-        // Use a stable shuffle based on service IDs to prevent infinite re-renders
         const shuffledServices =
           i % 3 === 0
             ? [...services].sort((a, b) => {
@@ -147,20 +144,17 @@ const ServicesSec = () => {
         repeatedServices.push(...shuffledServices);
       }
 
-      // Distribute the repeated services across columns
       repeatedServices.forEach((service, i) => {
         if (service) {
           cols[i % numColumns].push(service);
         }
       });
     } else {
-      // Fallback: Create empty columns if no services
     }
 
     return cols;
   }, [services, numColumns]);
 
-  // Show loading state with skeleton cards
   if (isLoading || !isClient) {
     return (
       <section className="ServicesSec">
@@ -197,7 +191,6 @@ const ServicesSec = () => {
     );
   }
 
-  // Show skeleton if no services (hide empty state from user)
   if (services.length === 0) {
     return (
       <section className="ServicesSec">
@@ -269,9 +262,8 @@ const ServicesSec = () => {
                           alt={service.title || "Service"}
                           width={400}
                           height={180}
-                          priority={cardIndex < 10} // Prioritize first 10 images
+                            priority={cardIndex < 10}
                           onError={(e) => {
-                            // Fallback to default image on error
                             e.currentTarget.src = "/img/tint.webp";
                           }}
                           unoptimized={false}

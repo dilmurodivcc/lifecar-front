@@ -63,7 +63,6 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
           };
         }
 
-        // Add sorting
         if (filters.sortBy) {
           switch (filters.sortBy) {
             case "price-low":
@@ -77,7 +76,6 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
           }
         }
 
-        // Add pagination
         if (filters.page && filters.pageSize) {
           params.pagination = {
             page: filters.page,
@@ -98,7 +96,6 @@ const useServices = (locale: string = "uz", filters: ServiceFilters = {}) => {
 
   useEffect(() => {
     if (error) {
-      // Error handling can be added here if needed
     }
   }, [error]);
 
@@ -124,7 +121,6 @@ const useServiceCategories = (locale: string = "uz") => {
 
   useEffect(() => {
     if (error) {
-      // Error handling can be added here if needed
     }
   }, [error]);
 
