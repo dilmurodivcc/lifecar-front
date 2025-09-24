@@ -9,7 +9,7 @@
 @use "./components/common/dropdowns" as *;
 @use "./components/common/cards" as *;
 @use "./components/ui/loading-spinner" as *;
-@use "./components/ui/yandexMap" as *;    
+@use "./components/ui/yandexMap" as *;
 @use "./pages/services/services" as *;
 @use "./pages/services/services-cards" as *;
 @use "./pages/products/products" as *;
@@ -17,6 +17,7 @@
 @use "./pages/home/contact" as *;
 @use "./pages/home/aboutSec" as *;
 @use "./pages/contact/contact" as *;
+@use "./components/ui/not-found" as *;
 .yandex-map-container {
   .ymaps,
   .ymaps canvas,

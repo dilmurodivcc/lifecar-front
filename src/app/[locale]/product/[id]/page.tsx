@@ -1,12 +1,12 @@
 "use client";
 import ClientLayout from "@/components/layout/ClientLayout";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useProductBySlug, type Product } from "@/hooks/useProducts";
 import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 import Image from "next/image";
 import Link from "next/link";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaPhone, FaTelegram } from "react-icons/fa";
 
 interface ProductDetailProps {
   params: Promise<{
@@ -21,6 +21,8 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [showExpandButton, setShowExpandButton] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
+  const contactDropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useSafeTranslation();
 
   useEffect(() => {
@@ -68,6 +70,28 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
     };
   }, [mounted, product?.detail?.full_info]);
 
+  // Click outside to close dropdown
+  useEffect(() => {
+    if (!mounted) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        contactDropdownRef.current &&
+        !contactDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsContactDropdownOpen(false);
+      }
+    };
+
+    if (isContactDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mounted, isContactDropdownOpen]);
+
   if (isLoading) {
     return (
       <ClientLayout showHeader={true} showFooter={false} showSpace={true}>
@@ -110,14 +134,13 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
     );
   };
 
-  // Get all images from API - main image + detail images
   const mainImageUrl = getImageUrl(product?.image);
   const detailImages = product?.detail?.img || [];
 
   const galleryImages = [
     mainImageUrl,
     ...detailImages.map((img) => getImageUrl(img)),
-  ].filter(Boolean); // Remove any undefined/null values
+  ].filter(Boolean);
 
   return (
     <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
@@ -212,6 +235,43 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                     % {t("productDetail.discount")}
                   </div>
                 )}
+              </div>
+              <div className="get-product" ref={contactDropdownRef}>
+                <button
+                  className="primary-btn get-products-contact"
+                  onClick={() =>
+                    setIsContactDropdownOpen(!isContactDropdownOpen)
+                  }
+                >
+                  Sotib olish | Buyurtma berish
+                </button>
+                <div
+                  className={`contact-dropdown ${
+                    isContactDropdownOpen ? "open" : ""
+                  }`}
+                >
+                  <div className="contact-item">
+                    <a href="tel:+998337852222" className="contact-link phone">
+                      <FaPhone className="contact-icon" />
+                      <span className="contact-text">+998 33 785 22 22</span>
+                    </a>
+                  </div>
+                  <div className="contact-item">
+                    <a href="tel:+998946188848" className="contact-link phone">
+                      <FaPhone className="contact-icon" />
+                      <span className="contact-text">+998 94 618 88 48</span>
+                    </a>
+                  </div>
+                  <div className="contact-item">
+                    <a
+                      href="https://t.me/TuningLifeCar"
+                      className="contact-link telegram"
+                    >
+                      <FaTelegram className="contact-icon" />
+                      <span className="contact-text">Telegram</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

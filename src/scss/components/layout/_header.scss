@@ -155,11 +155,11 @@ header {
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
-           //light theme
-           [data-theme="light"] & {
-            color: var(--black);
-            background-color: rgba(0, 0, 0, 0.048);
-          }
+        //light theme
+        [data-theme="light"] & {
+          color: var(--black);
+          background-color: rgba(0, 0, 0, 0.048);
+        }
       }
 
       &.active {

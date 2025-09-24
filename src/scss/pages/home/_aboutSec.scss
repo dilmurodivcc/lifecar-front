@@ -24,11 +24,19 @@
     align-items: center;
 
     @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+      .about-image {
+        display: none;
+      }
+
       gap: 50px;
     }
 
     @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+      .about-image {
+        display: block;
+      }
+
       gap: 40px;
     }
 

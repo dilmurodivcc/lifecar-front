@@ -9,8 +9,9 @@ const Card = (props: {
   layout: string;
   type: string;
   slug: string;
+  cardType?: "product" | "service";
 }) => {
-  const { img, title, desc, price, time, layout, type, slug } = props;
+  const { img, title, desc, price, time, layout, type, slug, cardType } = props;
   const isValidImageUrl = (url: string) => {
     if (!url || typeof url !== "string") return false;
     return url.startsWith("http") || url.startsWith("/");
@@ -20,7 +21,31 @@ const Card = (props: {
 
   return (
     <>
-      <Link href={`/product/${slug}`} className={`card ${layout}`} >
+    {cardType === "service" ? (
+     <div className={`card ${layout}`}>
+     <div className="card-type">{type}</div>
+     <div className="img-wrapper">
+       <Image
+         src={imageSrc}
+         alt={title}
+         width={400}
+         height={200}
+         onError={(e) => {
+           e.currentTarget.src = "/img/placeholder.jpg";
+         }}
+       />
+     </div>
+     <div className="card-content">
+       <h4 className="title">{title}</h4>
+       <p className="desc">{desc}</p>
+       <div className="card-bottom">
+         <h4 className="price">{price}</h4>
+         {time && <h4 className="time">{time}</h4>}
+       </div>
+     </div>
+   </div>
+    ) : ( 
+      <Link href={`/product/${slug}`} className={`card ${layout}`}>
         <div className="card-type">{type}</div>
         <div className="img-wrapper">
           <Image
@@ -42,6 +67,7 @@ const Card = (props: {
           </div>
         </div>
       </Link>
+    )}
     </>
   );
 };

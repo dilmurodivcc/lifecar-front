@@ -91,7 +91,6 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     getLocale();
   }, [params]);
 
-
   const {
     data: services,
     isLoading: servicesLoading,
@@ -244,14 +243,11 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
                 >
                   <span>
-                    {
-                      filterBy === "all"
-                        ? t("services.filter.all")
-                        : categories?.data?.data?.find(
-                            (cat: Category) =>
-                              String(cat.id) === String(filterBy)
-                          )?.name || t("services.filter.all")
-                    }
+                    {filterBy === "all"
+                      ? t("services.filter.all")
+                      : categories?.data?.data?.find(
+                          (cat: Category) => String(cat.id) === String(filterBy)
+                        )?.name || t("services.filter.all")}
                   </span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -357,6 +353,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                     layout={layout}
                     type={categoryName}
                     slug={service.slug || ""}
+                    cardType="service"
                   />
                 );
               })

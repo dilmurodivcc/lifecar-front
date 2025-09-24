@@ -8,17 +8,19 @@
     z-index: 1000;
     .directions-button {
       border: 1px solid var(--border-color);
-      background-color: var(--text);
+      background-color: white;
+      box-shadow: 0 0 10px #55555564;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: start;
       width: max-content;
-      height: 22px; 
+      height: 22px;
+      font-weight: 600; 
 
       padding: 10px;
       border-radius: 6px;
-      color: var(--white);
+      color: #555;
       cursor: pointer;
       transition: all 0.3s ease;
       gap: 5px;

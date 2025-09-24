@@ -2,28 +2,26 @@
 
 import Link from "next/link";
 import { FaHome, FaArrowLeft } from "react-icons/fa";
+import { useSafeTranslation } from "@/hooks/useSafeTranslation";
 
 export default function NotFound() {
+  const { t } = useSafeTranslation();
   return (
     <div className="not-found">
       <div className="not-found-container">
         <div className="error-code">404</div>
-        <h1>Sahifa topilmadi</h1>
-        <p>
-          Kechirasiz, qidirilayotgan sahifa mavjud emas yoki o&apos;chirilgan
-          bo&apos;lishi mumkin.
-        </p>
+        <h1>{t("common.notFound")}</h1>
         <div className="not-found-actions">
-          <Link href="/" className="btn-primary">
+          <Link href="/" className="primary-btn">
             <FaHome />
-            Bosh sahifaga qaytish
+            {t("common.backToHome")}
           </Link>
           <button
             onClick={() => window.history.back()}
-            className="btn-secondary"
+            className="primary-btn back"
           >
             <FaArrowLeft />
-            Orqaga qaytish
+            {t("common.back")}
           </button>
         </div>
       </div>

@@ -6,6 +6,9 @@
   font-family: var(--font-geist, $font-family);
   font-size: 15px;
   padding: 48px 0 0 0;
+  background-color: var(--white );
+  border-radius: 50px 50px 0 0;
+  border: 1px solid var(--border-color);
 }
 
 .footer-grid {

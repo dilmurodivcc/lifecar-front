@@ -159,7 +159,7 @@ const ContactSec = () => {
                   {" "}
                   <FaTelegram></FaTelegram> {t("contact.telegram")}:
                 </b>{" "}
-                <a href="https://t.me/lifecar_uz">@lifecar_uz</a>
+                <a href="https://t.me/TuningLifeCar">@TuningLifeCar</a>
               </li>
             </ul>
             <h2>{t("contact.ourSocial")}</h2>

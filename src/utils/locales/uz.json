@@ -162,7 +162,9 @@
         "showMore": "Ko'proq ko'rsatish",
         "showLess": "Kamroq ko'rsatish",
         "tryAgain": "Qayta urinish",
-        "moreInfo": "Batafsil ma'lumot"
+        "moreInfo": "Batafsil ma'lumot",
+        "backToHome": "Bosh sahifaga qaytish",
+        "notFound": "Sahifa topilmadi"
     },
     "breadcrumb": {
         "home": "Bosh sahifa",
