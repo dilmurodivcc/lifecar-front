@@ -19,6 +19,8 @@ interface ContactPageProps {
 }
 
 export default function ContactPage({}: ContactPageProps) {
+  const { t } = useTranslation();
+
   const openYandexMaps = () => {
     window.open("https://yandex.com/maps/?text=Lifecar Auto Tuning", "_blank");
   };
@@ -29,7 +31,6 @@ export default function ContactPage({}: ContactPageProps) {
       "_blank"
     );
   };
-  const { t } = useTranslation();
 
   return (
     <ClientLayout showHeader={true} showFooter={false} showSpace={true}>
@@ -39,43 +40,17 @@ export default function ContactPage({}: ContactPageProps) {
             <h2>{t("contact.ourWorkingHours")}</h2>
             <ul className="working-hours">
               <li>
-                <b>{t("contact.weeks.monday")}:</b>{" "}
+                <b>{t("contact.weeks.mondayToSaturday")}:</b>{" "}
                 <p>
                   09:00 <span>-</span> 20:00
                 </p>
               </li>
               <li>
-                <b>{t("contact.weeks.tuesday")}:</b>{" "}
-                <p>
-                  09:00 <span>-</span> 20:00
-                </p>
+                <b>{t("contact.weeks.sundayOnly")}:</b>{" "}
+                <span>{t("contact.weeks.closed")}</span>
               </li>
               <li>
-                <b>{t("contact.weeks.wednesday")}:</b>{" "}
-                <p>
-                  09:00 <span>-</span> 20:00
-                </p>
-              </li>
-              <li>
-                <b>{t("contact.weeks.thursday")}:</b>{" "}
-                <p>
-                  09:00 <span>-</span> 20:00
-                </p>
-              </li>
-              <li>
-                <b>{t("contact.weeks.friday")}:</b>{" "}
-                <p>
-                  09:00 <span>-</span> 20:00
-                </p>
-              </li>
-              <li>
-                <b>{t("contact.weeks.saturday")}:</b>{" "}
-                <p>
-                  09:00 <span>-</span> 20:00
-                </p>
-              </li>
-              <li>
-                <b>{t("contact.weeks.sunday")}:</b>{" "}
+                <b>{t("contact.weeks.publicHolidays")}:</b>{" "}
                 <span>{t("contact.weeks.closed")}</span>
               </li>
             </ul>
@@ -158,7 +133,7 @@ export default function ContactPage({}: ContactPageProps) {
                 className="map-button yandex-map-button"
               >
                 <FaYandex />
-                
+
                 {t("contact.yandexButton")}
               </button>
               <button

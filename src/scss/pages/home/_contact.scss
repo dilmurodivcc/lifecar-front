@@ -60,6 +60,14 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+
+        // Mobile styles for abbreviated weekday names
+        @media (max-width: 900px) {
+          b {
+            min-width: 30px; // Ensure consistent width for abbreviated names
+            font-size: 14px;
+          }
+        }
       }
     }
     .contact-info {

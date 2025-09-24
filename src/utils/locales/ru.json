@@ -103,7 +103,17 @@
             "friday": "Пятница",
             "saturday": "Суббота",
             "sunday": "Воскресенье",
-            "closed": "Закрыто"
+            "closed": "Закрыто",
+            "mondayShort": "Пн",
+            "tuesdayShort": "Вт",
+            "wednesdayShort": "Ср",
+            "thursdayShort": "Чт",
+            "fridayShort": "Пт",
+            "saturdayShort": "Сб",
+            "sundayShort": "Вс",
+            "mondayToSaturday": "Понедельник - Суббота",
+            "sundayOnly": "Воскресенье",
+            "publicHolidays": "Государственные праздники"
         }
     },
     "footer": {
@@ -158,8 +168,9 @@
         "showMore": "Показать больше",
         "showLess": "Показать меньше",
         "tryAgain": "Попробовать снова",
-        "moreInfo": "Подробнее"
-        
+        "moreInfo": "Подробнее",
+        "backToHome": "Вернуться на главную",
+        "notFound": "Страница не найдена"
     },
     "breadcrumb": {
         "home": "Главная",

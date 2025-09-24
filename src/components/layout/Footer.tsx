@@ -73,7 +73,7 @@ const Footer = () => {
         <div className="footer-contact">
           <div className="footer-col-title">{t("footer.social.title")}</div>
           <div className="footer-social">
-            <a href="https://t.me/lifecar_uz" aria-label="X" target="_blank">
+            <a href="https://t.me/TuningLifeCar" aria-label="X" target="_blank">
               <FaTelegram />
             </a>
             <a href="https://instagram.com/life_car.uzb" aria-label="GitHub" target="_blank">

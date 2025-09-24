@@ -107,7 +107,17 @@
             "friday": "Juma",
             "saturday": "Shanba",
             "sunday": "Yakshanba",
-            "closed": "Dam olish"
+            "closed": "Dam olish",
+            "mondayShort": "Du",
+            "tuesdayShort": "Se",
+            "wednesdayShort": "Ch",
+            "thursdayShort": "Pa",
+            "fridayShort": "Ju",
+            "saturdayShort": "Sh",
+            "sundayShort": "Ya",
+            "mondayToSaturday": "Dushanba - Shanbagacha",
+            "sundayOnly": "Yakshanba",
+            "publicHolidays": "Halq aro bayramlarda"
         }
     },
     "footer": {

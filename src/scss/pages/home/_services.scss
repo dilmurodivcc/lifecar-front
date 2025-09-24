@@ -3,7 +3,7 @@
   overflow: hidden;
   position: relative;
   background-color: var(--bg);
-  min-height: 100vh;
+  // min-height: 100vh;
 
   .container {
     max-width: 1550px;
@@ -177,7 +177,11 @@
   min-height: 600px;
   width: 100%;
   max-height: 1200px;
-
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
   overflow: hidden;
 
   &::after {
@@ -192,7 +196,7 @@
     &::after {
       box-shadow: inset 0 0 120px 60px var(--bg);
     }
-  } 
+  }
 
   @media (max-width: 768px) {
     &::after {
@@ -304,9 +308,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.4s ease;
   background: var(--bg-ter);
-  cursor: pointer;
   overflow: hidden;
   min-height: 300px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
 
   &:hover {
     .img-wrapper {
@@ -450,10 +458,8 @@
     p {
       padding: 16px 24px;
     }
-
   }
 }
-
 
 @media (max-width: 480px) {
   .error-state {
@@ -462,7 +468,7 @@
   .loading-state {
     height: 200px;
   }
-  .price{
+  .price {
     font-size: 16px !important;
   }
 }
