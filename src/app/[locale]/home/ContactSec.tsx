@@ -22,16 +22,16 @@ const ContactSec = () => {
   }, []);
 
   const openYandexMaps = () => {
-    window.open("https://yandex.com/maps/?text=Lifecar Auto Tuning", "_blank");
+    window.open("https://yandex.uz/maps/-/CLqABUnb", "_blank");
   };
 
   const openGoogleMaps = () => {
     window.open(
-      "https://www.google.com/maps/search/?api=1&query=Lifecar Auto Tuning",
+      "https://www.google.com/maps/search/?api=1&query=Lifecar",
       "_blank"
     );
   };
-
+  
   if (!isHydrated) {
     return (
       <section className="contactSec">
@@ -72,11 +72,11 @@ const ContactSec = () => {
               ))}
             </ul>
             <div className="map-buttons">
-              <button className="map-button yandex-map-button" disabled>
+              <button className="map-button yandex-map-button" onClick={openYandexMaps} disabled>
                 <FaYandex />
                 {t("common.loading")}
               </button>
-              <button className="map-button google-map-button" disabled>
+              <button className="map-button google-map-button" onClick={openGoogleMaps} disabled>
                 <FaGoogle />
                 {t("common.loading")}
               </button>
@@ -109,7 +109,7 @@ const ContactSec = () => {
               </li>
               <li>
                 <b>{t("contact.weeks.publicHolidays")}:</b>{" "}
-                <span>{t("contact.weeks.closed")}</span>
+                <span>{t("contact.weeks.onlyRemoteCall")}</span>
               </li>
             </ul>
             <h2>{t("contact.ourContacts")}</h2>

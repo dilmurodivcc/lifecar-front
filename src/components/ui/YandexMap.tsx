@@ -137,12 +137,14 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
             const placemark = new window.ymaps.Placemark(
               coordinates,
               {
-                balloonContent: "Lifecar Auto Tuning",
-                hintContent: "Lifecar Auto Tuning",
+                balloonContent: "Lifecar",
+                hintContent: "Lifecar",
               },
               {
-                preset: "islands#redDotIcon",
-                iconColor: "#ff0000",
+                iconLayout: "default#image",
+                iconImageHref: "/icons/pointerLogo.svg",
+                iconImageSize: [50, 50],
+                iconImageOffset: [-25, -50],
               }
             );
 
@@ -198,8 +200,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
 
   if (!mounted) {
     return (
-      <div
-      >
+      <div>
         <div className="text-center">
           <p className="text-gray-500 font-medium">Loading map...</p>
         </div>
@@ -209,22 +210,19 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
 
   if (error) {
     return (
-      <div
-      >
+      <div>
         <div className="text-center">
           <p className="text-red-500 font-medium">❌ {error}</p>
         </div>
       </div>
     );
   }
-
   return (
     <div
       ref={mapRef}
       className={`relative yandex-map-container ${className} ${
         isFullscreen ? "yandex-map-fullscreen" : ""
       }`}
-
     >
       {theme === "dark" && !isFullscreen && (
         <div className="absolute inset-0 bg-black/30 pointer-events-none mix-blend-multiply" />

@@ -155,7 +155,7 @@ const Footer = () => {
                 categories.slice(0, 4).map((category: ProductCategory) => (
                   <Link
                     key={category.id}
-                    href={`/${locale}/products?category=${category.id}`}
+                    href={`/${locale}/products?filterBy=${category.id}`}
                   >
                     {category.name}
                   </Link>
@@ -172,7 +172,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <div className="footer-copyright">
-            © 2024 {t("footer.bottom.copyright")}
+            © 2025 {t("footer.bottom.copyright")}
           </div>
           <div
             className="footer-backToTop"

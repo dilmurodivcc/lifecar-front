@@ -238,7 +238,7 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
         />
 
         <link rel="icon" href="/icons/lifecar.ico" type="image/x-icon" />

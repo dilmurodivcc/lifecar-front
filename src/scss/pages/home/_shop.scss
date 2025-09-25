@@ -73,7 +73,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: max-content ;
+    height: max-content;
     transition: box-shadow 0.3s, border 0.3s, transform 0.2s;
     position: relative;
     overflow: hidden;
@@ -110,7 +110,7 @@
       }
       @media (max-width: 900px) {
         height: 200px;
-        padding: 0  !important;
+        padding: 0 !important;
       }
       @media (max-width: 380px) {
         height: 200px;
@@ -157,7 +157,6 @@
           font-size: 0.8rem;
           line-clamp: 3 !important;
           -webkit-line-clamp: 3 !important;
-     
         }
         .price {
           font-size: 0.9rem !important;

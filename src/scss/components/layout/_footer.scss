@@ -59,6 +59,10 @@
   display: flex;
   gap: 16px;
   font-size: 22px;
+  svg{
+    width: 22px;
+    height: 22px;
+  }
 }
 
 .footer-social a {

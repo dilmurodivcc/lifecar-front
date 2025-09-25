@@ -47,15 +47,47 @@ export default function ShopPage({ params }: ShopPageProps) {
       const savedSortBy = localStorage.getItem("shop-sortBy");
       const savedFilterBy = localStorage.getItem("shop-filterBy");
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlFilterBy = urlParams.get("filterBy");
+
+      // Restore layout/sort prefs regardless of navigation type
       if (savedLayout && (savedLayout === "grid" || savedLayout === "list")) {
         setLayout(savedLayout);
       }
       if (savedSortBy) {
         setSortBy(savedSortBy);
       }
-      if (savedFilterBy) {
-        setFilterBy(savedFilterBy);
+
+      // Determine navigation type (reload vs navigate)
+      const navEntry = performance.getEntriesByType("navigation")[0] as
+        | PerformanceNavigationTiming
+        | undefined;
+      const navType = navEntry?.type;
+
+      // 1) URL param always wins if present
+      if (urlFilterBy) {
+        setFilterBy(urlFilterBy);
+        try {
+          localStorage.setItem("shop-filterBy", urlFilterBy);
+        } catch {}
+        return;
       }
+
+      // 2) If page was reloaded, keep previous filter from storage
+      if (navType === "reload") {
+        if (savedFilterBy) {
+          setFilterBy(savedFilterBy);
+        } else {
+          setFilterBy("all");
+        }
+        return;
+      }
+
+      // 3) For normal navigation (not reload), reset to "all" and clear stored filter
+      setFilterBy("all");
+      try {
+        localStorage.removeItem("shop-filterBy");
+      } catch {}
     } catch {}
   }, [isHydrated]);
 
@@ -91,6 +123,33 @@ export default function ShopPage({ params }: ShopPageProps) {
       setLocale(resolvedParams.locale);
     });
   }, [params]);
+
+  // Also listen for URL changes
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    const handleUrlChange = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlFilterBy = urlParams.get("filterBy");
+
+      if (urlFilterBy && urlFilterBy !== filterBy) {
+        setFilterBy(urlFilterBy);
+        try {
+          localStorage.setItem("shop-filterBy", urlFilterBy);
+        } catch {}
+      }
+    };
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener("popstate", handleUrlChange);
+
+    // Also check URL on mount and when component updates
+    handleUrlChange();
+
+    return () => {
+      window.removeEventListener("popstate", handleUrlChange);
+    };
+  }, [isHydrated, filterBy]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -143,6 +202,19 @@ export default function ShopPage({ params }: ShopPageProps) {
     })) || []),
   ];
 
+  // Get current filter label for display
+  const getCurrentFilterLabel = () => {
+    if (filterBy === "all") {
+      return t("shop.filter.all");
+    }
+
+    const category = categoriesData?.data?.data?.find(
+      (cat: any) => cat.id.toString() === filterBy
+    );
+
+    return category ? category.name : t("shop.filter.all");
+  };
+
   const products = productsData?.data?.data || [];
   const totalPages = productsData?.data?.meta?.pagination?.pageCount || 1;
   const currentProducts = products;
@@ -178,7 +250,7 @@ export default function ShopPage({ params }: ShopPageProps) {
                 </div>
                 <div className="filter-dropdown">
                   <button className="dropdown-button filter" disabled>
-                    <span>{t("shop.filter.all")}</span>
+                    <span>{getCurrentFilterLabel()}</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path
                         stroke="currentColor"
@@ -192,15 +264,15 @@ export default function ShopPage({ params }: ShopPageProps) {
                 </div>
               </div>
               <div className="right">
-                <input
-                  type="text"
-                  className="input-search-shop"
-                  placeholder={t("common.search")}
-                  disabled
-                />
-                <button className="search-button" disabled>
-                  <FaSearch />
-                </button>
+                <div className="search-input-wrapper">
+                  <input
+                    type="text"
+                    className="input-search-shop"
+                    placeholder={t("common.search")}
+                    disabled
+                  />
+                  <FaSearch className="search-icon" />
+                </div>
               </div>
             </div>
             <section className="cards-grid grid">
@@ -281,12 +353,7 @@ export default function ShopPage({ params }: ShopPageProps) {
                   className="dropdown-button filter"
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
                 >
-                  <span>
-                    {
-                      filterOptions.find((option) => option.value === filterBy)
-                        ?.label
-                    }
-                  </span>
+                  <span>{getCurrentFilterLabel()}</span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       stroke="currentColor"
@@ -316,16 +383,16 @@ export default function ShopPage({ params }: ShopPageProps) {
               </div>
             </div>
             <div className="right">
-              <input
-                type="text"
-                className="input-search-shop"
-                placeholder={t("common.search")}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button className="search-button">
-                <FaSearch />
-              </button>
+              <div className="search-input-wrapper">
+                <input
+                  type="text"
+                  className="input-search-shop"
+                  placeholder={t("common.search")}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <FaSearch className="search-icon" />
+              </div>
             </div>
           </div>
           <section className={`cards-grid ${layout}`}>
@@ -368,7 +435,6 @@ export default function ShopPage({ params }: ShopPageProps) {
             )}
           </section>
 
-          {/* Pagination */}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

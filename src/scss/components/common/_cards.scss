@@ -1,5 +1,16 @@
 @use "../../base/variables" as *;
 
+// Prevent zoom on cards
+.card,
+.shop-card,
+.service-card,
+.product-card {
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .skeleton {
   .skeleton-img {
     border-radius: 16px;
@@ -78,7 +89,7 @@
     background: var(--glass-bg);
     border-radius: 6px;
     animation: shimmer 1.5s infinite;
-  
+
     background-size: 200% 100%;
   }
 }
@@ -94,6 +105,7 @@
 
 .card {
   backdrop-filter: blur(20px);
+  height: 350px;
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-color);
   border-radius: 16px;
@@ -289,6 +301,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   margin-bottom: 60px;
+  min-height: 600px;
 
   &.list {
     display: grid;

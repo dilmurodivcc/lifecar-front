@@ -2,48 +2,48 @@
     "navigation": {
         "home": "Bosh sahifa",
         "services": "Xizmatlar",
-        "shop": "Do'kon",
+        "shop": "Do‘kon",
         "about": "Biz haqimizda",
         "contact": "Aloqa"
     },
     "header": {
         "languages": {
-            "uz": "O'zbek",
+            "uz": "O‘zbek",
             "ru": "Русский"
         },
         "phone": "Telefon",
         "address": "Manzil"
     },
     "hero": {
-        "title": "Lifecar | Auto Tuning",
-        "subtitle": "Professional avto tuning, ehtiyot qismlar va aksessuarlar O'zbekistonda",
-        "cta": "Xizmatlarimizni ko'rish",
-        "learnMore": "Batafsil ma'lumot"
+        "title": "Lifecar | Avto Tuning",
+        "subtitle": "O‘zbekistonda professional avto tuning, ehtiyot qismlar va aksessuarlar",
+        "cta": "Xizmatlarni ko‘rish",
+        "learnMore": "Batafsil ma’lumot"
     },
     "shopSec": {
         "title": "Avtotuning ehtiyot qismlari do‘koni",
-        "subtitle": "Barcha avtomobillar uchun tuning detallar.",
+        "subtitle": "Barcha avtomobillar uchun tuning detallar va aksessuarlar",
         "viewAll": "Barcha mahsulotlar"
     },
     "servicesSec": {
-        "title": "Bizning Xizmatlar",
-        "cta": "Xizmatlarimizni ko'rish",
-        "Boglanish": "Boglanish"
+        "title": "Bizning xizmatlar",
+        "cta": "Xizmatlarni ko‘rish",
+        "Boglanish": "Bog‘lanish"
     },
     "shop": {
-        "title": "Do'kon",
-        "subtitle": "Eng yaxshi avto ehtiyot qismlari va aksessuarlar",
-        "viewAll": "Barchasini ko'rish",
-        "addToCart": "Savatchaga qo'shish",
+        "title": "Do‘kon",
+        "subtitle": "Eng yaxshi avto ehtiyot qismlar va aksessuarlar",
+        "viewAll": "Barchasini ko‘rish",
+        "addToCart": "Savatchaga qo‘shish",
         "price": "Narx",
         "filter": {
             "all": "Barcha mahsulotlar",
             "parts": "Ehtiyot qismlar",
             "accessories": "Aksessuarlar",
-            "engine": "Motor qismlari",
+            "engine": "Dvigatel qismlari",
             "brake": "Tormoz tizimi"
         },
-        "featuredOnly": "Faqat tavsiya etilgan",
+        "featuredOnly": "Faqat tavsiya etilganlar",
         "noProducts": "Mahsulotlar topilmadi"
     },
     "services": {
@@ -51,7 +51,7 @@
             "title": "Filtrlash",
             "all": "Barcha xizmatlar",
             "service": "Xizmatlar",
-            "repair": "Ta'mirlash",
+            "repair": "Ta’mirlash",
             "maintenance": "Texnik xizmat"
         },
         "search": "Qidirish",
@@ -63,41 +63,41 @@
         "priceHigh": "Qimmatroq"
     },
     "about": {
-        "title": "Biz Haqimizda",
-        "subtitle": "Lifecar - O'zbekistondagi eng ishonchli avto tuning xizmatlari",
-        "description": "Biz 10 yildan ortiq tajribaga ega professional avto ustalar jamoasi. Avtomobilingizni eng yuqori sifatda sozlash va ta'mirlash bizning asosiy maqsadimiz.",
-        "experience": "Yillik Tajriba",
-        "clients": "Mamnun Mijozlar",
-        "projects": "Bajarilgan Loyihalar"
+        "title": "Biz haqimizda",
+        "subtitle": "Lifecar – O‘zbekistondagi eng ishonchli avto tuning xizmatlari",
+        "description": "Biz 10 yildan ortiq tajribaga ega professional avto ustalar jamoasimiz. Avtomobilingizni eng yuqori sifatda sozlash va ta’mirlash – bizning asosiy maqsadimiz.",
+        "experience": "Yillik tajriba",
+        "clients": "Mamnun mijozlar",
+        "projects": "Bajarilgan loyihalar"
     },
     "aboutSection": {
         "title": "Biz haqimizda",
-        "description": "Bizning kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan ishlaydi va avtomobil tuning xizmatlarida o'zining ishonchliligi bilan mashhur.",
+        "description": "Kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan faoliyat yuritadi va avtotuning xizmatlarida o‘z ishonchliligi bilan mashhur.",
         "features": {
             "experience": {
-                "text": "20+ yil tajriba – malakali va tajribali masterlar jamoasi"
+                "text": "yillik tajriba – malakali va tajribali ustalar jamoasi"
             },
             "company": {
-                "text": "10+ yil kompaniya faoliyati – ishonchli tuning servis"
+                "text": "yillik faoliyat – ishonchli tuning servisi"
             },
             "guarantee": {
                 "text": "Har bir ishga kafolat – sifat va ishonch bizning ustuvorligimiz"
             },
             "clients": {
-                "text": "Kuniga 10+ mamnun mijoz – mijozlarimiz bizga qayta-qayta murojaat qiladi"
+                "text": "Kuniga 10+ mamnun mijoz – mijozlarimiz bizga qayta-qayta murojaat qilmoqda"
             }
         },
-        "closing": "Bizning maqsadimiz – sizning avtomobilingizni yanada mukammal qilish va yuqori sifat bilan xizmat ko'rsatishdir."
+        "closing": "Bizning maqsadimiz – avtomobilingizni yanada mukammal qilish va eng yuqori sifatda xizmat ko‘rsatishdir."
     },
     "contact": {
-        "ourWorkingHours": "Bizning Ish Vaqtimiz.",
-        "ourContacts": "Bizning Kontaktlarimiz.",
-        "ourSocial": "Bizning Ijtimoiy Tarmoqlarimiz.",
-        "ourAddress": "Bizning Manzilimiz.",
+        "ourWorkingHours": "Ish vaqti",
+        "ourContacts": "Kontaktlar",
+        "ourSocial": "Ijtimoiy tarmoqlar",
+        "ourAddress": "Manzil",
         "telephone": "Telefon",
         "telegram": "Telegram",
-        "yandexButton": "Yandex karta mashrut",
-        "googleButton": "Google karta mashrut",
+        "yandexButton": "Yandex xaritada yo‘l ko‘rsatish",
+        "googleButton": "Google xaritada yo‘l ko‘rsatish",
         "send": "Yuborish",
         "weeks": {
             "monday": "Dushanba",
@@ -107,57 +107,58 @@
             "friday": "Juma",
             "saturday": "Shanba",
             "sunday": "Yakshanba",
-            "closed": "Dam olish",
+            "closed": "Dam olish kuni",
+            "onlyRemoteCall": "Faqat chaqiruv asosida!",
             "mondayShort": "Du",
             "tuesdayShort": "Se",
-            "wednesdayShort": "Ch",
-            "thursdayShort": "Pa",
+            "wednesdayShort": "Chor",
+            "thursdayShort": "Pay",
             "fridayShort": "Ju",
-            "saturdayShort": "Sh",
-            "sundayShort": "Ya",
-            "mondayToSaturday": "Dushanba - Shanbagacha",
+            "saturdayShort": "Sha",
+            "sundayShort": "Yak",
+            "mondayToSaturday": "Dushanba – Shanba",
             "sundayOnly": "Yakshanba",
-            "publicHolidays": "Halq aro bayramlarda"
+            "publicHolidays": "Davlat bayramlarida"
         }
     },
     "footer": {
         "social": {
-            "title": "Ijtimoiy Tarmoqlar",
+            "title": "Ijtimoiy tarmoqlar",
             "telegram": "Telegram",
             "instagram": "Instagram",
-            "youtube": "Youtube",
+            "youtube": "YouTube",
             "yandex": "Yandex"
         },
         "contact": {
-            "title": "Bog'lanish",
+            "title": "Bog‘lanish",
             "phone": "Telefon",
             "email": "Email",
             "address": "Manzil",
-            "workingHours": "Ish Vaqti"
+            "workingHours": "Ish vaqti"
         },
         "shop": {
-            "title": "Do'kon",
+            "title": "Do‘kon",
             "allProducts": "Barcha mahsulotlar",
-            "steeringWheels": "Steering Wheels",
-            "radarDetectors": "Radar Detectors",
-            "tanirofka": "Tanirofka",
-            "carAccessories": "Car Accessories"
+            "steeringWheels": "Rullar",
+            "radarDetectors": "Radar detektorlar",
+            "tanirofka": "Tanirovka",
+            "carAccessories": "Avto aksessuarlar"
         },
         "links": {
             "title": "Sahifalar",
             "home": "Bosh sahifa",
             "contact": "Aloqa",
             "services": "Xizmatlar",
-            "shop": "Do'kon",
+            "shop": "Do‘kon",
             "about": "Biz haqimizda"
         },
         "map": {
-            "title": "Bizning Manzil",
-            "address": "Toshkent shahar, Chilonzor tumani, Bunyodkor ko'chasi, 1-uy"
+            "title": "Manzilimiz",
+            "address": "Toshkent sh., Chilonzor tumani, Bunyodkor ko‘chasi, 1-uy"
         },
         "bottom": {
-            "copyright": "Lifecar.uz Tashkent, Uzbekistan",
-            "backToTop": "Tepaga"
+            "copyright": "Lifecar.uz Toshkent, O‘zbekiston",
+            "backToTop": "Yuqoriga"
         }
     },
     "common": {
@@ -169,28 +170,31 @@
         "back": "Orqaga",
         "next": "Keyingi",
         "previous": "Oldingi",
-        "showMore": "Ko'proq ko'rsatish",
-        "showLess": "Kamroq ko'rsatish",
-        "tryAgain": "Qayta urinish",
-        "moreInfo": "Batafsil",
+        "showMore": "Ko‘proq ko‘rsatish",
+        "showLess": "Kamroq ko‘rsatish",
+        "tryAgain": "Qayta urinib ko‘rish",
+        "moreInfo": "Batafsil ma’lumot",
         "backToHome": "Bosh sahifaga qaytish",
-        "notFound": "Sahifa topilmadi"
+        "notFound": "Sahifa topilmadi",
+        "productNotFound": "Mahsulot topilmadi",
+        "productNotFoundMessage": "Kechirasiz, so‘ralgan mahsulot mavjud emas.",
+        "productNotFoundBackToShop": "Do‘konga qaytish"
     },
     "breadcrumb": {
         "home": "Bosh sahifa",
-        "shop": "Do'kon"
+        "shop": "Do‘kon"
     },
     "productDetail": {
         "notFound": {
             "title": "Mahsulot topilmadi",
-            "message": "Kechirasiz, so'ralgan mahsulot topilmadi.",
-            "backToShop": "Do'konga qaytish"
+            "message": "Kechirasiz, so‘ralgan mahsulot topilmadi.",
+            "backToShop": "Do‘konga qaytish"
         },
-        "discount": "chegirma",
+        "discount": "Chegirma",
         "fullInfo": {
-            "title": "Mahsulot haqida to'liq ma'lumot",
-            "showMore": "Ko'proq ma'lumot",
-            "showLess": "Kamroq ma'lumot"
+            "title": "Mahsulot haqida to‘liq ma’lumot",
+            "showMore": "Ko‘proq ma’lumot",
+            "showLess": "Kamroq ma’lumot"
         },
         "specs": {
             "brand": "Brend",
@@ -204,8 +208,8 @@
         }
     },
     "seo": {
-        "title": "Lifecar | Avto Tuning Xizmatlari O'zbekistonda",
-        "description": "Lifecar - Avto tuning, auto parts, auto accessories va professional avto ustalar xizmatlari O'zbekistonda. Professional avto sozlash va ta'mirlash xizmatlari.",
-        "keywords": "Lifecar, lifecar tuning, lifecar tyuning, lifecar uz, auto tuning, avtotuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar"
+        "title": "Lifecar | Avto Tuning Xizmatlari O‘zbekistonda",
+        "description": "Lifecar – avto tuning, ehtiyot qismlar, aksessuarlar va professional ustalar xizmatlari O‘zbekistonda. Professional sozlash va ta’mirlash xizmatlari.",
+        "keywords": "Lifecar, lifecar tuning, lifecar tyuning, lifecar uz, avto tuning, avtotuning, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar"
     }
 }

@@ -18,6 +18,7 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   const [slug, setSlug] = useState("");
   const [locale, setLocale] = useState("uz");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isImageChanging, setIsImageChanging] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [showExpandButton, setShowExpandButton] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -112,11 +113,21 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
         <div className="product-detail-error">
           <div className="container">
             <div className="error-content">
-              <h2>{t("common.notFound.title")}</h2>
-              <p>{t("common.notFound.message")}</p>
-              <Link href="/shop" className="primary-btn">
-                {t("common.notFound.backToShop")}
-              </Link>
+              <div className="error-code">404</div>
+
+              <h2>{t("common.productNotFound")}</h2>
+              <p>{t("common.productNotFoundMessage")}</p>
+              <div className="actions">
+                <Link href="/shop" className="primary-btn">
+                  {t("common.productNotFoundBackToShop")}
+                </Link>
+                <button
+                  className="primary-btn back"
+                  onClick={() => window.history.back()}
+                >
+                  {t("common.back")}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -142,6 +153,35 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
     ...detailImages.map((img) => getImageUrl(img)),
   ].filter(Boolean);
 
+  // Optimized image navigation functions
+  const changeImageIndex = (newIndex: number) => {
+    if (isImageChanging || newIndex === currentImageIndex) return;
+
+    setIsImageChanging(true);
+    setCurrentImageIndex(newIndex);
+
+    // Reset loading state after a short delay
+    setTimeout(() => {
+      setIsImageChanging(false);
+    }, 150);
+  };
+
+  const navigateToPrevious = () => {
+    const newIndex =
+      currentImageIndex === 0
+        ? galleryImages.length - 1
+        : currentImageIndex - 1;
+    changeImageIndex(newIndex);
+  };
+
+  const navigateToNext = () => {
+    const newIndex =
+      currentImageIndex === galleryImages.length - 1
+        ? 0
+        : currentImageIndex + 1;
+    changeImageIndex(newIndex);
+  };
+
   return (
     <ClientLayout showHeader={true} showFooter={true} showSpace={true}>
       <div className="product-detail">
@@ -160,22 +200,20 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                 />
                 <div className="image-navigation">
                   <button
-                    className="nav-btn prev"
-                    onClick={() =>
-                      setCurrentImageIndex((prev) =>
-                        prev === 0 ? galleryImages.length - 1 : prev - 1
-                      )
-                    }
+                    className={`nav-btn prev ${
+                      isImageChanging ? "disabled" : ""
+                    }`}
+                    onClick={navigateToPrevious}
+                    disabled={isImageChanging}
                   >
                     <FaArrowLeft />
                   </button>
                   <button
-                    className="nav-btn next"
-                    onClick={() =>
-                      setCurrentImageIndex((prev) =>
-                        prev === galleryImages.length - 1 ? 0 : prev + 1
-                      )
-                    }
+                    className={`nav-btn next ${
+                      isImageChanging ? "disabled" : ""
+                    }`}
+                    onClick={navigateToNext}
+                    disabled={isImageChanging}
                   >
                     <FaArrowRight />
                   </button>
@@ -191,8 +229,9 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
                     key={index}
                     className={`thumbnail ${
                       index === currentImageIndex ? "active" : ""
-                    }`}
-                    onClick={() => setCurrentImageIndex(index)}
+                    } ${isImageChanging ? "disabled" : ""}`}
+                    onClick={() => changeImageIndex(index)}
+                    disabled={isImageChanging}
                   >
                     <Image
                       src={image}

@@ -51,7 +51,7 @@ export default function ContactPage({}: ContactPageProps) {
               </li>
               <li>
                 <b>{t("contact.weeks.publicHolidays")}:</b>{" "}
-                <span>{t("contact.weeks.closed")}</span>
+                <span>{t("contact.weeks.onlyRemoteCall")}</span>
               </li>
             </ul>
             <h2>{t("contact.ourContacts")}</h2>

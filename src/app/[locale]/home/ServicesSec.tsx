@@ -158,7 +158,6 @@ const ServicesSec = () => {
   if (isLoading || !isClient) {
     return (
       <section className="ServicesSec">
-        <div className="container">
           <div className="servicesCenterTitle">
             <h1>{t("hero.title")}</h1>
             <div className="btns">
@@ -186,7 +185,6 @@ const ServicesSec = () => {
             </div>
             <div className="carousel-fade"></div>
           </div>
-        </div>
       </section>
     );
   }
@@ -194,7 +192,6 @@ const ServicesSec = () => {
   if (services.length === 0) {
     return (
       <section className="ServicesSec">
-        <div className="container">
           <div className="servicesCenterTitle">
             <h1>{t("hero.title")}</h1>
             <div className="btns">
@@ -222,14 +219,12 @@ const ServicesSec = () => {
             </div>
             <div className="carousel-fade"></div>
           </div>
-        </div>
       </section>
     );
   }
 
   return (
     <section className="ServicesSec">
-      <div className="container">
         <div className="servicesCenterTitle">
           <h1>{t("hero.title")}</h1>
           <div className="btns">
@@ -290,7 +285,6 @@ const ServicesSec = () => {
           </div>
           <div className="carousel-fade"></div>
         </div>
-      </div>
     </section>
   );
 };

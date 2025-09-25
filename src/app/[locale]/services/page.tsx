@@ -64,6 +64,11 @@ export default function ServicesPage({ params }: ServicesPageProps) {
   const { t } = useTranslation();
 
   const [locale, setLocale] = useState("uz");
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -76,6 +81,54 @@ export default function ServicesPage({ params }: ServicesPageProps) {
   useEffect(() => {
     setCurrentPage(1);
   }, [debouncedSearchTerm, filterBy, sortBy]);
+
+  // Initialize layout/sort/filter with reload-aware behavior
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    try {
+      const savedLayout = localStorage.getItem("services-layout");
+      const savedSortBy = localStorage.getItem("services-sortBy");
+      const savedFilterBy = localStorage.getItem("services-filterBy");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlFilterBy = urlParams.get("filterBy");
+
+      if (savedLayout && (savedLayout === "grid" || savedLayout === "list")) {
+        setLayout(savedLayout);
+      }
+      if (savedSortBy) {
+        setSortBy(savedSortBy);
+      }
+
+      const navEntry = performance.getEntriesByType("navigation")[0] as
+        | PerformanceNavigationTiming
+        | undefined;
+      const navType = navEntry?.type;
+
+      if (urlFilterBy) {
+        setFilterBy(urlFilterBy);
+        try {
+          localStorage.setItem("services-filterBy", urlFilterBy);
+        } catch {}
+        return;
+      }
+
+      if (navType === "reload") {
+        if (savedFilterBy) {
+          setFilterBy(savedFilterBy);
+        } else {
+          setFilterBy("all");
+        }
+        return;
+      }
+
+      setFilterBy("all");
+      try {
+        localStorage.removeItem("services-filterBy");
+      } catch {}
+    } catch {}
+  }, [isHydrated]);
 
   useEffect(() => {
     const getLocale = async () => {
@@ -225,6 +278,9 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                       }`}
                       onClick={() => {
                         setSortBy(option.value);
+                        try {
+                          localStorage.setItem("services-sortBy", option.value);
+                        } catch {}
                         setIsSortOpen(false);
                       }}
                     >
@@ -268,6 +324,9 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                     }`}
                     onClick={() => {
                       setFilterBy("all");
+                      try {
+                        localStorage.setItem("services-filterBy", "all");
+                      } catch {}
                       setIsFilterOpen(false);
                     }}
                   >
@@ -284,6 +343,12 @@ export default function ServicesPage({ params }: ServicesPageProps) {
                         }`}
                         onClick={() => {
                           setFilterBy(String(cat.id));
+                          try {
+                            localStorage.setItem(
+                              "services-filterBy",
+                              String(cat.id)
+                            );
+                          } catch {}
                           setIsFilterOpen(false);
                         }}
                       >
@@ -303,16 +368,16 @@ export default function ServicesPage({ params }: ServicesPageProps) {
               </div>
             </div>
             <div className="right">
-              <input
-                type="text"
-                className="input-search-services"
-                placeholder={t("common.search")}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button className="search-button">
-                <FaSearch />
-              </button>
+              <div className="search-input-wrapper">
+                <input
+                  type="text"
+                  className="input-search-services"
+                  placeholder={t("common.search")}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <FaSearch className="search-icon" />
+              </div>
             </div>
           </div>
 

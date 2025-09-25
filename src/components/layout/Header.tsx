@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { HiSun, HiMoon, HiChevronDown, HiMenu, HiX } from "react-icons/hi";
+import { HiSun, HiMoon, HiChevronDown } from "react-icons/hi";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/components/providers/ThemeProvider";
@@ -115,9 +115,11 @@ const Header = () => {
 
     router.replace(newPath);
 
+    // Prevent horizontal scroll and maintain vertical position
     setTimeout(() => {
       window.scrollTo({
         top: currentScrollY,
+        left: 0,
         behavior: "instant",
       });
     }, 50);
@@ -167,7 +169,11 @@ const Header = () => {
         </div>
 
         <button className="mobile-menu-btn">
-          <HiMenu />
+          <div className="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </button>
       </header>
     );
@@ -255,10 +261,14 @@ const Header = () => {
       </div>
 
       <button
-        className="mobile-menu-btn"
+        className={`mobile-menu-btn ${mobileMenuOpen ? "active" : ""}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
-        {mobileMenuOpen ? <HiX /> : <HiMenu />}
+        <div className="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
 
       <div
@@ -270,7 +280,13 @@ const Header = () => {
             href={`/${locale}`}
             className={`nav-link ${isActiveLink(`/${locale}`) ? "active" : ""}`}
             prefetch={true}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              // Prevent horizontal scroll
+              setTimeout(() => {
+                window.scrollTo({ left: 0, behavior: "instant" });
+              }, 10);
+            }}
           >
             {t("navigation.home")}
           </Link>
@@ -280,7 +296,13 @@ const Header = () => {
               isActiveLink(`/${locale}/services`) ? "active" : ""
             }`}
             prefetch={true}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              // Prevent horizontal scroll
+              setTimeout(() => {
+                window.scrollTo({ left: 0, behavior: "instant" });
+              }, 10);
+            }}
           >
             {t("navigation.services")}
           </Link>
@@ -290,7 +312,13 @@ const Header = () => {
               isActiveLink(`/${locale}/products`) ? "active" : ""
             }`}
             prefetch={true}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              // Prevent horizontal scroll
+              setTimeout(() => {
+                window.scrollTo({ left: 0, behavior: "instant" });
+              }, 10);
+            }}
           >
             {t("navigation.shop")}
           </Link>
@@ -300,7 +328,13 @@ const Header = () => {
               isActiveLink(`/${locale}/contact`) ? "active" : ""
             }`}
             prefetch={true}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              // Prevent horizontal scroll
+              setTimeout(() => {
+                window.scrollTo({ left: 0, behavior: "instant" });
+              }, 10);
+            }}
           >
             {t("navigation.contact")}
           </Link>

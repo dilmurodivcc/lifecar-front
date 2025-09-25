@@ -1,5 +1,24 @@
 @use "../../base/variables" as *;
 
+// Prevent horizontal scroll and zoom on mobile
+body {
+  overflow-x: hidden;
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html {
+  overflow-x: hidden;
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 header {
   padding: 6px;
   display: flex;
@@ -20,6 +39,7 @@ header {
   background-color: rgba(0, 0, 0, 0.818);
   z-index: 1000;
   will-change: transform, opacity;
+  box-sizing: border-box;
 
   [data-theme="light"] & {
     background-color: rgba(255, 255, 255, 0.768);
@@ -93,15 +113,46 @@ header {
     color: var(--black);
     transition: all 0.2s ease;
 
-    svg {
-      width: 30px;
-      height: 30px;
-      color: var(--text-black);
-      fill: var(--text);
-    }
-
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .hamburger-icon {
+      width: 28px;
+      height: 22px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: var(--black);
+        border-radius: 2px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+      }
+    }
+
+    &.active {
+      .hamburger-icon {
+        span {
+          &:nth-child(1) {
+            transform: translateY(10.5px) rotate(45deg);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+          }
+
+          &:nth-child(3) {
+            transform: translateY(-10.5px) rotate(-45deg);
+          }
+        }
+      }
     }
   }
 
@@ -126,6 +177,8 @@ header {
     transition: all 0.3s ease-in-out;
     z-index: 9;
     margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
     &.open {
       transform: translateY(0);
       opacity: 1;
@@ -220,9 +273,12 @@ header.shrink {
   header {
     padding: 6px 12px;
     margin: 0 !important;
-    width: 94vw;
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
     height: 56px;
     justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
 
     .logo {
       gap: 8px;
@@ -240,14 +296,35 @@ header.shrink {
     .mobile-menu-btn {
       padding: 6px;
 
-      svg {
+      .hamburger-icon {
         width: 24px;
-        height: 24px;
+        height: 20px;
+
+        span {
+          height: 2.5px;
+        }
+      }
+
+      &.active {
+        .hamburger-icon {
+          span {
+            &:nth-child(1) {
+              transform: translateY(8.75px) rotate(45deg);
+            }
+
+            &:nth-child(3) {
+              transform: translateY(-8.75px) rotate(-45deg);
+            }
+          }
+        }
       }
     }
 
     .mobile-menu {
       padding: 16px;
+      width: 100%;
+      left: 0;
+      right: 0;
 
       .mobile-nav {
         gap: 12px;
@@ -293,9 +370,12 @@ header.shrink {
   header {
     padding: 4px 8px;
     height: 52px;
-    margin: 8px auto;
-    max-width: 98vw;
+    margin: 0 !important;
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
     justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
 
     .logo {
       gap: 6px;
@@ -313,14 +393,35 @@ header.shrink {
     .mobile-menu-btn {
       padding: 4px;
 
-      svg {
+      .hamburger-icon {
         width: 22px;
-        height: 22px;
+        height: 18px;
+
+        span {
+          height: 2px;
+        }
+      }
+
+      &.active {
+        .hamburger-icon {
+          span {
+            &:nth-child(1) {
+              transform: translateY(8px) rotate(45deg);
+            }
+
+            &:nth-child(3) {
+              transform: translateY(-8px) rotate(-45deg);
+            }
+          }
+        }
       }
     }
 
     .mobile-menu {
       padding: 12px;
+      width: 100%;
+      left: 0;
+      right: 0;
 
       .mobile-nav {
         gap: 10px;
