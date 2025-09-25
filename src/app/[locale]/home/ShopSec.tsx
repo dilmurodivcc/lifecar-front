@@ -35,7 +35,7 @@ const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
             <p className="ShopSec-description">{t("shopSec.subtitle")}</p>
           </div>
 
-          <Link href="/shop" className="ShopSec-button primary-btn">
+          <Link href="/products" className="ShopSec-button primary-btn">
             <span>{t("shopSec.viewAll")}</span>
           </Link>
         </div>
@@ -53,15 +53,18 @@ const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
 
               return (
                 <div className="shop-card" key={product.id}>
+                  <div className="img-wrapper">
                   <Image
+                    fill
+
                     src={imageUrl}
                     alt={product.title}
-                    width={400}
-                    height={400}
+                    style={{ objectFit: "cover" }}
                     onError={(e) => {
-                      e.currentTarget.src = "/img/7700.png";
-                    }}
-                  />
+                        e.currentTarget.src = "/img/7700.png";
+                      }}
+                    />
+                  </div>
                   <div className="card-content">
                     <div className="top">
                       <div className="title">{product.title}</div>

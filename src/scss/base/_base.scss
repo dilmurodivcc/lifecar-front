@@ -8,10 +8,11 @@
     max-width: 1400px;
     padding: 0 20px;
   }
-  @media (max-width: 1300px) {
-    max-width: 1000px;
+  @media (max-width: 1400px) {
+    max-width: 1300px;
+    padding: 0 10px;
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 1300px) {
     max-width: 94vw;
   }
 }
@@ -24,7 +25,7 @@ body {
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar { 
+::-webkit-scrollbar {
   background-color: transparent;
   width: 6px;
 }
@@ -33,8 +34,7 @@ body {
   border-radius: 5px 0 0 5px;
 }
 
-
-h2{
+h2 {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--text);
@@ -55,24 +55,24 @@ h2{
     letter-spacing: -0.5px;
   }
 }
-p{
+p {
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--text);
   letter-spacing: -0.5px;
 }
 @media (max-width: 1200px) {
-  p{
+  p {
     font-size: 1rem;
   }
 }
 @media (max-width: 768px) {
-  p{
+  p {
     font-size: 0.8rem;
   }
 }
 
-.space{
+.space {
   height: 100px !important;
   @media (max-width: 768px) {
     height: 70px !important;
@@ -85,18 +85,18 @@ p{
   }
 }
 
-
-
-a, button {
-  -webkit-tap-highlight-color: transparent  !important; 
+a,
+button {
+  -webkit-tap-highlight-color: transparent !important;
 }
-a:focus, button:focus {
+a:focus,
+button:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-
-a:active, button:active {
+a:active,
+button:active {
   background: none !important;
   color: inherit !important;
 }

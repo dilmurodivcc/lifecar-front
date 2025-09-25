@@ -23,7 +23,7 @@
     "shopSec": {
         "title": "Avtotuning ehtiyot qismlari do‘koni",
         "subtitle": "Barcha avtomobillar uchun tuning detallar.",
-        "viewAll": "Barcha mahsulotlarni ko‘rish"
+        "viewAll": "Barcha mahsulotlar"
     },
     "servicesSec": {
         "title": "Bizning Xizmatlar",
@@ -172,7 +172,7 @@
         "showMore": "Ko'proq ko'rsatish",
         "showLess": "Kamroq ko'rsatish",
         "tryAgain": "Qayta urinish",
-        "moreInfo": "Batafsil ma'lumot",
+        "moreInfo": "Batafsil",
         "backToHome": "Bosh sahifaga qaytish",
         "notFound": "Sahifa topilmadi"
     },

@@ -23,7 +23,7 @@
     "shopSec": {
         "title": "Автозапчасти",
         "subtitle": "Оригинальные автозапчасти и тюнинг аксессуары для всех авто.",
-        "viewAll": "Посмотреть все продукты"
+        "viewAll": "Все продукты"
     },
     "servicesSec": {
         "title": "Наши Услуги",
@@ -93,7 +93,7 @@
         "ourAddress": "Наш Адрес.",
         "telephone": "Телефон",
         "telegram": "Телеграм",
-        "yandexButton": "Yandex карта машрут",
+        "yandexButton": "Yandex карта маш1ут",
         "googleButton": "Google карта машрут",
         "weeks": {
             "monday": "Понедельник",

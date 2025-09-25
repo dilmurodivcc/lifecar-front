@@ -125,8 +125,10 @@
   }
   .map,
   .yandex-map-container,
-  .ymaps-2-1-79-map {
-    width: 600px;
+  .ymaps-2-1-79-map, .ymaps-2-1-79-events-pane  {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
     height: 400px !important;
   }
   .map-buttons {

@@ -69,87 +69,118 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-grid">
-        <div className="footer-contact">
-          <div className="footer-col-title">{t("footer.social.title")}</div>
-          <div className="footer-social">
-            <a href="https://t.me/TuningLifeCar" aria-label="X" target="_blank">
-              <FaTelegram />
-            </a>
-            <a href="https://instagram.com/life_car.uzb" aria-label="GitHub" target="_blank">
-              <FaInstagram />
-            </a>
-            <a href="https://youtube.com/@LIFECARUZB" aria-label="Reddit" target="_blank">
-              <FaYoutube />
-            </a>
-            <a href="https://yandex.uz/maps/-/CLqABUnb" aria-label="YouTube" target="_blank">
-              <TbBrandYandex />
-            </a>
-            <a href="https://tiktok.com/@life_car.uzb" aria-label="TikTok" target="_blank">
-              <FaTiktok />
-            </a>
-          </div>
-          <div className="footer-col-title">{t("footer.contact.title")}</div>
-          <div className="footer-contact-info">
-            <a href="tel:+998 33 785 22 22">
-              {" "}
-              <FaPhone /> +998 33 785 22 22
-            </a>
-            <a href="tel:+998 94 618 88 48">
-              {" "}
-              <FaPhone /> +998 94 618 88 48
-            </a>
-            <a href="https://t.me/TuningLifeCar">
-              {" "}
-              <FaTelegram /> @TuningLifeCar
-            </a>
-          </div>
-        </div>
-
-        <div className="footer-links-grid">
-          <div className="footer-col">
-            <div className="footer-col-title">{t("footer.links.title")}</div>
-            <Link href={`/${locale}`}>{t("navigation.home")}</Link>
-            <Link href={`/${locale}/services`}>{t("navigation.services")}</Link>
-            <Link href={`/${locale}/products`}>{t("navigation.shop")}</Link>
-            <Link href={`/${locale}/contact`}>{t("navigation.contact")}</Link>
-          </div>
-          <div className="footer-col">
-            <div className="footer-col-title">{t("footer.shop.title")}</div>
-            <Link href={`/${locale}/products`}>
-              {t("footer.shop.allProducts")}
-            </Link>
-            {!mounted || categoriesLoading ? (
-              <div>Loading...</div>
-            ) : (
-              categories.slice(0, 4).map((category: ProductCategory) => (
-                <Link
-                  key={category.id}
-                  href={`/${locale}/products?category=${category.id}`}
+      <div className="container">
+        <div className="footer-grid">
+          <div className="footer-contact">
+            <div className="footer-col">
+              <div className="footer-col-title">{t("footer.social.title")}</div>
+              <div className="footer-social">
+                <a
+                  href="https://t.me/TuningLifeCar"
+                  aria-label="X"
+                  target="_blank"
                 >
-                  {category.name}
-                </Link>
-              ))
-            )}
+                  <FaTelegram />
+                </a>
+                <a
+                  href="https://instagram.com/life_car.uzb"
+                  aria-label="GitHub"
+                  target="_blank"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://youtube.com/@LIFECARUZB"
+                  aria-label="Reddit"
+                  target="_blank"
+                >
+                  <FaYoutube />
+                </a>
+                <a
+                  href="https://yandex.uz/maps/-/CLqABUnb"
+                  aria-label="YouTube"
+                  target="_blank"
+                >
+                  <TbBrandYandex />
+                </a>
+                <a
+                  href="https://tiktok.com/@life_car.uzb"
+                  aria-label="TikTok"
+                  target="_blank"
+                >
+                  <FaTiktok />
+                </a>
+              </div>
+            </div>
+
+            <div className="footer-col">
+              <div className="footer-col-title">
+                {t("footer.contact.title")}
+              </div>
+              <div className="footer-contact-info">
+                <a href="tel:+998 33 785 22 22">
+                  {" "}
+                  <FaPhone /> +998 33 785 22 22
+                </a>
+                <a href="tel:+998 94 618 88 48">
+                  {" "}
+                  <FaPhone /> +998 94 618 88 48
+                </a>
+                <a href="https://t.me/TuningLifeCar">
+                  {" "}
+                  <FaTelegram /> @TuningLifeCar
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-links-grid">
+            <div className="footer-col">
+              <div className="footer-col-title">{t("footer.links.title")}</div>
+              <Link href={`/${locale}`}>{t("navigation.home")}</Link>
+              <Link href={`/${locale}/services`}>
+                {t("navigation.services")}
+              </Link>
+              <Link href={`/${locale}/products`}>{t("navigation.shop")}</Link>
+              <Link href={`/${locale}/contact`}>{t("navigation.contact")}</Link>
+            </div>
+            <div className="footer-col">
+              <div className="footer-col-title">{t("footer.shop.title")}</div>
+              <Link href={`/${locale}/products`}>
+                {t("footer.shop.allProducts")}
+              </Link>
+              {!mounted || categoriesLoading ? (
+                <div>Loading...</div>
+              ) : (
+                categories.slice(0, 4).map((category: ProductCategory) => (
+                  <Link
+                    key={category.id}
+                    href={`/${locale}/products?category=${category.id}`}
+                  >
+                    {category.name}
+                  </Link>
+                ))
+              )}
+            </div>
+          </div>
+
+          <div className="footer-map">
+            <div className="footer-col-title">{t("footer.map.title")}</div>
+            {mounted && <YandexMap theme={theme} />}
           </div>
         </div>
 
-        <div className="footer-map">
-          <div className="footer-col-title">{t("footer.map.title")}</div>
-          {mounted && <YandexMap theme={theme} />}
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <div className="footer-copyright">
-          © 2024 {t("footer.bottom.copyright")}
-        </div>
-        <div
-          className="footer-backToTop"
-          style={{ cursor: "pointer" }}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          {t("footer.bottom.backToTop")} <IoMdArrowRoundUp />
+        <div className="footer-bottom">
+          <div className="footer-copyright">
+            © 2024 {t("footer.bottom.copyright")}
+          </div>
+          <div
+            className="footer-backToTop"
+            style={{ cursor: "pointer" }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            {t("footer.bottom.backToTop")} <IoMdArrowRoundUp />
+          </div>
         </div>
       </div>
     </footer>

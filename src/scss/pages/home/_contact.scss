@@ -2,15 +2,15 @@
   margin: 100px 0;
 
   @media (max-width: 1200px) {
-    margin: 80px 0;
+    margin: 40px 0;
   }
 
   @media (max-width: 768px) {
-    margin: 60px 0;
+    margin: 30px 0;
   }
 
   @media (max-width: 480px) {
-    margin: 50px 0;
+    margin: 20px 0;
   }
 
   .container {
@@ -43,7 +43,7 @@
       width: 100%;
       gap: 16px;
     }
-    @media (max-width: 1000px) {
+    @media (max-width: 1200px) {
       width: 100%;
     }
     @media (max-width: 480px) {
@@ -117,10 +117,10 @@
           border: 1px solid var(--border-color) !important;
           font-size: 20px;
           transition: all 0.3s ease;
-          &:hover {
-            background: var(--bg-sec);
-            color: var(--text-white);
-          }
+          // &:hover {
+          //   background: var(--bg-sec);
+          //   color: var(--text-white);
+          // }
         }
       }
     }
@@ -152,10 +152,9 @@
     @media (max-width: 1200px) {
       width: 450px;
       height: auto !important ;
-    }
-    @media (max-width: 1000px) {
       display: none;
     }
+ 
   }
 
   .map-buttons {
@@ -195,10 +194,10 @@
         font-size: 14px;
       }
 
-      &:hover {
-        background: var(--bg-sec);
-        color: var(--text-white);
-      }
+      // &:hover {
+      //   background: var(--bg-sec);
+      //   color: var(--text-white);
+      // }
 
       .map-button-icon {
         width: 12px !important;

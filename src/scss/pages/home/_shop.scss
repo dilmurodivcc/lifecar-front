@@ -3,15 +3,15 @@
 
   // Responsive Design
   @media (max-width: 1200px) {
-    padding: 70px 0;
+    padding: 40px 0;
   }
 
   @media (max-width: 768px) {
-    padding: 60px 0;
+    padding: 30px 0;
   }
 
   @media (max-width: 480px) {
-    padding: 50px 0;
+    padding: 20px 0;
   }
 
   .container {
@@ -20,11 +20,11 @@
     gap: 50px;
 
     @media (max-width: 768px) {
-      gap: 40px;
+      gap: 30px;
     }
 
     @media (max-width: 480px) {
-      gap: 30px;
+      gap: 20px;
     }
   }
 
@@ -56,17 +56,13 @@
     min-height: 500px;
     gap: 20px;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
     @media (max-width: 480px) {
+      grid-template-columns: 1fr;
       gap: 12px;
     }
   }
@@ -77,32 +73,67 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
+    height: max-content ;
     transition: box-shadow 0.3s, border 0.3s, transform 0.2s;
     position: relative;
     overflow: hidden;
-    background-color: var(--bg-ter);
+    background-color: var(--white);
     border: 1px solid var(--border-color);
     box-shadow: 0 0px 8px var(--box-shadow);
 
-    // Skeleton loading styles
-
-    img {
-      height: 400px;
-      object-fit: cover;
+    // Image container for Next.js Image with fill
+    > div:first-child {
+      width: 100%;
       border-radius: 20px;
-
-      @media (max-width: 1200px) {
-        height: 350px;
-      }
-
+      padding: 20px;
+      display: grid;
+      place-items: center;
       @media (max-width: 768px) {
-        height: 300px;
+        height: 200px;
         border-radius: 16px;
       }
 
-      @media (max-width: 480px) {
-        height: 250px;
+      @media (max-width: 380px) {
+        height: 160px;
+        border-radius: 12px;
+      }
+    }
+
+    // Skeleton loading styles
+
+    .img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      @media (max-width: 1200px) {
+        height: 240px;
+      }
+      @media (max-width: 900px) {
+        height: 200px;
+        padding: 0  !important;
+      }
+      @media (max-width: 380px) {
+        height: 200px;
+      }
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      // object-fit: cover;
+      border-radius: 20px;
+      top: 20px !important;
+
+      @media (max-width: 768px) {
+        height: 200px;
+        border-radius: 16px;
+        top: 16px !important;
+      }
+      @media (max-width: 900px) {
+        top: 0 !important;
+      }
+      @media (max-width: 380px) {
+        height: 160px;
         border-radius: 12px;
       }
     }
@@ -116,9 +147,32 @@
       text-align: start;
       width: 100%;
 
-      @media (max-width: 768px) {
+      @media (max-width: 1200px) {
         padding: 16px;
         gap: 8px;
+        .title {
+          font-size: 1.1rem;
+        }
+        .description {
+          font-size: 0.8rem;
+          line-clamp: 3 !important;
+          -webkit-line-clamp: 3 !important;
+     
+        }
+        .price {
+          font-size: 0.9rem !important;
+        }
+        .primary-btn {
+          font-size: 0.8rem !important;
+          padding: 8px 16px;
+          border-radius: 5px;
+          line-clamp: 1;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+        }
       }
 
       @media (max-width: 480px) {
@@ -187,12 +241,28 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 380px) {
+      font-size: 0.85rem;
+    }
   }
 
   .price {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--text);
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 380px) {
+      font-size: 0.8rem;
+    }
   }
 
   .description {
@@ -207,6 +277,16 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     height: 72px;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+      height: 55px;
+    }
+
+    @media (max-width: 380px) {
+      font-size: 0.75rem;
+      height: 50px;
+    }
   }
 }
 
@@ -230,17 +310,13 @@
     overflow: hidden;
     position: relative;
 
-    @media (max-width: 1200px) {
-      height: 350px;
-    }
-
     @media (max-width: 768px) {
-      height: 300px;
+      height: 200px;
       border-radius: 16px;
     }
 
-    @media (max-width: 480px) {
-      height: 250px;
+    @media (max-width: 380px) {
+      height: 160px;
       border-radius: 12px;
     }
 

@@ -126,7 +126,7 @@ const ContactSec = () => {
                   {" "}
                   <FaPhone></FaPhone> {t("contact.telephone")}:
                 </b>{" "}
-                <a href="tel:+998 99 814 65 65">+998 99 814 65 65</a>
+                <a href="tel:+998 94 618 88 48">+998 94 618 88 48</a>
               </li>
               <li>
                 <b>

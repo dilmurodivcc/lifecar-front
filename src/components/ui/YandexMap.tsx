@@ -199,7 +199,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   if (!mounted) {
     return (
       <div
-        className={`w-full h-[250px] rounded-xl bg-gray-100 flex items-center justify-center ${className}`}
       >
         <div className="text-center">
           <p className="text-gray-500 font-medium">Loading map...</p>
@@ -211,7 +210,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
   if (error) {
     return (
       <div
-        className={`w-full h-[250px] rounded-xl bg-gray-100 flex items-center justify-center ${className}`}
       >
         <div className="text-center">
           <p className="text-red-500 font-medium">❌ {error}</p>
@@ -226,14 +224,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
       className={`relative yandex-map-container ${className} ${
         isFullscreen ? "yandex-map-fullscreen" : ""
       }`}
-      style={{
-        minHeight: isFullscreen ? "100vh" : "250px",
-        width: isFullscreen ? "100vw" : "100%",
-        maxWidth: isFullscreen ? "100vw" : "100%",
-        borderRadius: isFullscreen ? "0" : "10px",
-        overflow: "hidden",
-        boxSizing: "border-box",
-      }}
+
     >
       {theme === "dark" && !isFullscreen && (
         <div className="absolute inset-0 bg-black/30 pointer-events-none mix-blend-multiply" />
@@ -246,7 +237,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ theme, className = "" }) => {
             window.open(`https://yandex.uz/maps/-/CLqABUnb`, "_blank");
           }}
         >
-          Машрут
+          Маршут
           <FaDirections />
         </button>
       </div>

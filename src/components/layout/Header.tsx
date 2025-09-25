@@ -14,26 +14,10 @@ const languages = [
 ];
 
 const Header = () => {
-  const [localTheme, setLocalTheme] = useState("dark");
   const [mounted, setMounted] = useState(false);
 
-  let theme = localTheme;
-  let toggleTheme = () => {
-    const newTheme = localTheme === "light" ? "dark" : "light";
-    setLocalTheme(newTheme);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("theme", newTheme);
-      document.documentElement.setAttribute("data-theme", newTheme);
-    }
-  };
-
-  try {
-    const themeContext = useTheme();
-    if (mounted) {
-      theme = themeContext.theme;
-      toggleTheme = themeContext.toggleTheme;
-    }
-  } catch {}
+  // useTheme now handles SSR gracefully
+  const themeContext = useTheme();
   const [language, setLanguage] = useState("uz");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,12 +53,6 @@ const Header = () => {
   useEffect(() => {
     setMounted(true);
     setIsClient(true);
-
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme") || "dark";
-      setLocalTheme(savedTheme);
-      document.documentElement.setAttribute("data-theme", savedTheme);
-    }
   }, []);
 
   useEffect(() => {
@@ -145,6 +123,7 @@ const Header = () => {
     }, 50);
   };
 
+  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <header className="shrink">
@@ -182,8 +161,8 @@ const Header = () => {
               <HiChevronDown />
             </button>
           </div>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
+          <button className="theme-toggle" onClick={themeContext.toggleTheme}>
+            <HiSun />
           </button>
         </div>
 
@@ -270,8 +249,8 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
+        <button className="theme-toggle" onClick={themeContext.toggleTheme}>
+          {themeContext.theme === "light" ? <HiMoon /> : <HiSun />}
         </button>
       </div>
 
@@ -352,8 +331,8 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {mounted && theme === "light" ? <HiMoon /> : <HiSun />}
+          <button className="theme-toggle" onClick={themeContext.toggleTheme}>
+            {themeContext.theme === "light" ? <HiMoon /> : <HiSun />}
           </button>
         </div>
       </div>

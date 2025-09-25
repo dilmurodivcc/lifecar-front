@@ -3,7 +3,7 @@
     <msapplication>
         <tile>
             <square150x150logo src="/icons/lifecar.webp"/>
-            <TileColor>#1a1a1a</TileColor>
+            <TileColor>#000000</TileColor>
         </tile>
     </msapplication>
 </browserconfig>
