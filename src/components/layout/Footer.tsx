@@ -155,7 +155,7 @@ const Footer = () => {
                 categories.slice(0, 4).map((category: ProductCategory) => (
                   <Link
                     key={category.id}
-                    href={`/${locale}/products?filterBy=${category.id}`}
+                    href={`/${locale}/products`}
                   >
                     {category.name}
                   </Link>

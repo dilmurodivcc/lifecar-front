@@ -195,7 +195,7 @@ export default function RootLayout({
                 },
                 {
                   "@type": "ContactPoint",
-                  telephone: "+998901234567",
+                  telephone: "+998946188848",
                   contactType: "sales",
                   availableLanguage: ["Uzbek", "Russian"],
                 },

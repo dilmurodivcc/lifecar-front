@@ -15,7 +15,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       description:
         "Lifecar - O'zbekistondagi eng yaxshi avto tuning xizmatlari. Professional avto ustalar, original ehtiyot qismlar, tuning aksessuarlar va avto ta'mirlash xizmatlari. Toshkentda avto tuning markazi.",
       keywords:
-        "lifecar, life car, Life Car, Life Car Uzbekistan, lifecar uz,  lifecar tuning, lifecar uz, avto tuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar, tuning, avto ta'mirlash, toshkent avto tuning, professional avto ustalar, original ehtiyot qismlar, avto modifikatsiya, avto sozlash",
+        "lifecar, life car, Life Car, Life Car Uzbekistan, lifecar uz, lifecar tuning, avto tuning, автотюнинг, avto usta, avto ustalar, avto ehtiyot qismlar, avto aksessuarlar, tuning, avto ta'mirlash, toshkent avto tuning, professional avto ustalar, original ehtiyot qismlar, avto modifikatsiya, avto sozlash, mashina tuning, avto servis, avto markaz, tuning markaz, avto ustaxona, mashina ta'mirlash, avto tuning xizmatlari, tuning aksessuarlar, avto tuning toshkent, lifecar toshkent, avto tuning o'zbekiston",
       openGraphTitle: "Lifecar | Professional Avto Tuning Xizmatlari",
       openGraphDescription:
         "O'zbekistondagi eng yaxshi avto tuning markazi. Professional xizmatlar va original ehtiyot qismlar.",
@@ -26,7 +26,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       description:
         "Professional avto tuning xizmatlari: kuzov ta'miri, dvigatel sozlash, interyer tuning, eksterier modifikatsiya. O'zbekistondagi eng tajribali avto ustalar bilan ishlang.",
       keywords:
-        "avto tuning xizmatlari, kuzov ta'miri, dvigatel sozlash, interyer tuning, eksterier modifikatsiya, avto usta, professional tuning, avto ta'mirlash, tuning markazi, lifecar services",
+        "avto tuning xizmatlari, kuzov ta'miri, dvigatel sozlash, interyer tuning, eksterier modifikatsiya, avto usta, professional tuning, avto ta'mirlash, tuning markazi, lifecar services, avto tuning toshkent, mashina tuning, avto servis, tuning xizmatlari, avto modifikatsiya, mashina ta'mirlash, avto ustaxona, tuning aksessuarlar, avto tuning markaz, professional avto ustalar",
       openGraphTitle: "Professional Avto Tuning Xizmatlari | Lifecar",
       openGraphDescription:
         "Kuzov ta'miri, dvigatel sozlash va boshqa professional avto tuning xizmatlari.",
@@ -37,29 +37,19 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
       description:
         "Original avto ehtiyot qismlar, tuning aksessuarlar va avto modifikatsiya uchun barcha kerakli narsalar. Barcha mashina turlari uchun ehtiyot qismlar.",
       keywords:
-        "avto ehtiyot qismlar, tuning aksessuarlar, avto modifikatsiya, original ehtiyot qismlar, avto shop, lifecar shop, avto tuning parts, avto aksessuarlar, mashina ehtiyot qismlari",
+        "avto ehtiyot qismlar, tuning aksessuarlar, avto modifikatsiya, original ehtiyot qismlar, avto shop, lifecar shop, avto tuning parts, avto aksessuarlar, mashina ehtiyot qismlari, avto tuning toshkent, tuning aksessuarlar toshkent, avto ehtiyot qismlar toshkent, mashina ehtiyot qismlari, avto tuning shop, tuning magazin, avto magazin, lifecar magazin, avto tuning aksessuarlar",
       openGraphTitle: "Avto Ehtiyot Qismlar va Aksessuarlar | Lifecar",
       openGraphDescription:
         "Original ehtiyot qismlar va tuning aksessuarlar barcha mashina turlari uchun.",
       canonical: "https://lifecar.uz/uz/products",
     },
-    about: {
-      title: "Lifecar Haqida | Avto Tuning Kompaniyasi | Toshkent",
-      description:
-        "Lifecar - O'zbekistondagi eng yirik avto tuning kompaniyasi. 10+ yillik tajriba, professional avto ustalar va zamonaviy texnologiyalar. Bizning missiyamiz va tariximiz.",
-      keywords:
-        "lifecar haqida, avto tuning kompaniyasi, toshkent tuning, professional avto ustalar, avto tuning tarixi, lifecar missiyasi, avto tuning tajribasi",
-      openGraphTitle: "Lifecar Haqida | Professional Avto Tuning Kompaniyasi",
-      openGraphDescription:
-        "O'zbekistondagi eng yirik avto tuning kompaniyasi. 10+ yillik tajriba va professional xizmatlar.",
-      canonical: "https://lifecar.uz/uz/about",
-    },
+
     contact: {
       title: "Bog'lanish | Telefon | Manzil | Lifecar | Avto Tuning Xizmatlari",
       description:
         "Lifecar bilan bog'laning. Toshkentdagi avto tuning markazimizga tashrif buyuring. Telefon, manzil va ish vaqtlari. Professional konsultatsiya oling.",
       keywords:
-        "lifecar bog'lanish, avto tuning telefon, toshkent tuning markaz, lifecar manzil, avto tuning konsultatsiya, lifecar kontakt",
+        "lifecar bog'lanish, avto tuning telefon, toshkent tuning markaz, lifecar manzil, avto tuning konsultatsiya, lifecar kontakt, avto tuning toshkent, tuning markaz toshkent, lifecar telefon, avto tuning manzil, tuning xizmatlari telefon, avto ustaxona toshkent, tuning markaz manzil, lifecar kontakt ma'lumotlari",
       openGraphTitle: "Lifecar bilan Bog'lanish | Avto Tuning Xizmatlari",
       openGraphDescription:
         "Professional avto tuning xizmatlari uchun biz bilan bog'laning. Toshkentdagi markazimizga tashrif buyuring.",
@@ -101,17 +91,7 @@ export const seoConfig: Record<string, Record<string, SEOConfig>> = {
         "Оригинальные запчасти и тюнинг аксессуары для всех типов автомобилей.",
       canonical: "https://lifecar.uz/ru/products",
     },
-    about: {
-      title: "О Lifecar | Авто Тюнинг Компания | Ташкент",
-      description:
-        "Lifecar - крупнейшая компания авто тюнинга в Узбекистане. 10+ лет опыта, профессиональные авто мастера и современные технологии. Наша миссия и история.",
-      keywords:
-        "о lifecar, авто тюнинг компания, ташкент тюнинг, профессиональные авто мастера, история авто тюнинга, миссия lifecar, опыт авто тюнинга, lifecar узбекистан",
-      openGraphTitle: "О Lifecar | Профессиональная Авто Тюнинг Компания",
-      openGraphDescription:
-        "Крупнейшая компания авто тюнинга в Узбекистане. 10+ лет опыта и профессиональные услуги.",
-      canonical: "https://lifecar.uz/ru/about",
-    },
+
     contact: {
       title: "Контакты | Lifecar | Услуги Авто Тюнинга",
       description:

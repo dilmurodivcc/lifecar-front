@@ -90,7 +90,7 @@ const useProducts = (locale: string = "uz", filters: ProductFilters = {}) => {
           params.filters = {
             ...((params.filters as Record<string, unknown>) || {}),
             product_categroy: {
-              id: { $eq: filters.categoryId },
+              id: { $eq: parseInt(filters.categoryId) },
             },
           };
         }

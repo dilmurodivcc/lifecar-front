@@ -266,6 +266,12 @@ const Header = () => {
       <button
         className={`mobile-menu-btn ${mobileMenuOpen ? "active" : ""}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        onTouchEnd={(e) => {
+          // Prevent double-tap zoom on mobile
+          e.preventDefault();
+          setMobileMenuOpen(!mobileMenuOpen);
+        }}
+        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
       >
         <div className="hamburger-icon">
           <span></span>

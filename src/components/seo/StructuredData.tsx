@@ -30,7 +30,7 @@ export default function StructuredData({ locale, page }: StructuredDataProps) {
         },
         {
           "@type": "ContactPoint",
-          telephone: "+998998146565",
+          telephone: "+998946188848",
           contactType: "sales",
           availableLanguage: ["Uzbek", "Russian"],
         },

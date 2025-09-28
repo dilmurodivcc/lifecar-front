@@ -64,7 +64,7 @@ export default function ShopPage({ params }: ShopPageProps) {
         | undefined;
       const navType = navEntry?.type;
 
-      // 1) URL param always wins if present
+      // 1) URL param always wins if present (including from footer links)
       if (urlFilterBy) {
         setFilterBy(urlFilterBy);
         try {
@@ -136,6 +136,12 @@ export default function ShopPage({ params }: ShopPageProps) {
         setFilterBy(urlFilterBy);
         try {
           localStorage.setItem("shop-filterBy", urlFilterBy);
+        } catch {}
+      } else if (!urlFilterBy && filterBy !== "all") {
+        // If URL has no filterBy param but state is not "all", reset to "all"
+        setFilterBy("all");
+        try {
+          localStorage.removeItem("shop-filterBy");
         } catch {}
       }
     };

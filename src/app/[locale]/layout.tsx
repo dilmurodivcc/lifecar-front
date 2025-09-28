@@ -34,18 +34,27 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: seoConfig.canonical,
+      languages: {
+        uz: "https://lifecar.uz/uz",
+        ru: "https://lifecar.uz/ru",
+        "x-default": "https://lifecar.uz/uz",
+      },
     },
   };
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   return (
     <>
-      <StructuredData locale="uz" page="home" />
+      <StructuredData locale={locale} page="home" />
       {children}
     </>
   );
