@@ -168,7 +168,10 @@ const Header = () => {
           </button>
         </div>
 
-        <button className="mobile-menu-btn">
+        <button
+          className={`mobile-menu-btn ${mobileMenuOpen ? "active" : ""}`}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
           <div className="hamburger-icon">
             <span></span>
             <span></span>
