@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -90,7 +90,7 @@ const getServiceData = (
 };
 
 const ServicesSec = () => {
-  const { t } = useSafeTranslation();
+  const { t } = useTranslation();
   const pathname = usePathname();
   const segments = pathname.split("/");
   const locale = segments[1] || "uz";
@@ -158,73 +158,6 @@ const ServicesSec = () => {
   if (isLoading || !isClient) {
     return (
       <section className="ServicesSec">
-          <div className="servicesCenterTitle">
-            <h1>{t("hero.title")}</h1>
-            <div className="btns">
-              <Link href={`/${locale}/services`} prefetch={true}>
-                <button className="toServices">
-                  <MdMiscellaneousServices /> {t("hero.cta")}
-                </button>
-              </Link>
-              <Link href={`/${locale}/contact`} prefetch={true}>
-                <button className="toContact">
-                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
-                </button>
-              </Link>
-            </div>
-          </div>
-          <div className="services-carousel-wrapper">
-            <div className="services-carousel">
-              {Array.from({ length: 5 }, (_, colIndex) => (
-                <div className="carousel-column" key={colIndex}>
-                  {Array.from({ length: 3 }, (_, cardIndex) => (
-                    <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="carousel-fade"></div>
-          </div>
-      </section>
-    );
-  }
-
-  if (services.length === 0) {
-    return (
-      <section className="ServicesSec">
-          <div className="servicesCenterTitle">
-            <h1>{t("hero.title")}</h1>
-            <div className="btns">
-              <Link href={`/${locale}/services`} prefetch={true}>
-                <button className="toServices">
-                  <MdMiscellaneousServices /> {t("hero.cta")}
-                </button>
-              </Link>
-              <Link href={`/${locale}/contact`} prefetch={true}>
-                <button className="toContact">
-                  <FaPhoneAlt /> {t("servicesSec.Boglanish")}
-                </button>
-              </Link>
-            </div>
-          </div>
-          <div className="services-carousel-wrapper">
-            <div className="services-carousel">
-              {Array.from({ length: 5 }, (_, colIndex) => (
-                <div className="carousel-column" key={colIndex}>
-                  {Array.from({ length: 3 }, (_, cardIndex) => (
-                    <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="carousel-fade"></div>
-          </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="ServicesSec">
         <div className="servicesCenterTitle">
           <h1>{t("hero.title")}</h1>
           <div className="btns">
@@ -242,49 +175,113 @@ const ServicesSec = () => {
         </div>
         <div className="services-carousel-wrapper">
           <div className="services-carousel">
-            {columns.map((column, colIndex) => (
+            {Array.from({ length: 5 }, (_, colIndex) => (
               <div className="carousel-column" key={colIndex}>
-                {column.map((service, cardIndex) => {
-                  if (!service) return null;
-                  return (
-                    <div
-                      className="card-home"
-                      key={`${service.id}-${cardIndex}`}
-                    >
-                      <div className="img-wrapper">
-                        <Image
-                          src={service.image || "/img/tint.webp"}
-                          alt={service.title || "Service"}
-                          width={400}
-                          height={180}
-                            priority={cardIndex < 10}
-                          onError={(e) => {
-                            e.currentTarget.src = "/img/tint.webp";
-                          }}
-                          unoptimized={false}
-                        />
-                      </div>
-                      <div className="card-content">
-                        <h4 className="title">
-                          {service.title || "Untitled Service"}
-                        </h4>
-                        <div className="card-bottom">
-                          <p className="description">
-                            {service.description || "No description available"}
-                          </p>
-                          <h4 className="price">
-                            {service.price || "Price on request"}
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                {Array.from({ length: 3 }, (_, cardIndex) => (
+                  <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
+                ))}
               </div>
             ))}
           </div>
           <div className="carousel-fade"></div>
         </div>
+      </section>
+    );
+  }
+
+  if (services.length === 0) {
+    return (
+      <section className="ServicesSec">
+        <div className="servicesCenterTitle">
+          <h1>{t("hero.title")}</h1>
+          <div className="btns">
+            <Link href={`/${locale}/services`} prefetch={true}>
+              <button className="toServices">
+                <MdMiscellaneousServices /> {t("hero.cta")}
+              </button>
+            </Link>
+            <Link href={`/${locale}/contact`} prefetch={true}>
+              <button className="toContact">
+                <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="services-carousel-wrapper">
+          <div className="services-carousel">
+            {Array.from({ length: 5 }, (_, colIndex) => (
+              <div className="carousel-column" key={colIndex}>
+                {Array.from({ length: 3 }, (_, cardIndex) => (
+                  <SkeletonCard key={`skeleton-${colIndex}-${cardIndex}`} />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="carousel-fade"></div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="ServicesSec">
+      <div className="servicesCenterTitle">
+        <h1>{t("hero.title")}</h1>
+        <div className="btns">
+          <Link href={`/${locale}/services`} prefetch={true}>
+            <button className="toServices">
+              <MdMiscellaneousServices /> {t("hero.cta")}
+            </button>
+          </Link>
+          <Link href={`/${locale}/contact`} prefetch={true}>
+            <button className="toContact">
+              <FaPhoneAlt /> {t("servicesSec.Boglanish")}
+            </button>
+          </Link>
+        </div>
+      </div>
+      <div className="services-carousel-wrapper">
+        <div className="services-carousel">
+          {columns.map((column, colIndex) => (
+            <div className="carousel-column" key={colIndex}>
+              {column.map((service, cardIndex) => {
+                if (!service) return null;
+                return (
+                  <div className="card-home" key={`${service.id}-${cardIndex}`}>
+                    <div className="img-wrapper">
+                      <Image
+                        src={service.image || "/img/tint.webp"}
+                        alt={service.title || "Service"}
+                        width={400}
+                        height={180}
+                        priority={cardIndex < 10}
+                        onError={(e) => {
+                          e.currentTarget.src = "/img/tint.webp";
+                        }}
+                        unoptimized={false}
+                      />
+                    </div>
+                    <div className="card-content">
+                      <h4 className="title">
+                        {service.title || "Untitled Service"}
+                      </h4>
+                      <div className="card-bottom">
+                        <p className="description">
+                          {service.description || "No description available"}
+                        </p>
+                        <h4 className="price">
+                          {service.price || "Price on request"}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+        <div className="carousel-fade"></div>
+      </div>
     </section>
   );
 };

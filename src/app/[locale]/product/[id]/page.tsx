@@ -2,7 +2,7 @@
 import ClientLayout from "@/components/layout/ClientLayout";
 import { useEffect, useState, useRef } from "react";
 import { useProductBySlug, type Product } from "@/hooks/useProducts";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
@@ -24,7 +24,7 @@ const ProductDetail = ({ params }: ProductDetailProps) => {
   const [mounted, setMounted] = useState(false);
   const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
   const contactDropdownRef = useRef<HTMLDivElement>(null);
-  const { t } = useSafeTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);

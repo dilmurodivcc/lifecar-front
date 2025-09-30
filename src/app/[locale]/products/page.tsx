@@ -137,20 +137,11 @@ export default function ShopPage({ params }: ShopPageProps) {
         try {
           localStorage.setItem("shop-filterBy", urlFilterBy);
         } catch {}
-      } else if (!urlFilterBy && filterBy !== "all") {
-        // If URL has no filterBy param but state is not "all", reset to "all"
-        setFilterBy("all");
-        try {
-          localStorage.removeItem("shop-filterBy");
-        } catch {}
       }
     };
 
     // Listen for popstate events (back/forward navigation)
     window.addEventListener("popstate", handleUrlChange);
-
-    // Also check URL on mount and when component updates
-    handleUrlChange();
 
     return () => {
       window.removeEventListener("popstate", handleUrlChange);

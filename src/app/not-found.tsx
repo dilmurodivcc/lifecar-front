@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { FaHome, FaArrowLeft } from "react-icons/fa";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
-  const { t } = useSafeTranslation();
+  const { t } = useTranslation();
   return (
     <div className="not-found">
       <div className="not-found-container">

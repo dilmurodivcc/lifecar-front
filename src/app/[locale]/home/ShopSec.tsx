@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import { useTranslation } from "react-i18next";
 import { useProducts, type Product } from "@/hooks/useProducts";
 import Link from "next/link";
 import ShopSkeletonCard from "@/components/ui/ShopSkeletonCard";
@@ -10,7 +10,7 @@ interface ShopSecProps {
 }
 
 const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
-  const { t } = useSafeTranslation();
+  const { t } = useTranslation();
   const [currentLocale, setCurrentLocale] = useState("uz");
 
   useEffect(() => {
@@ -54,13 +54,12 @@ const ShopSec = ({ locale = "uz" }: ShopSecProps) => {
               return (
                 <div className="shop-card" key={product.id}>
                   <div className="img-wrapper">
-                  <Image
-                    fill
-
-                    src={imageUrl}
-                    alt={product.title}
-                    style={{ objectFit: "cover" }}
-                    onError={(e) => {
+                    <Image
+                      fill
+                      src={imageUrl}
+                      alt={product.title}
+                      style={{ objectFit: "cover" }}
+                      onError={(e) => {
                         e.currentTarget.src = "/img/7700.png";
                       }}
                     />

@@ -2,10 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import { FaTools, FaCar, FaCheckCircle, FaSmile } from "react-icons/fa";
-import { useSafeTranslation } from "@/hooks/useSafeTranslation";
+import { useTranslation } from "react-i18next";
 
 const AboutSec = () => {
-  const { t } = useSafeTranslation();
+  const { t } = useTranslation();
 
   return (
     <section className="about-sec">
