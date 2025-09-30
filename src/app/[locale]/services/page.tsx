@@ -162,6 +162,23 @@ export default function ServicesPage({ params }: ServicesPageProps) {
     error: categoriesError,
   } = useServiceCategories(locale);
 
+  // Reset invalid filter when locale/categories change
+  useEffect(() => {
+    if (!isHydrated) return;
+    const cats = categories?.data?.data;
+    if (filterBy !== "all" && Array.isArray(cats)) {
+      const exists = cats.some(
+        (cat: any) => String(cat.id) === String(filterBy)
+      );
+      if (!exists) {
+        setFilterBy("all");
+        try {
+          localStorage.setItem("services-filterBy", "all");
+        } catch {}
+      }
+    }
+  }, [locale, categories, filterBy, isHydrated]);
+
   useEffect(() => {
     if (servicesError) {
       setError("Failed to load services");

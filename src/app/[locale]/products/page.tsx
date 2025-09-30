@@ -167,6 +167,23 @@ export default function ShopPage({ params }: ShopPageProps) {
 
   const { data: categoriesData } = useProductCategories(locale);
 
+  // Reset invalid filter when locale/categories change
+  useEffect(() => {
+    if (!isHydrated) return;
+    const categories = categoriesData?.data?.data;
+    if (filterBy !== "all" && Array.isArray(categories)) {
+      const exists = categories.some(
+        (cat: any) => String(cat.id) === String(filterBy)
+      );
+      if (!exists) {
+        setFilterBy("all");
+        try {
+          localStorage.setItem("shop-filterBy", "all");
+        } catch {}
+      }
+    }
+  }, [locale, categoriesData, filterBy, isHydrated]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sortRef.current && !sortRef.current.contains(event.target as Node)) {

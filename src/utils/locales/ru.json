@@ -93,8 +93,8 @@
         "ourAddress": "Наш адрес",
         "telephone": "Телефон",
         "telegram": "Телеграм",
-        "yandexButton": "Маршрут через Yandex.Карты",
-        "googleButton": "Маршрут через Google.Карты",
+        "yandexButton": "Маршрут через Yandex Карты",
+        "googleButton": "Маршрут через Google Карты",
         "weeks": {
             "monday": "Понедельник",
             "tuesday": "Вторник",
