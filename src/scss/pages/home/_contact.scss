@@ -60,6 +60,9 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+        span{
+          text-align: end;
+        }
 
         // Mobile styles for abbreviated weekday names
         @media (max-width: 900px) {
