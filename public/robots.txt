@@ -1,11 +1,10 @@
-# *
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
 # Host
-Host: https://lifecar.uz
+Host: lifecar.uz
 
 # Sitemaps
 Sitemap: https://lifecar.uz/sitemap.xml

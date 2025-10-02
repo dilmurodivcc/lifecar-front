@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { FaTools, FaCar, FaCheckCircle, FaSmile } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 const AboutSec = () => {
   const { t } = useTranslation();
@@ -31,16 +31,20 @@ const AboutSec = () => {
               <div className="feature-item">
                 <FaTools className="feature-icon" />
                 <span className="feature-text">
-                  <span className="highlight">20+ yil</span>{" "}
-                  {t("aboutSection.features.experience.text")}
+                  <Trans
+                    i18nKey="aboutSection.features.experience.rich"
+                    components={{ 0: <span className="highlight" /> }}
+                  />
                 </span>
               </div>
 
               <div className="feature-item">
                 <FaCar className="feature-icon" />
                 <span className="feature-text">
-                  <span className="highlight">10+ yil</span>{" "}
-                  {t("aboutSection.features.company.text")}
+                  <Trans
+                    i18nKey="aboutSection.features.company.rich"
+                    components={{ 0: <span className="highlight" /> }}
+                  />
                 </span>
               </div>
 
@@ -54,8 +58,10 @@ const AboutSec = () => {
               <div className="feature-item">
                 <FaSmile className="feature-icon" />
                 <span className="feature-text">
-                  <span className="highlight">10+ mamnun mijoz</span>{" "}
-                  {t("aboutSection.features.clients.text")}
+                  <Trans
+                    i18nKey="aboutSection.features.clients.rich"
+                    components={{ 0: <span className="highlight" /> }}
+                  />
                 </span>
               </div>
             </div>

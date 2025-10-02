@@ -19,31 +19,31 @@
 @use "./pages/contact/contact" as *;
 @use "./components/ui/not-found" as *;
 
-
 // Prevent page zoom and pinch-to-zoom
 html {
-  touch-action: pan-x pan-y;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
-  touch-action: pan-x pan-y;
-  -webkit-touch-callout: none;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+  cursor: default;
+}
+
+button {
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  overflow-x: hidden;
-  position: relative;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 input,
@@ -54,6 +54,29 @@ textarea,
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  pointer-events: auto;
+}
+
+a {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+// Remove mobile active states
+* {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+button:active,
+a:active,
+input:active,
+textarea:active,
+select:active {
+  background: none !important;
+  color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 .yandex-map-container {
   .ymaps,

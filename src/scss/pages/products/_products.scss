@@ -1,9 +1,7 @@
 @use "../../base/variables" as *;
-
 .shop {
   position: relative;
   overflow: hidden;
-
   .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -16,7 +14,6 @@
       color: var(--text);
     }
   }
-
   .shop-header {
     padding: 40px 0 60px;
     display: flex;
@@ -24,13 +21,11 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-
     .left {
       display: flex;
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
-
       button {
         width: 48px;
         height: 48px;
@@ -49,7 +44,6 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
-
         &::before {
           content: "";
           position: absolute;
@@ -65,7 +59,6 @@
           );
           transition: left 0.5s;
         }
-
         &:hover {
           transform: translateY(-2px);
           background: var(--glass-bg-hover);
@@ -77,13 +70,11 @@
             left: 100%;
           }
         }
-
         &:active {
           transform: translateY(0);
         }
       }
-    }
-
+    } 
     .right {
       display: flex;
       align-items: center;
@@ -128,7 +119,6 @@
           left: 16px;
           color: var(--text-muted);
           font-size: 18px;
-          pointer-events: none;
           z-index: 1;
         }
       }
@@ -261,8 +251,6 @@
       }
     }
   }
-
-  // Featured toggle styles
   .featured-toggle {
     .checkbox-label {
       display: flex;

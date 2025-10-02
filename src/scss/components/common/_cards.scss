@@ -1,15 +1,7 @@
 @use "../../base/variables" as *;
 
 // Prevent zoom on cards
-.card,
-.shop-card,
-.service-card,
-.product-card {
-  touch-action: pan-x pan-y;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
+
 
 .skeleton {
   .skeleton-img {

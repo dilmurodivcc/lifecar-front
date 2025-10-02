@@ -85,18 +85,8 @@ p {
   }
 }
 
-a,
-button {
-  -webkit-tap-highlight-color: transparent !important;
-}
 a:focus,
 button:focus {
   outline: none !important;
   box-shadow: none !important;
-}
-
-a:active,
-button:active {
-  background: none !important;
-  color: inherit !important;
 }

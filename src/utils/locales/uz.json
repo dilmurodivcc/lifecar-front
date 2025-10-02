@@ -75,16 +75,19 @@
         "description": "Kompaniyamiz 20 yildan ortiq tajribaga ega ustalar bilan faoliyat yuritadi va avtotuning xizmatlarida o‘z ishonchliligi bilan mashhur.",
         "features": {
             "experience": {
-                "text": "yillik tajriba – malakali va tajribali ustalar jamoasi"
+                "text": "yillik tajriba – malakali va tajribali ustalar jamoasi",
+                "rich": "<0>20+ yil</0> yillik tajriba – malakali va tajribali ustalar jamoasi"
             },
             "company": {
-                "text": "yillik faoliyat – ishonchli tuning servisi"
+                "text": "yillik faoliyat – ishonchli tuning servisi",
+                "rich": "<0>10+ yil</0> yillik faoliyat – ishonchli tuning servisi"
             },
             "guarantee": {
                 "text": "Har bir ishga kafolat – sifat va ishonch bizning ustuvorligimiz"
             },
             "clients": {
-                "text": "Kuniga 10+ mamnun mijoz – mijozlarimiz bizga qayta-qayta murojaat qilmoqda"
+                "text": "Kuniga 10+ mamnun mijoz – mijozlarimiz bizga qayta-qayta murojaat qilmoqda",
+                "rich": "<0>10+ mamnun mijoz</0> – mijozlarimiz bizga qayta-qayta murojaat qilmoqda"
             }
         },
         "closing": "Bizning maqsadimiz – avtomobilingizni yanada mukammal qilish va eng yuqori sifatda xizmat ko‘rsatishdir."
