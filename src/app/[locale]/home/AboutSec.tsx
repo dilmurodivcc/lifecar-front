@@ -32,7 +32,7 @@ const AboutSec = () => {
                 <FaTools className="feature-icon" />
                 <span className="feature-text">
                   <Trans
-                    i18nKey="aboutSection.features.experience.rich"
+                    i18nKey="aboutSection.features.experience.text"
                     components={{ 0: <span className="highlight" /> }}
                   />
                 </span>
@@ -42,7 +42,7 @@ const AboutSec = () => {
                 <FaCar className="feature-icon" />
                 <span className="feature-text">
                   <Trans
-                    i18nKey="aboutSection.features.company.rich"
+                    i18nKey="aboutSection.features.company.text"
                     components={{ 0: <span className="highlight" /> }}
                   />
                 </span>
@@ -59,7 +59,7 @@ const AboutSec = () => {
                 <FaSmile className="feature-icon" />
                 <span className="feature-text">
                   <Trans
-                    i18nKey="aboutSection.features.clients.rich"
+                    i18nKey="aboutSection.features.clients.text"
                     components={{ 0: <span className="highlight" /> }}
                   />
                 </span>
